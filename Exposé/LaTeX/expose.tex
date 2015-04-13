@@ -1,0 +1,167 @@
+%
+% Vorlage
+%
+% Stefan Taber <stefan.taber@inso.tuwien.ac.at>
+%
+\documentclass[a4paper,10pt,german,public]{INSOexpose}
+\usepackage{array,longtable}
+\usepackage{setspace}
+\usepackage{hyperref}
+
+\inputencoding{utf8} % linux, mac
+% \inputencoding{latin1} % linux, mac
+
+%
+\title{\centering Evaluierung von REST Frameworks für Android im Revex2020 Kontext \\}
+% Bitte setzen falls der Titel zu lang ist
+%\shorttitle{Kurztitel}
+\author{Elisabeth Pilz}
+\matrikelnr{1225231}
+\kennzahl{E 033 534}
+\studium{Software \& Information Engineering}
+\date{\today}
+\dokumenttyp{Bachelorarbeit}
+\assistent{}
+
+% Bibliographie file
+\bibliography{db}
+
+\begin{document}
+
+\maketitle
+
+%=======================================================================
+\section{Problemstellung}
+%=======================================================================
+%Allgemeine Problemstellung: Formulierung der konkreten Problemstellung in wenigen Sätzen. Welchem Themenbereich ist die Arbeit zuzuordnen?
+
+Revex2020 ist ein Forschungsprojekt zur Revitalisierung von Wasserkraftwerken, das in Kooperation mit dem Institut für Energietechnik und Thermodynamik entwickelt wird. Das Projekt soll es Betreibern von Kleinwasserkraftwerken ermöglichen anhand von erfassten Daten aussagekräftige Bewertungen über den technischen Zustand von mechanischen, hydraulischen und elektrischen Kraftwerkskomponenten durchzuführen. So sollen z.B. Wartungskosten den Neuanschaffungskosten gegenübergestellt werden, um wirtschaftliche Entscheidungen zur Laufzeitverlängerung von Wasserkraftwerken treffen zu können.
+\\\\
+Zukünftig soll es Mitarbeitern ermöglicht werden, neben der Webapplikation, mithilfe von mobilen Geräten den Zustand der Kraftwerkskomponenten vor Ort abzufragen und bewerten zu können. Es soll daher eine Android App entwickelt werden, die das bereits vorhandene Backend eines REST-Webservices verwendet. Dadurch ist die Auswahl eines geeigneten REST Frameworks für Android nötig, die eine vollständige und korrekte Anbindung ermöglicht.
+
+%=======================================================================
+\section{Zielsetzung/Motivation}
+%=======================================================================
+%Welches Ziel soll durch die Bachelorarbeit erreicht werden, was motiviert Sie zu dieser Arbeit? 
+
+Ziel dieser Bachelorarbeit ist die Evaluierung von verschiedenen REST Frameworks für Android im Revex2020 Kontext, um eine unkomplizierte Anbindung an das bereits vorhandene Backend zu ermöglichen. Dazu werden bestehende REST Frameworks für Android getestet, indem diese in einem Anwendungsfall eingesetzt werden. Nach der Evaluierung dieser Frameworks, soll eine Empfehlung abgegeben werden, welches sich am besten für das Revex2020 Projekt eignet.
+
+%=======================================================================
+\section{Methodik}
+%=======================================================================
+%Werden theoretische, praktische oder empirische Analysen durchgeführt? Klare Darstellung der eingesetzten theoretischen und praktischen Methoden (Befragung, Recherche, Statistik, Rapid Prototyping, Objektorientierte Analyse, UML, Komponenten-basierte Entwicklung, Programmiersprachen etc.).
+
+Die Evaluierung der Frameworks erfolgt aufgrund von Prototypen, indem die REST Frameworks verwendet werden. Es wurde im Vorfeld ein Anwendungsfall definiert, der dann später die einzelnen REST Frameworks testet. Dazu wird in einem Szenario der Prozess des Kraftwerk erstellen, löschen, bearbeiten und anzeigen durchgespielt. Als Vorlage dazu wird die bestehende Web-Applikation des Projektes verwendet.
+\\\\
+Die Qualität der einzelnen Frameworks soll anhand folgender Punkte gemessen werden:
+\begin{spacing}{1.4}
+\begin{longtable}{|p{.5 \linewidth}|p{.5 \linewidth}|}
+	\hline
+	\multicolumn{1}{|c|}{\textbf{Kriterium}} & \textbf{in Framework?} \\ 
+	\hline \hline 
+	aktive Community & - \\ 
+	\hline
+	Dokumentation & - \\ 
+	\hline
+	Support durch Entwickler & - \\
+	\hline
+	Lizenz & - \\
+	\hline
+	Hilfestellung für Entwicklung \newline (Tutorial, Codebeispiele) & - \\
+	\hline
+	Einbinden in vorhandenes Projekt \newline (Größe des Frameworks, etc.) & - \\
+	\hline
+	Unterstützung von HTTP-Methoden \newline (GET, POST, PUT, DELETE) & - \\
+	\hline 
+	JSON Unterstützung & - \\
+	\hline
+	Übertragen von Parameter  & - \\
+	\hline
+	Aufruf der URL (String, Object etc.) & - \\
+	\hline
+	HTTP-Header erweitern & - \\
+	\hline 
+	mögliche Einschränkungen durch Framework \newline (z.B. keine Unterstützung von JSON etc.) & - \\
+	\hline 
+	\caption{Evaluierungskriterien}
+	\label{tab:tabEvaluierungskriterien}
+\end{longtable}
+\end{spacing}
+%=======================================================================
+\section{State of the Art}
+%=======================================================================
+%Welche Lösungen oder ähnlichen Projekte gibt es schon – Einbettung von Literaturzitaten (mind. 5); Fallbeispiele.
+Die Bachelorarbeit hat als Ziel bestehende REST Frameworks für Android zu Evaluieren, dafür wurde  mit einer Internet Recherche, nach eben solchen Frameworks gestartet. Dabei wurden folgende Projekte gefunden:
+\begin{itemize}
+	\item Resty (\url{http://beders.github.io/Resty/Resty/Overview.html})
+	\item Resting (\url{https://code.google.com/p/resting/})
+	\item RESTlet (\url{http://restlet.com/})
+	\item Spring for Android (\url{http://projects.spring.io/spring-android/})
+	\item CRest (\url{http://crest.codegist.org/index.html})
+	\item RESTeasy Mobile (\url{http://resteasy.jboss.org/})
+	\item RESTDroid (\url{http://pcreations.fr/me/restdroid-resource-oriented-rest-client-for-android})
+	\item Jersey (\url{https://jersey.java.net/})
+\end{itemize}
+
+%=======================================================================
+\section{Inhaltsverzeichnis}
+%=======================================================================
+Geplante Struktur der Arbeit: ca. 40 Seiten	
+\begin{samepage}
+  \begin{contentstructure}
+    \item Einleitung	\estimatedpages{3 Seiten}
+    \item Frameworks \estimatedpages{3 Seiten}
+    \begin{contentstructure}
+      \item Beschreibung \estimatedpages{2 Seiten}
+      \item Auswahl \estimatedpages{5 Seiten}
+    \end{contentstructure}
+    \item Android 
+    \begin{contentstructure}
+      \item Aufbau \estimatedpages{2 Seiten}
+      \item Prozess der App Implementierung \estimatedpages{5 Seiten}
+    \end{contentstructure}
+    \item Evaluierung der Frameworks \estimatedpages{10 Seiten}
+    \begin{contentstructure}
+      \item Framework 1
+      \item Framework 2
+      \item Framework 3
+    \end{contentstructure}
+    \item Ergebnis
+  \end{contentstructure}
+\end{samepage}
+
+%=======================================================================
+\section{Zeitplan}
+%=======================================================================
+Zeitplanung der geplanten Arbeit mit wichtigen Meilensteine.
+
+\begin{spacing}{1.4}
+\begin{longtable}{|p{.2 \linewidth}|p{.5 \linewidth}|}
+	\hline
+	\multicolumn{1}{|c|}{\textbf{Zeitraum}} & \textbf{Phase} \\ 
+	\hline 
+	April & Schreiben des Exposé \\ 
+	\hline 
+	April & Auswahl der Frameworks \\
+	\hline 
+	Mai & Erstellung der App mit ersten Framework \\
+	\hline 
+	Ende Mai-Juni & Evaluierung der restlichen Frameworks \\
+	\hline 
+	Mitte Mai -Juli & Schreiben des theoretischen Teils \\
+	\hline
+	\caption{Zeitplan}
+	\label{tab:tabZeitplan}
+\end{longtable}
+\end{spacing}
+
+
+\nocite{dobjanschi:developing-android}
+\nocite{tilko:rest}
+\nocite{louis:android}
+\nocite{stackOverflow:rest-client}
+\nocite{burd:android}
+% Bibliographie
+\printbibliography
+
+\end{document}

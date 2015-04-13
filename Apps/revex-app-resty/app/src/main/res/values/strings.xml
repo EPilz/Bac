@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Revex-app-resty</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="token">Token</string>
+
+    <string name="title_powerPlants">Power Plants</string>
+</resources>
