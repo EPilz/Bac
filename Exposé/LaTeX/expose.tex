@@ -26,7 +26,7 @@
 
 % Bibliographie file
 \bibliography{db}
-\ExecuteBibliographyOptions{sorting=none}
+%\ExecuteBibliographyOptions{sorting=none}
 \begin{document}
 
 \maketitle
@@ -61,7 +61,7 @@ Ziel dieser Bachelorarbeit ist die Evaluierung von verschiedenen REST-Frameworks
 
 Die Evaluierung der Frameworks erfolgt aufgrund von Prototypen, indem die REST Frameworks verwendet werden. Es wurde im Vorfeld ein Anwendungsfall definiert, indem die einzelnen REST Frameworks  integriert werden. Dazu wird in einem Szenario der Prozess des Kraftwerk erstellen, löschen, bearbeiten und anzeigen durchgespielt. Als Vorlage dazu wird die bestehende Web-Applikation des Projektes verwendet.
 \\\\
-Die Qualität der einzelnen Frameworks soll anhand folgender Kriterien gemessen werden, welche aus dem Kriterienkatalog\cite{vergleich13} ausgewählt wurden:
+Die Qualität der einzelnen Frameworks soll anhand folgender Kriterien verglichen werden, welche aus dem Kriterienkatalog der Fachstudie\cite{vergleich13} ausgewählt wurden:
 \begin{spacing}{1.4}
 \begin{longtable}{|p{.7 \linewidth}|p{.2 \linewidth}|}
 	\hline
@@ -69,11 +69,11 @@ Die Qualität der einzelnen Frameworks soll anhand folgender Kriterien gemessen 
 	\hline \hline 
 	aktive Community & - \\ 
 	\hline
-	Dokumentation & - \\ 
+	Dokumentation \newline (vorhanden?, Schnittstellenbeschreibung, JavaDoc) & - \\ 
 	\hline
 	Lizenz & - \\
 	\hline
-	Hilfestellung für Entwicklung (Tutorial, Codebeispiele) & - \\
+	Hilfestellung für Entwicklung \newline (Tutorial, Codebeispiele) & - \\
 	\hline
 \end{longtable}
 \begin{longtable}{|p{.7 \linewidth}|p{.2 \linewidth}|}
@@ -105,7 +105,7 @@ Die Qualität der einzelnen Frameworks soll anhand folgender Kriterien gemessen 
 	\hline 
 	werden verschiedene Medientypen unterstützt \newline (HTML, XML, CSV) & - \\
 	\hline
-	Sicherheitsmechanismen (Authentifizierung) & - \\
+	Sicherheitsmechanismen \newline (Authentifizierung, Verschlüsselung bei Übertragung) & - \\
 	\hline
 	Möglichkeiten zustandsabhängige Links zu Repräsentationen hinzuzufügen (Hypermedia)& - \\
 	\hline
@@ -133,15 +133,17 @@ Um Rest Framework für die Evaluierung zu finden, wurde eine Technologie-Recherc
 	\item Jersey (\url{https://jersey.java.net/})
 \end{itemize}
 
-Es würde den Rahmen der Bachelorarbeit sprengen alle REST Frameworks zu evaluieren, deswegen werden nur die populärsten drei ausgewählt. Diese wurden mithilfe von Github ermittelt, indem zu einem die Github Stars mit den Commits (seit dem 01.01.2014) in den Repositories verglichen wurden.
+
 
 \begin{figure}[!htbp]
 	\centering	
-	\subfigure[Diagramm: Github Stars]{\includegraphics[width=0.49\textwidth]{imgs/github_stars.png}}
-	\subfigure[Diagramm: Github Commits]{\includegraphics[width=0.49\textwidth]{imgs/github_commits.png}}
+	\subfigure[Diagramm: Github Stars]{\includegraphics[width=0.8\textwidth]{imgs/github_stars.png}}
+	\subfigure[Diagramm: Github Commits]{\includegraphics[width=0.8\textwidth]{imgs/github_commits.png}}
+	\caption{Github Statistiken}	
+	\label{figure:github}
 \end{figure}
 
-Es werden daher folgende REST-Frameworks evaluiert:
+Es würde den Rahmen der Bachelorarbeit sprengen alle REST Frameworks zu evaluieren, deswegen werden nur die populärsten drei ausgewählt. Diese wurden mithilfe von Github ermittelt, indem zu einem die Github Stars mit den Commits (seit dem 01.01.2014)  in den Repositories verglichen wurden, siehe Abbildung \ref{figure:github}. Es werden daher folgende REST-Frameworks evaluiert und miteinander verglichen:
 
 \begin{itemize}
 	\item Retrofit 

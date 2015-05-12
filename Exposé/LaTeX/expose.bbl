@@ -16,23 +16,6 @@
   {}
 \endgroup
 
-\entry{projektbeschreibung:revex2020}{online}{}
-  \name{author}{1}{}{%
-    {{}%
-     {Artner}{A.}%
-     {Thomas}{T.}%
-     {}{}%
-     {}{}}%
-  }
-  \strng{namehash}{AT1}
-  \strng{fullhash}{AT1}
-  \field{note}{[abgerufen am {27.04.2015}]}
-  \field{title}{Projektbeschreibung REVEX2020}
-  \verb{url}
-  \verb https://www.inso.tuwien.ac.at/?id=471
-  \endverb
-\endentry
-
 \entry{vergleich13}{misc}{}
   \name{author}{3}{}{%
     {{}%
@@ -59,6 +42,23 @@
   \verb http://elib.uni-stuttgart.de/opus/volltexte/2013/8731
   \endverb
   \field{year}{2013}
+\endentry
+
+\entry{projektbeschreibung:revex2020}{online}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Artner}{A.}%
+     {Thomas}{T.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{AT1}
+  \strng{fullhash}{AT1}
+  \field{note}{[abgerufen am {27.04.2015}]}
+  \field{title}{Projektbeschreibung REVEX2020}
+  \verb{url}
+  \verb https://www.inso.tuwien.ac.at/?id=471
+  \endverb
 \endentry
 
 \entry{dobjanschi:developing-android}{inproceedings}{}

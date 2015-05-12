@@ -84,7 +84,7 @@
 \RequirePackage{color}
 \RequirePackage{lastpage}
 \RequirePackage[utf8]{inputenc}
-\RequirePackage[backend=bibtex]{biblatex}
+\RequirePackage[backend=bibtex, style=numeric, sorting=none]{biblatex}
 \RequirePackage{fix-cm}
 \RequirePackage{enumitem}
 
