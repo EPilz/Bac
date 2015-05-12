@@ -1,0 +1,166 @@
+% $ biblatex auxiliary file $
+% $ biblatex version 2.4 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated as
+% required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+\entry{projektbeschreibung:revex2020}{online}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Artner}{A.}%
+     {Thomas}{T.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{AT1}
+  \strng{fullhash}{AT1}
+  \field{note}{[abgerufen am {27.04.2015}]}
+  \field{title}{Projektbeschreibung REVEX2020}
+  \verb{url}
+  \verb https://www.inso.tuwien.ac.at/?id=471
+  \endverb
+\endentry
+
+\entry{vergleich13}{misc}{}
+  \name{author}{3}{}{%
+    {{}%
+     {Fischer}{F.}%
+     {Markus}{M.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Képes}{K.}%
+     {Kálmán}{K.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Wassiljew}{W.}%
+     {Alexander}{A.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{FMKKWA1}
+  \strng{fullhash}{FMKKWA1}
+  \field{title}{Vergleich von Frameworks zur Implementierung von REST-basierten
+  Anwendungen}
+  \verb{url}
+  \verb http://elib.uni-stuttgart.de/opus/volltexte/2013/8731
+  \endverb
+  \field{year}{2013}
+\endentry
+
+\entry{dobjanschi:developing-android}{inproceedings}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Dobjanschi}{D.}%
+     {Virgil}{V.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{DV1}
+  \strng{fullhash}{DV1}
+  \field{booktitle}{Google I/O 2010}
+  \field{title}{Developing Android REST client applications}
+  \verb{url}
+  \verb https://www.youtube.com/watch?v=xHXn3Kg2IQE
+  \endverb
+  \field{year}{2010}
+\endentry
+
+\entry{tilko:rest}{article}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Stefan~Tilkov}{S.~T.}%
+     {Phillip~Ghadir}{P.~G.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{STPG1}
+  \strng{fullhash}{STPG1}
+  \field{title}{REST: Die Architektur des WEB}
+  \verb{url}
+  \verb http://www.sigs.de/publications/os/2006/05/tilkov_ghadir_OS_05_06.pdf
+  \endverb
+  \field{journaltitle}{ObjektSpektrum}
+  \field{month}{05}
+  \field{year}{2006}
+\endentry
+
+\entry{louis:android}{book}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Louis}{L.}%
+     {Dirk}{D.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {M{\"u}ller}{M.}%
+     {Peter}{P.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Carl Hanser Verlag GmbH \& Company KG}%
+  }
+  \strng{namehash}{LDMP1}
+  \strng{fullhash}{LDMP1}
+  \field{title}{Android: Der schnelle und einfache Einstieg in die
+  Programmierung und Entwicklungsumgebung}
+  \list{location}{1}{%
+    {Hanser eLibrary}%
+  }
+  \field{year}{2014}
+\endentry
+
+\entry{stackOverflow:rest-client}{online}{}
+  \name{author}{1}{}{%
+    {{}%
+     {StackOverflow}{S.}%
+     {}{}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{S1}
+  \strng{fullhash}{S1}
+  \field{note}{[abgerufen am {10.04.2015}]}
+  \field{title}{Best REST Client Framework/Utility on Android}
+  \verb{url}
+  \verb http://stackoverflow.com/questions/4945119/best-rest-client-framework-u
+  \verb tility-on-android
+  \endverb
+\endentry
+
+\entry{burd:android}{book}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Burd}{B.}%
+     {Barry}{B.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {John Wiley \& Sons}%
+  }
+  \strng{namehash}{BB1}
+  \strng{fullhash}{BB1}
+  \field{series}{For dummies}
+  \field{title}{Android Application Development All-in-One For Dummies}
+  \field{year}{2011}
+\endentry
+
+\lossort
+\endlossort
+
+\endinput

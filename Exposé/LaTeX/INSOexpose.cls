@@ -134,7 +134,7 @@
   \thispagestyle{empty}
   \@maketitle%
   \eject
-  \section*{\huge\title@label}
+  %\section*{\huge\title@label}
 }
 
 \def\@maketitle{

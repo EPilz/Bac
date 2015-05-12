@@ -17,32 +17,37 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="token"
         android:id="@+id/textViewToken"
-        android:layout_marginTop="41dp"
         android:textSize="10dp"
-        android:layout_below="@+id/title"
-        android:layout_alignRight="@+id/title"
-        android:layout_alignEnd="@+id/title" />
+        android:textAlignment="inherit"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/labelToken"
+        android:layout_alignRight="@+id/labelToken"
+        android:layout_alignEnd="@+id/labelToken"
+        android:layout_marginTop="10dp" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/token"
         android:id="@+id/labelToken"
-        android:layout_alignBaseline="@+id/textViewToken"
-        android:layout_alignBottom="@+id/textViewToken"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/title"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="power plants"
         android:id="@+id/textViewPowerPlants"
+        android:layout_gravity="center"
+        android:textAlignment="inherit"
+        android:textSize="10dp"
         android:layout_below="@+id/textViewToken"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="35dp"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="42dp"
+        android:layout_alignParentLeft="true" />
 
 </RelativeLayout>

@@ -7,6 +7,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import java.util.Date;
+
+import inso.revex_app_resty.util.PropertiesFileUtility;
 import us.monoid.json.JSONArray;
 import us.monoid.json.JSONException;
 import us.monoid.json.JSONObject;
@@ -26,7 +29,7 @@ public class ActivityPowerPlants extends ActionBarActivity {
         setContentView(R.layout.activity_power_plants);
 
         new TokenTask().execute();
-        token = "admin:1428595104815:0085accb498755c8f3aabe54d86b6696";
+        //token = "admin:1428595104815:0085accb498755c8f3aabe54d86b6696";
     }
 
 
@@ -56,14 +59,22 @@ public class ActivityPowerPlants extends ActionBarActivity {
         JSONResource res = null;
 
         try {
-//            Resty resty = new Resty().identifyAsMozilla();
-//            resty.withHeader("Content-Type", "application/json;charset=UTF-8");
-//            resty.withHeader("Accept", "application/json, text/plain, */*");
-//            res = resty.json("https://revex.inso.tuwien.ac.at/dev/api/user/authentication", content("{\"username\":\"admin\",\"password\":\"admin\"}"));
-//
-//            JSONObject ob = res.toObject();
-//            token  = (String) ob.get("token");
+            int minutes = PropertiesFileUtility.minutesDiffFromToken(getApplicationContext());
 
+            if(minutes >= 0 && minutes <= 30) {
+                token = PropertiesFileUtility.getValue(getApplicationContext(), "token");
+            } else {
+                Resty resty = new Resty().identifyAsMozilla();
+                resty.withHeader("Content-Type", "application/json;charset=UTF-8");
+                resty.withHeader("Accept", "application/json, text/plain, */*");
+                res = resty.json("https://revex.inso.tuwien.ac.at/dev/api/account/authentication", content("{\"username\":\"admin\",\"password\":\"admin\"}"));
+
+                JSONObject ob = res.toObject();
+                token  = (String) ob.get("token");
+
+                PropertiesFileUtility.setValue(getApplicationContext(), "token", token);
+                PropertiesFileUtility.setCurrentDate(getApplicationContext(), "tokenTime");
+            }
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -74,7 +85,6 @@ public class ActivityPowerPlants extends ActionBarActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     private void getPowerPlants() {
