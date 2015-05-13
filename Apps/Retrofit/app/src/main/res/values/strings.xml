@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Revex 2020 - Retrofit</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="label_allPowerPlants">Alle Kraftwerke</string>
+</resources>
