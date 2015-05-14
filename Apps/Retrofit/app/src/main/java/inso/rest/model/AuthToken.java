@@ -1,5 +1,7 @@
 package inso.rest.model;
 
+import org.parceler.Parcel;
+
 public class AuthToken {
 
     private String token;

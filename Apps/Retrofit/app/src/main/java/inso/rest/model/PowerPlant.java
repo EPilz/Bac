@@ -1,11 +1,15 @@
 package inso.rest.model;
 
+import org.parceler.Parcel;
+
 import java.util.Date;
 
 public class PowerPlant {
 
     public PowerPlant() {
     }
+
+    private Integer id;
 
     private String name;
 
@@ -26,7 +30,6 @@ public class PowerPlant {
     private String storageType;
 
     private String maintenanceStrategy;
-
 
     public String getName() {
         return name;
@@ -107,6 +110,14 @@ public class PowerPlant {
     public void setMaintenanceStrategy(
             String maintenanceStrategy) {
         this.maintenanceStrategy = maintenanceStrategy;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     @Override

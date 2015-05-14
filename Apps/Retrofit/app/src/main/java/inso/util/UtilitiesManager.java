@@ -1,0 +1,34 @@
+package inso.util;
+
+import inso.rest.model.AuthToken;
+import inso.rest.model.User;
+
+/**
+ * Created by Elisabeth on 14.05.2015.
+ */
+public class UtilitiesManager {
+    private static UtilitiesManager instance;
+
+    private AuthToken authToken;
+
+    private UtilitiesManager() {
+    }
+    public static synchronized UtilitiesManager getInstance () {
+        if (UtilitiesManager.instance == null) {
+            UtilitiesManager.instance = new UtilitiesManager();
+        }
+        return UtilitiesManager.instance;
+    }
+
+    public  AuthToken getAuthToken() {
+        return authToken;
+    }
+
+    public void setAuthToken(AuthToken authToken) {
+        this.authToken = authToken;
+    }
+
+    public User getStandardUser() {
+        return new User("admin", "admin");
+    }
+}

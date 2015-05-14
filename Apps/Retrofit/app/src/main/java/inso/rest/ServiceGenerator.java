@@ -22,7 +22,7 @@ import retrofit.converter.GsonConverter;
  */
 public class ServiceGenerator {
 
-    private static final String BASE_URL = "https://revex.inso.tuwien.ac.at/dev/api";
+    private static final String BASE_URL = "https://revex.inso.tuwien.ac.at/api";
 
     private ServiceGenerator() {
     }

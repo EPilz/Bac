@@ -1,5 +1,7 @@
 package inso.rest.model;
 
+import org.parceler.Parcel;
+
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -21,6 +23,9 @@ public class User {
     private Date expirationDate;
 
     private Date lockedUntilDate;
+
+    public User() {
+    }
 
     public User(String username, String password) {
         this.username = username;
