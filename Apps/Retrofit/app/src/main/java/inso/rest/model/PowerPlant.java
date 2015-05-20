@@ -3,8 +3,12 @@ package inso.rest.model;
 import org.parceler.Parcel;
 
 import java.util.Date;
+import java.util.List;
 
 public class PowerPlant {
+
+    public final static String KEY_PRODUCTION_LINES = "productionLines";
+
 
     public PowerPlant() {
     }
@@ -30,6 +34,8 @@ public class PowerPlant {
     private String storageType;
 
     private String maintenanceStrategy;
+
+    private List<Link> links;
 
     public String getName() {
         return name;
@@ -118,6 +124,14 @@ public class PowerPlant {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public List<Link> getLinks() {
+        return links;
+    }
+
+    public void setLinks(List<Link> links) {
+        this.links = links;
     }
 
     @Override

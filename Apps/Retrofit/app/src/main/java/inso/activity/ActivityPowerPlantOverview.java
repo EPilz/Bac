@@ -1,19 +1,27 @@
 package inso.activity;
 
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.Locale;
 
 import inso.rest.ServiceGenerator;
+import inso.rest.model.Component;
 import inso.rest.model.Evaluation;
+import inso.rest.model.Link;
 import inso.rest.model.PowerPlant;
+import inso.rest.model.ProductionLine;
 import inso.rest.service.PowerPlantService;
 import inso.util.UtilitiesManager;
 
@@ -73,6 +81,9 @@ public class ActivityPowerPlantOverview extends ActionBarActivity {
 
         @Override
         protected void onPostExecute(PowerPlant powerPlant) {
+            LoadProductLinesTask loadProductLinesTask = new LoadProductLinesTask();
+            loadProductLinesTask.execute(powerPlant);
+
             SimpleDateFormat sdf = new SimpleDateFormat("MMMM dd, yyyy", Locale.US);
             DecimalFormat df = new DecimalFormat("#.00");
 
@@ -102,6 +113,13 @@ public class ActivityPowerPlantOverview extends ActionBarActivity {
 
             TextView textViewTurbineType = (TextView) findViewById(R.id.textView_turbineType);
             textViewTurbineType.setText(powerPlant.getTurbineType());
+
+          /*  TextView textViewLinks = (TextView) findViewById(R.id.textView_Links);
+            String bla = "";
+            for(Link l : powerPlant.getLinks()) {
+               bla += l.getLastValueId() + " ";
+            }
+            textViewLinks.setText(bla);*/
         }
     }
 
@@ -121,6 +139,52 @@ public class ActivityPowerPlantOverview extends ActionBarActivity {
 
             TextView textViewTurbineType = (TextView) findViewById(R.id.textView_resultEvaluation);
             textViewTurbineType.setText(df.format(evaluation.getState()));
+        }
+    }
+
+    private class LoadProductLinesTask extends AsyncTask<PowerPlant, Void, List<ProductionLine>> {
+
+
+        @Override
+        protected List<ProductionLine> doInBackground(PowerPlant... params) {
+            PowerPlantService powerPlantService = ServiceGenerator.
+                    createServiceWithAuthToken(PowerPlantService.class, UtilitiesManager.getInstance().getAuthToken());
+            PowerPlant powerPlant = params[0];
+
+            List<ProductionLine> productionLines =  powerPlantService.getProductionLines(powerPlant.getId());
+
+            for (ProductionLine productionLine : productionLines) {
+                productionLine.setEvaluation(powerPlantService.getProductionLineEvaluation(productionLine.getId()));
+                productionLine.setComponents(powerPlantService.getComponentsFromProductionLines(productionLine.getId()));
+            }
+
+            return productionLines;
+        }
+
+        @Override
+        protected void onPostExecute(List<ProductionLine> productionLines) {
+            PowerPlantService powerPlantService = ServiceGenerator.
+                    createServiceWithAuthToken(PowerPlantService.class, UtilitiesManager.getInstance().getAuthToken());
+            DecimalFormat df = new DecimalFormat("#.00");
+            TableLayout tableLayout = (TableLayout) findViewById(R.id.tableLayoutProdutionLines);
+
+            for (ProductionLine productionLine : productionLines) {
+                TableRow tr = new TableRow(ActivityPowerPlantOverview.this);
+                //tr.setLayoutParams(new TableRow.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
+                Button b = new Button(ActivityPowerPlantOverview.this);
+                b.setText(productionLine.getName() + " eval: " + df.format(productionLine.getEvaluation().getState()));
+                tr.addView(b);
+                tableLayout.addView(tr);
+
+                for (Component component : productionLine.getComponents()) {
+                    tr = new TableRow(ActivityPowerPlantOverview.this);
+                    Button buttonComponent = new Button(ActivityPowerPlantOverview.this);
+                    buttonComponent.setBackgroundColor(Color.RED);
+                    buttonComponent.setText(component.getName());
+                    tr.addView(buttonComponent);
+                    tableLayout.addView(tr);
+                }
+            }
         }
     }
 }
