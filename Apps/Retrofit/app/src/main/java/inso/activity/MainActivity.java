@@ -1,5 +1,6 @@
 package inso.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -21,7 +22,7 @@ import inso.rest.service.UserService;
 import inso.util.UtilitiesManager;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends Activity {
 
     private final static String FILE_NAME = "config";
     private final static String KEY_TOKEN = "token";

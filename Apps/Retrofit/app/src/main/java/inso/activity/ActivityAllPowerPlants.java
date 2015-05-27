@@ -1,5 +1,6 @@
 package inso.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -19,7 +20,7 @@ import inso.rest.service.UserService;
 import inso.util.UtilitiesManager;
 
 
-public class ActivityAllPowerPlants extends ActionBarActivity {
+public class ActivityAllPowerPlants extends Activity {
 
     public static final String KEY = "ID";
 
@@ -79,19 +80,50 @@ public class ActivityAllPowerPlants extends ActionBarActivity {
         protected void onPostExecute(List<PowerPlant> powerPlants) {
             LinearLayout linearLayout = (LinearLayout) findViewById(R.id.listViewPowerPlants);
             for (final PowerPlant powerPlant : powerPlants) {
-                Button b = new Button(ActivityAllPowerPlants.this);
-                b.setText(powerPlant.getName());
-                b.setOnClickListener(new View.OnClickListener() {
+                LinearLayout linearLayoutInline = new LinearLayout(ActivityAllPowerPlants.this);
+                linearLayoutInline.setOrientation(LinearLayout.HORIZONTAL);
+
+                Button buttonPowerPlant = new Button(ActivityAllPowerPlants.this);
+                buttonPowerPlant.setText(powerPlant.getName());
+                buttonPowerPlant.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
                         Intent i = new Intent(ActivityAllPowerPlants.this, ActivityPowerPlantOverview.class);
                         i.putExtra(ActivityAllPowerPlants.KEY, powerPlant.getId());
                         startActivity(i);
                     }
                 });
-                linearLayout.addView(b);
+
+                Button buttonDelete = new Button(ActivityAllPowerPlants.this);
+                buttonDelete.setText("D");
+                buttonDelete.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        DeletePowerPlantTask deletePowerPlantTask = new DeletePowerPlantTask();
+                        deletePowerPlantTask.execute(powerPlant);
+                    }
+                });
+                linearLayoutInline.addView(buttonPowerPlant);
+                linearLayoutInline.addView(buttonDelete);
+                linearLayout.addView(linearLayoutInline);
             }
+        }
+    }
+
+    private class DeletePowerPlantTask extends AsyncTask<PowerPlant, Void, PowerPlant> {
+
+        @Override
+        protected PowerPlant doInBackground(PowerPlant... params) {
+            PowerPlantService powerPlantService = ServiceGenerator.
+                    createServiceWithAuthToken(PowerPlantService.class, UtilitiesManager.getInstance().getAuthToken());
+
+            return  powerPlantService.deletePowerPlantById(params[0].getId());
+        }
+
+        @Override
+        protected void onPostExecute(PowerPlant powerPlant) {
+            Intent i = new Intent(ActivityAllPowerPlants.this, ActivityAllPowerPlants.class);
+            startActivity(i);
         }
     }
 }

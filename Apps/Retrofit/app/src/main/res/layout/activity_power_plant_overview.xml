@@ -8,13 +8,9 @@
     android:nestedScrollingEnabled="true">
 
     <TextView android:text="--" android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/CodeFont"
         android:id="@+id/textView_name"
-        android:layout_column="1"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_column="1" />
 
     <ScrollView
         android:layout_width="wrap_content"

@@ -1,5 +1,6 @@
 package inso.activity;
 
+import android.app.Activity;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
@@ -25,7 +26,7 @@ import inso.rest.service.PowerPlantService;
 import inso.util.UtilitiesManager;
 
 
-public class ActivityPowerPlantOverview extends ActionBarActivity {
+public class ActivityPowerPlantOverview extends Activity {
 
     private int id;
 

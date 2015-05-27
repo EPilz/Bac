@@ -1,14 +1,20 @@
 package inso.activity;
 
+import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import inso.activity.util.KeyValueArrayAdapter;
@@ -18,7 +24,9 @@ import inso.rest.service.PowerPlantService;
 import inso.util.UtilitiesManager;
 
 
-public class ActivityCreatePowerPlant extends ActionBarActivity {
+public class ActivityCreatePowerPlant extends Activity {
+
+    private final String date_format = "dd.MM.yyyy";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +72,26 @@ public class ActivityCreatePowerPlant extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void openDatePicker(View view) {
+        final TextView textViewDate = (TextView) findViewById(R.id.editText_date);
+        final Calendar c = Calendar.getInstance();
+        int mYear = c.get(Calendar.YEAR);
+        int mMonth = c.get(Calendar.MONTH);
+        int mDay = c.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year,
+                                          int monthOfYear, int dayOfMonth) {
+                        textViewDate.setText(String.format("%02d.%02d.%d", dayOfMonth, (monthOfYear+1), year));
+
+                    }
+                }, mYear, mMonth, mDay);
+        datePickerDialog.show();
+    }
+
     public void createPowerPlant(View view) {
         TextView textViewName = (TextView) findViewById(R.id.editText_name);
 
@@ -77,7 +105,14 @@ public class ActivityCreatePowerPlant extends ActionBarActivity {
         Spinner spinnerPressureType = (Spinner) findViewById(R.id.spinnerPressureType);
         KeyValueArrayAdapter.KeyValue keyValuePressureType  = (KeyValueArrayAdapter.KeyValue) spinnerPressureType.getSelectedItem();
         powerPlant.setPressureType(keyValuePressureType.getKey());
-        powerPlant.setCommissioningDate(new Date());
+
+        SimpleDateFormat sdf = new SimpleDateFormat(date_format);
+        TextView textViewDate = (TextView) findViewById(R.id.editText_date);
+        try {
+            powerPlant.setCommissioningDate(sdf.parse(textViewDate.getText().toString()));
+        } catch (ParseException e) {
+            powerPlant.setCommissioningDate(new Date());
+        }
         CreatePowerPlantTask createPowerPlantTask = new CreatePowerPlantTask();
         createPowerPlantTask.execute(powerPlant);
     }
