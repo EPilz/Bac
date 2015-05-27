@@ -5,7 +5,6 @@ import java.util.Date;
 
 public class Component {
 
-	
 	private Integer id;
 	private Integer partId;
 	private String name;
@@ -29,6 +28,8 @@ public class Component {
 	
 	// "Gewichtung"
 	private Double weight;
+
+    private Evaluation evaluation;
 
 	public Integer getId() {
 		return id;
@@ -110,4 +111,11 @@ public class Component {
 		this.weight = weight;
 	}
 
+    public Evaluation getEvaluation() {
+        return evaluation;
+    }
+
+    public void setEvaluation(Evaluation evaluation) {
+        this.evaluation = evaluation;
+    }
 }

@@ -14,5 +14,36 @@
     <string name="years">years</string>
     <string name="days">days</string>
     <string name="prozent">%</string>
-    <string name="per_year"> per year</string>
+    <string name="per_year">per year</string>
+    <string name="not_found">Keine Daten gefunden</string>
+    <string name="title_activity_create_power_plant">Create Power Plant</string>
+
+    <string name="create_power_plant">neues Kraftwerk anlegen</string>
+
+
+    <string-array name="option_array_turbineType_key">
+        <item>FRANCIS</item>
+        <item>KAPLAN</item>
+        <item>PELTON</item>
+    </string-array>
+
+    <string-array name="option_array_turbineType_value">
+        <item>Francis</item>
+        <item>Kaplan</item>
+        <item>Pelton</item>
+    </string-array>
+
+    <string-array name="option_array_pressureType_key">
+        <item>LOW</item>
+        <item>MEDIUM</item>
+        <item>HIGH</item>
+    </string-array>
+
+    <string-array name="option_array_pressureType_value">
+        <item>Low</item>
+        <item>Medium</item>
+        <item>High</item>
+    </string-array>
+
+
 </resources>

@@ -6,7 +6,9 @@ import inso.rest.model.Component;
 import inso.rest.model.Evaluation;
 import inso.rest.model.PowerPlant;
 import inso.rest.model.ProductionLine;
+import retrofit.http.Body;
 import retrofit.http.GET;
+import retrofit.http.POST;
 import retrofit.http.Path;
 
 /**
@@ -31,5 +33,12 @@ public interface PowerPlantService {
 
     @GET("/productionlines/{id}/evaluation")
     public Evaluation getProductionLineEvaluation(@Path("id") int id);
+
+    @GET("/components/{id}/evaluation")
+    public Evaluation getComponentEvaluation(@Path("id") int id);
+
+    @POST("/powerplants")
+    public PowerPlant createPowerPlant(@Body PowerPlant powerPlant);
+
 
 }

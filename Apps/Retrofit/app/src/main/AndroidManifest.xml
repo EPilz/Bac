@@ -29,6 +29,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="inso.activity.ActivityAllPowerPlants" />
         </activity>
+        <activity
+            android:name=".ActivityCreatePowerPlant"
+            android:label="@string/title_activity_create_power_plant"
+            android:parentActivityName=".ActivityAllPowerPlants" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="inso.activity.ActivityAllPowerPlants" />
+        </activity>
     </application>
 
 </manifest>

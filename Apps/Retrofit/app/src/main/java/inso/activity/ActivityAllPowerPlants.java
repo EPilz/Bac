@@ -55,6 +55,12 @@ public class ActivityAllPowerPlants extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
+    public void createPowerPlant(View view) {
+        Intent i = new Intent(ActivityAllPowerPlants.this, ActivityCreatePowerPlant.class);
+        startActivity(i);
+    }
+
     private class LoadTask extends AsyncTask<Void, Void, List<PowerPlant>> {
 
         @Override
