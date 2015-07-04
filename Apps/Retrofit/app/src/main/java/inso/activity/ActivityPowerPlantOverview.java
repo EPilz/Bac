@@ -2,12 +2,17 @@ package inso.activity;
 
 import android.app.Activity;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -161,11 +166,11 @@ public class ActivityPowerPlantOverview extends Activity {
         protected void onPostExecute(List<ProductionLine> productionLines) {
             PowerPlantService powerPlantService = ServiceGenerator.
                     createServiceWithAuthToken(PowerPlantService.class, UtilitiesManager.getInstance().getAuthToken());
-            DecimalFormat df = new DecimalFormat("#.00");
+
             TableLayout tableLayout = (TableLayout) findViewById(R.id.tableLayoutProdutionLines);
+
             if(productionLines.isEmpty()) {
                 TableRow tr = new TableRow(ActivityPowerPlantOverview.this);
-                //tr.setLayoutParams(new TableRow.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
                 Button b = new Button(ActivityPowerPlantOverview.this);
                 b.setText(getString(R.string.not_found));
                 tr.addView(b);
@@ -173,22 +178,56 @@ public class ActivityPowerPlantOverview extends Activity {
             } else {
                 for (ProductionLine productionLine : productionLines) {
                     TableRow tr = new TableRow(ActivityPowerPlantOverview.this);
-                    //tr.setLayoutParams(new TableRow.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
+                    tr.setBackgroundColor(Color.DKGRAY);
+
                     Button b = new Button(ActivityPowerPlantOverview.this);
-                    b.setText(productionLine.getName() + " eval: " + df.format(productionLine.getEvaluation().getState()));
+                    b.setBackgroundColor(Color.TRANSPARENT);
+                    b.setText(productionLine.getName());
+                    b.setGravity(Gravity.LEFT);
                     tr.addView(b);
+
+                    TextView textViewEvalProduct = getTextViewWithColor(productionLine.getEvaluation());
+                    textViewEvalProduct.setGravity(Gravity.RIGHT);
+                    tr.addView(textViewEvalProduct);
+
                     tableLayout.addView(tr);
 
                     for (Component component : productionLine.getComponents()) {
                         tr = new TableRow(ActivityPowerPlantOverview.this);
                         Button buttonComponent = new Button(ActivityPowerPlantOverview.this);
                         buttonComponent.setBackgroundColor(Color.TRANSPARENT);
-                        buttonComponent.setText(component.getName() + " : " + df.format(component.getEvaluation().getState()));
+                        buttonComponent.setText(component.getName());
+                        buttonComponent.setGravity(Gravity.LEFT);
                         tr.addView(buttonComponent);
+
+                        TextView textViewEval = getTextViewWithColor(component.getEvaluation());
+                        textViewEval.setGravity(Gravity.RIGHT);
+                        tr.addView(textViewEval);
+
                         tableLayout.addView(tr);
                     }
                 }
             }
         }
+    }
+
+    private TextView getTextViewWithColor(Evaluation evaluation) {
+        DecimalFormat df = new DecimalFormat("#.00");
+
+        TextView textView = new TextView(ActivityPowerPlantOverview.this);
+        textView.setText(df.format(evaluation.getState()));
+
+        if(evaluation.getState() <= 2) {
+            textView.setTextColor(Color.parseColor("#188225"));
+        } else if(evaluation.getState() <= 4) {
+            textView.setTextColor(Color.parseColor("#FCC719"));
+        } else if(evaluation.getState() <= 6) {
+            textView.setTextColor(Color.parseColor("#F37F18"));
+        }  else if(evaluation.getState() <= 8) {
+            textView.setTextColor(Color.parseColor("#D44113"));
+        } else {
+            textView.setTextColor(Color.parseColor("#A11409"));
+        }
+        return textView;
     }
 }

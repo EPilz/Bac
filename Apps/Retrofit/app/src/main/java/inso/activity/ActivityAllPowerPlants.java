@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,6 +16,7 @@ import android.widget.LinearLayout;
 
 import java.util.List;
 
+import inso.activity.adapter.PowerPlantAdapter;
 import inso.rest.ServiceGenerator;
 import inso.rest.model.PowerPlant;
 import inso.rest.service.PowerPlantService;
@@ -68,7 +72,7 @@ public class ActivityAllPowerPlants extends Activity {
         protected List<PowerPlant> doInBackground(Void... params) {
             UserService userService = ServiceGenerator.createService(UserService.class);
             UtilitiesManager.getInstance().
-                    setAuthToken(userService.getAuthToken(UtilitiesManager.getInstance().getStandardUser()));
+                    setAuthToken(userService.getAuthToken(UtilitiesManager.getInstance().getUser()));
 
             PowerPlantService powerPlantService = ServiceGenerator.
                     createServiceWithAuthToken(PowerPlantService.class, UtilitiesManager.getInstance().getAuthToken());
@@ -78,7 +82,19 @@ public class ActivityAllPowerPlants extends Activity {
 
         @Override
         protected void onPostExecute(List<PowerPlant> powerPlants) {
-            LinearLayout linearLayout = (LinearLayout) findViewById(R.id.listViewPowerPlants);
+            RecyclerView rv = (RecyclerView)findViewById(R.id.recyclerView_powerPlants);
+            rv.setHasFixedSize(true);
+
+            LinearLayoutManager llm = new LinearLayoutManager(ActivityAllPowerPlants.this);
+            rv.setLayoutManager(llm);
+
+            PowerPlantAdapter adapter = new PowerPlantAdapter(powerPlants, ActivityAllPowerPlants.this);
+            rv.setAdapter(adapter);
+          //  rv.addItemDecoration(new SimpleDividerItemDecoration(getResources()));
+            rv.setItemAnimator(new DefaultItemAnimator());
+            adapter.notifyDataSetChanged();
+
+            /*LinearLayout linearLayout = (LinearLayout) findViewById(R.id.listViewPowerPlants);
             for (final PowerPlant powerPlant : powerPlants) {
                 LinearLayout linearLayoutInline = new LinearLayout(ActivityAllPowerPlants.this);
                 linearLayoutInline.setOrientation(LinearLayout.HORIZONTAL);
@@ -106,7 +122,7 @@ public class ActivityAllPowerPlants extends Activity {
                 linearLayoutInline.addView(buttonPowerPlant);
                 linearLayoutInline.addView(buttonDelete);
                 linearLayout.addView(linearLayoutInline);
-            }
+            }*/
         }
     }
 

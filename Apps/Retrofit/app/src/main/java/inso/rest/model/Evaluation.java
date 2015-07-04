@@ -8,6 +8,11 @@ public class Evaluation {
 	public Evaluation() {
 	}
 
+	public Evaluation(Double state, boolean operable) {
+		this.state = state;
+		this.operable = operable;
+	}
+
 	public Double getState() {
 		return state;
 	}

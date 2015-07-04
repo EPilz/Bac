@@ -22,7 +22,12 @@ public class ProductionLine {
     public ProductionLine() {
     }
 
-    public String getName() {
+	public ProductionLine(String name, Evaluation evaluation) {
+		this.name = name;
+		this.evaluation = evaluation;
+	}
+
+	public String getName() {
 		return name;
 	}
 

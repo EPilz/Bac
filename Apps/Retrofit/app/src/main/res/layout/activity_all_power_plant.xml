@@ -5,26 +5,44 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".AllPowerPlant">
 
-    <TextView android:text="@string/label_allPowerPlants"
-        android:id="@+id/textView"
-        style="@style/CodeFont" />
 
-    <LinearLayout
-        android:orientation="vertical"
+
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="false"
+        android:id="@+id/linearLayout">
+
+        <TextView android:text="@string/label_allPowerPlants"
+            android:id="@+id/textView"
+            style="@style/CodeFont"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/create_power_plant"
+            android:drawableLeft="@drawable/add4"
+            android:id="@+id/button"
+            android:onClick="createPowerPlant"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentRight="true"
+            android:background="@android:color/transparent"
+            android:textAlignment="textEnd"
+            android:singleLine="false" />
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:id="@+id/listViewPowerPlants"
-        android:layout_alignParentStart="false"></LinearLayout>
+        android:id="@+id/recyclerView_powerPlants"
+        android:layout_below="@+id/linearLayout"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="5dp"/>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/create_power_plant"
-        android:id="@+id/button"
-        android:layout_below="@+id/textView"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="20dp"
-        android:onClick="createPowerPlant" />
 
 </RelativeLayout>

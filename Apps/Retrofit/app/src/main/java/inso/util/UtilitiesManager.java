@@ -10,6 +10,7 @@ public class UtilitiesManager {
     private static UtilitiesManager instance;
 
     private AuthToken authToken;
+    private User user;
 
     private UtilitiesManager() {
     }
@@ -28,7 +29,12 @@ public class UtilitiesManager {
         this.authToken = authToken;
     }
 
-    public User getStandardUser() {
-        return new User("admin", "admin");
+    public User getUser() {
+        return user;
     }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
 }

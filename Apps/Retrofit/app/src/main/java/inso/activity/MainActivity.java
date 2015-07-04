@@ -5,12 +5,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -18,6 +18,7 @@ import java.util.Date;
 
 import inso.rest.ServiceGenerator;
 import inso.rest.model.AuthToken;
+import inso.rest.model.User;
 import inso.rest.service.UserService;
 import inso.util.UtilitiesManager;
 
@@ -27,6 +28,7 @@ public class MainActivity extends Activity {
     private final static String FILE_NAME = "config";
     private final static String KEY_TOKEN = "token";
     private final static String KEY_TOKENTIME = "tokenTime";
+    private final static String KEY_NAME = "userName";
     private final static long MINUTE_MILLIS = 60000;
     private final static String DATE_FORMAT = "dd-MM-yyyy HH:mm:ss";
 
@@ -39,15 +41,29 @@ public class MainActivity extends Activity {
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int minutes = minutesDiffFromToken();
-                Log.i("my", "minutes: " + minutes);
-                if (minutes >= 0 && minutes <= 50) {
-                    SharedPreferences sharedPrefs = getSharedPreferences(FILE_NAME, 0);
-                    String token = sharedPrefs.getString(KEY_TOKEN, "");
-                    UtilitiesManager.getInstance().setAuthToken(new AuthToken(token));
-                    Log.i("my", "Token: " + UtilitiesManager.getInstance().getAuthToken() + "");
+                SharedPreferences sharedPrefs = getSharedPreferences(FILE_NAME, 0);
+                String nameOld = sharedPrefs.getString(KEY_NAME, "");
+                String user = ((EditText)  findViewById(R.id.editText_name)).getText().toString();
+                String password  = ((EditText)  findViewById(R.id.editText_password)).getText().toString();
+                UtilitiesManager.getInstance().setUser(new User(user, password));
+
+                if(nameOld.equals(user)) {
+                    int minutes = minutesDiffFromToken();
+                    Log.i("my", "minutes: " + minutes);
+                    if (minutes >= 0 && minutes <= 50) {
+                        String token = sharedPrefs.getString(KEY_TOKEN, "");
+                        UtilitiesManager.getInstance().setAuthToken(new AuthToken(token));
+                        Log.i("my", "Token: " + UtilitiesManager.getInstance().getAuthToken() + "");
+                    } else {
+                        Log.i("my", "else load task");
+                        LoginTask loadTask = new LoginTask();
+                        loadTask.execute();
+                    }
                 } else {
-                    Log.i("my", "else load task");
+                    Log.i("my", "new user");
+                    SharedPreferences.Editor editor = sharedPrefs.edit();
+                    editor.putString(KEY_NAME, UtilitiesManager.getInstance().getUser().getUsername());
+                    editor.commit();
                     LoginTask loadTask = new LoginTask();
                     loadTask.execute();
                 }
@@ -103,7 +119,7 @@ public class MainActivity extends Activity {
         protected AuthToken doInBackground(Void... params) {
             UserService userService = ServiceGenerator.createService(UserService.class);
             UtilitiesManager.getInstance().
-                    setAuthToken(userService.getAuthToken(UtilitiesManager.getInstance().getStandardUser()));
+                    setAuthToken(userService.getAuthToken(UtilitiesManager.getInstance().getUser()));
 
             SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT);
 

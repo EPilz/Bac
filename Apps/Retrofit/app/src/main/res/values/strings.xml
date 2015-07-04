@@ -6,7 +6,7 @@
 
     <string name="action_settings">Settings</string>
 
-    <string name="label_allPowerPlants">Alle Kraftwerke</string>
+    <string name="label_allPowerPlants">Meine Kraftwerke</string>
     <string name="title_activity_main">MainActivity</string>
 
     <string name="title_activity_activity_power_plant_overview">Detail Kraftwerk</string>
@@ -18,7 +18,7 @@
     <string name="not_found">Keine Daten gefunden</string>
     <string name="title_activity_create_power_plant">Create Power Plant</string>
 
-    <string name="create_power_plant">neues Kraftwerk anlegen</string>
+    <string name="create_power_plant">neu</string>
 
 
     <string-array name="option_array_turbineType_key">
