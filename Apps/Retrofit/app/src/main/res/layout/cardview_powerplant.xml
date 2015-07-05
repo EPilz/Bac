@@ -27,7 +27,26 @@
                 android:id="@+id/powerPlant_name"
                 android:layout_alignParentTop="true"
                 android:textSize="15sp"
+
                 />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/powerPlant_edit"
+                android:layout_alignParentTop="true"
+                android:background="@android:color/transparent"
+                android:layout_toStartOf="@+id/powerPlant_delete"
+                android:src="@drawable/edit"/>
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/powerPlant_delete"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:background="@android:color/transparent"
+                android:src="@drawable/trash"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -37,6 +56,17 @@
                 android:textSize="12sp"
                 android:layout_marginLeft="6dp"
                 />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/powerPlant_turbineType"
+                android:layout_below="@+id/powerPlant_commissioningDate"
+                android:textSize="12sp"
+                android:layout_marginLeft="6dp"
+                />
+
+
 
 
 

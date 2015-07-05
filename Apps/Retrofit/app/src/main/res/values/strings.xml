@@ -18,7 +18,8 @@
     <string name="not_found">Keine Daten gefunden</string>
     <string name="title_activity_create_power_plant">Create Power Plant</string>
 
-    <string name="create_power_plant">neu</string>
+    <string name="new_power_plant">  neu</string>
+    <string name="create_power_plant">neues Kraftwerk anlegen</string>
 
 
     <string-array name="option_array_turbineType_key">
@@ -45,5 +46,30 @@
         <item>High</item>
     </string-array>
 
+    <string-array name="option_array_storageType_key">
+        <item>NONE</item>
+        <item>DAILY</item>
+        <item>MONTHLY</item>
+        <item>YEARLY</item>
+    </string-array>
+
+    <string-array name="option_array_storageType_value">
+        <item>NONE</item>
+        <item>DAILY</item>
+        <item>MONTHLY</item>
+        <item>YEARLY</item>
+    </string-array>
+
+    <string-array name="option_array_maintenanceStrategy_key">
+        <item>CONDITION_BASED</item>
+        <item>PREVENTIVE</item>
+        <item>OPERATIVE</item>
+    </string-array>
+
+    <string-array name="option_array_maintenanceStrategy_value">
+        <item>CONDITION_BASED</item>
+        <item>PREVENTIVE</item>
+        <item>OPERATIVE</item>
+    </string-array>
 
 </resources>

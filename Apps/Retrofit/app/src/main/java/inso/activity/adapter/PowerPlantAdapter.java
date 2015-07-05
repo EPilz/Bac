@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -24,9 +25,9 @@ import inso.rest.model.PowerPlant;
 public class PowerPlantAdapter extends RecyclerView.Adapter<PowerPlantAdapter.PowerPlantViewHolder> implements  OnItemClickListener{
 
     private List<PowerPlant> powerPlants;
-    private Context context;
+    private ActivityAllPowerPlants context;
 
-    public PowerPlantAdapter(List<PowerPlant> powerPlants, Context context){
+    public PowerPlantAdapter(List<PowerPlant> powerPlants, ActivityAllPowerPlants context){
         this.powerPlants = powerPlants;
         this.context = context;
     }
@@ -39,13 +40,26 @@ public class PowerPlantAdapter extends RecyclerView.Adapter<PowerPlantAdapter.Po
     }
 
     @Override
-    public void onBindViewHolder(PowerPlantAdapter.PowerPlantViewHolder holder, int i) {
+    public void onBindViewHolder(PowerPlantAdapter.PowerPlantViewHolder holder, final int i) {
         SimpleDateFormat sdf = new SimpleDateFormat("MMMM dd, yyyy", Locale.US);
 
         holder.name.setText(powerPlants.get(i).getName());
+
+        if(powerPlants.get(i).getTurbineType() != null && !powerPlants.get(i).getTurbineType().isEmpty()) {
+            holder.turbineType.setText(powerPlants.get(i).getTurbineType());
+        }
+
         if(powerPlants.get(i).getCommissioningDate() != null) {
             holder.commissioningDate.setText(sdf.format(powerPlants.get(i).getCommissioningDate()));
         }
+
+
+        holder.delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                context.deletePowerPlant(powerPlants.get(i));
+            }
+        });
     }
 
     @Override
@@ -72,12 +86,23 @@ public class PowerPlantAdapter extends RecyclerView.Adapter<PowerPlantAdapter.Po
         CardView cv;
         TextView name;
         TextView commissioningDate;
+        TextView turbineType;
+        ImageButton edit;
+        ImageButton delete;
 
-        PowerPlantViewHolder(View itemView) {
+        private PowerPlantViewHolder(View itemView) {
             super(itemView);
             cv = (CardView)itemView.findViewById(R.id.cv_powerPlant);
             name = (TextView)itemView.findViewById(R.id.powerPlant_name);
             commissioningDate = (TextView)itemView.findViewById(R.id.powerPlant_commissioningDate);
+            turbineType = (TextView)itemView.findViewById(R.id.powerPlant_turbineType);
+            edit = (ImageButton)itemView.findViewById(R.id.powerPlant_edit);
+            delete = (ImageButton)itemView.findViewById(R.id.powerPlant_delete);
+
+
+
+
+
             cv.setOnClickListener(this);
         }
 

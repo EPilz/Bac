@@ -25,7 +25,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/create_power_plant"
+            android:text="@string/new_power_plant"
             android:drawableLeft="@drawable/add4"
             android:id="@+id/button"
             android:onClick="createPowerPlant"

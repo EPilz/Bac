@@ -1,6 +1,8 @@
 package inso.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -126,7 +128,32 @@ public class ActivityAllPowerPlants extends Activity {
         }
     }
 
-    private class DeletePowerPlantTask extends AsyncTask<PowerPlant, Void, PowerPlant> {
+    public void deletePowerPlant(final PowerPlant powerPlant) {
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle("Delete PowerPlant");
+        alert.setMessage("Are you sure you want delete this?");
+        alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                DeletePowerPlantTask deletePowerPlantTask = new DeletePowerPlantTask();
+                deletePowerPlantTask.execute(powerPlant);
+
+                dialog.dismiss();
+            }
+        });
+        alert.setNegativeButton("mm", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        alert.show();
+    }
+
+    public class DeletePowerPlantTask extends AsyncTask<PowerPlant, Void, PowerPlant> {
 
         @Override
         protected PowerPlant doInBackground(PowerPlant... params) {

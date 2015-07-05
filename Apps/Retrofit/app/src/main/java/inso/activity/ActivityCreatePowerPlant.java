@@ -48,6 +48,22 @@ public class ActivityCreatePowerPlant extends Activity {
                 getResources().getStringArray(R.array.option_array_pressureType_key),
                 getResources().getStringArray(R.array.option_array_pressureType_value));
         spinnerPressureType.setAdapter(adapterPressureType);
+
+        Spinner spinnerStorageType = (Spinner) findViewById(R.id.spinner_storageType);
+        KeyValueArrayAdapter adapterStorageType = new KeyValueArrayAdapter(this, android.R.layout.simple_spinner_item);
+        adapterStorageType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapterStorageType.setKeyValue(
+                getResources().getStringArray(R.array.option_array_storageType_key),
+                getResources().getStringArray(R.array.option_array_storageType_value));
+        spinnerStorageType.setAdapter(adapterStorageType);
+
+        Spinner spinnerMaintenanceStrategy = (Spinner) findViewById(R.id.spinner_maintenanceStrategy);
+        KeyValueArrayAdapter adapterMaintenanceStrategy = new KeyValueArrayAdapter(this, android.R.layout.simple_spinner_item);
+        adapterMaintenanceStrategy.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapterMaintenanceStrategy.setKeyValue(
+                getResources().getStringArray(R.array.option_array_maintenanceStrategy_key),
+                getResources().getStringArray(R.array.option_array_maintenanceStrategy_value));
+        spinnerMaintenanceStrategy.setAdapter(adapterMaintenanceStrategy);
     }
 
     @Override
@@ -105,6 +121,14 @@ public class ActivityCreatePowerPlant extends Activity {
         Spinner spinnerPressureType = (Spinner) findViewById(R.id.spinnerPressureType);
         KeyValueArrayAdapter.KeyValue keyValuePressureType  = (KeyValueArrayAdapter.KeyValue) spinnerPressureType.getSelectedItem();
         powerPlant.setPressureType(keyValuePressureType.getKey());
+
+        Spinner spinnerStorageType = (Spinner) findViewById(R.id.spinner_storageType);
+        KeyValueArrayAdapter.KeyValue keyValueStorageType  = (KeyValueArrayAdapter.KeyValue) spinnerStorageType.getSelectedItem();
+        powerPlant.setStorageType(keyValueStorageType.getKey());
+
+        Spinner spinnerMaintenanceStrategy = (Spinner) findViewById(R.id.spinner_maintenanceStrategy);
+        KeyValueArrayAdapter.KeyValue keyValueMaintenanceStrategy  = (KeyValueArrayAdapter.KeyValue) spinnerMaintenanceStrategy.getSelectedItem();
+        powerPlant.setMaintenanceStrategy(keyValueMaintenanceStrategy.getKey());
 
         SimpleDateFormat sdf = new SimpleDateFormat(date_format);
         TextView textViewDate = (TextView) findViewById(R.id.editText_date);
