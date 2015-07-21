@@ -18,6 +18,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
@@ -90,7 +91,8 @@ public class ActivityPowerPlantOverview extends Activity {
             loadProductLinesTask.execute(powerPlant);
 
             SimpleDateFormat sdf = new SimpleDateFormat("MMMM dd, yyyy", Locale.US);
-            DecimalFormat df = new DecimalFormat("#.00");
+            DecimalFormat df = (DecimalFormat)NumberFormat.getNumberInstance(Locale.US);
+            df.applyPattern("0.00");
 
             TextView textViewName = (TextView) findViewById(R.id.textView_name);
             textViewName.setText(powerPlant.getName() != null ? powerPlant.getName() : "-");
@@ -108,7 +110,7 @@ public class ActivityPowerPlantOverview extends Activity {
             textViewBreakdownRate.setText(powerPlant.getBreakdownRate() != null ? (df.format(powerPlant.getBreakdownRate() * 100) + " " + getString(R.string.prozent)) : "-");
 
             TextView textViewIncOfMaintenance = (TextView) findViewById(R.id.textView_incOfMaintenance);
-            textViewIncOfMaintenance.setText(powerPlant.getYearlyIncreaseOfMaintenance() != null ? (df.format(powerPlant.getYearlyIncreaseOfMaintenance()) + " " + getString(R.string.prozent) + " " + getString(R.string.per_year)) : "-");
+            textViewIncOfMaintenance.setText(powerPlant.getYearlyIncreaseOfMaintenance() != null ? (df.format(powerPlant.getYearlyIncreaseOfMaintenance() * 100 - 100 ) + " " + getString(R.string.prozent) + " " + getString(R.string.per_year)) : "-");
 
             TextView textViewStorageType = (TextView) findViewById(R.id.textView_storageType);
             textViewStorageType.setText(powerPlant.getStorageType() != null ? powerPlant.getStorageType() : "-");
@@ -133,7 +135,8 @@ public class ActivityPowerPlantOverview extends Activity {
 
         @Override
         protected void onPostExecute(Evaluation evaluation) {
-            DecimalFormat df = new DecimalFormat("#.00");
+            DecimalFormat df = (DecimalFormat)NumberFormat.getNumberInstance(Locale.US);
+            df.applyPattern("0.00");
 
             TextView textViewTurbineType = (TextView) findViewById(R.id.textView_resultEvaluation);
             textViewTurbineType.setText(df.format(evaluation.getState()));
@@ -178,11 +181,12 @@ public class ActivityPowerPlantOverview extends Activity {
             } else {
                 for (ProductionLine productionLine : productionLines) {
                     TableRow tr = new TableRow(ActivityPowerPlantOverview.this);
-                    tr.setBackgroundColor(Color.DKGRAY);
+                    tr.setBackgroundColor(Color.parseColor("#282828"));
 
                     Button b = new Button(ActivityPowerPlantOverview.this);
                     b.setBackgroundColor(Color.TRANSPARENT);
                     b.setText(productionLine.getName());
+                    b.setTextColor(Color.parseColor("#428bca"));
                     b.setGravity(Gravity.LEFT);
                     tr.addView(b);
 
@@ -212,10 +216,11 @@ public class ActivityPowerPlantOverview extends Activity {
     }
 
     private TextView getTextViewWithColor(Evaluation evaluation) {
-        DecimalFormat df = new DecimalFormat("#.00");
+        DecimalFormat df = (DecimalFormat) NumberFormat.getNumberInstance(Locale.US);
+        df.applyPattern("0.00");
 
         TextView textView = new TextView(ActivityPowerPlantOverview.this);
-        textView.setText(df.format(evaluation.getState()));
+        textView.setText(df.format(evaluation.getState()) +  "   ");
 
         if(evaluation.getState() <= 2) {
             textView.setTextColor(Color.parseColor("#188225"));

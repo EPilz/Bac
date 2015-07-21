@@ -10,6 +10,7 @@ import retrofit.http.Body;
 import retrofit.http.DELETE;
 import retrofit.http.GET;
 import retrofit.http.POST;
+import retrofit.http.PUT;
 import retrofit.http.Path;
 
 /**
@@ -44,6 +45,7 @@ public interface PowerPlantService {
     @DELETE("/powerplants/{id}")
     public PowerPlant deletePowerPlantById(@Path("id") int id);
 
-
+    @PUT("/powerplants/{id}")
+    public PowerPlant updatePowerPlant(@Path("id") int id, @Body PowerPlant powerPlant);
 
 }

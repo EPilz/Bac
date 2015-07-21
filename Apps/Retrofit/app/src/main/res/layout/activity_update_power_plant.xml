@@ -32,7 +32,7 @@
             android:layout_height="match_parent"
             android:layout_marginTop="5dp">
 
-            <TextView android:text="@string/create_power_plant"
+            <TextView android:text="@string/update_power_plant"
                 style="@style/CodeFont"
                 android:id="@+id/textView"
                 android:layout_span="2"
@@ -57,7 +57,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
-                android:id="@+id/editText_name"
+                android:id="@+id/updateText_name"
                 android:clickable="true"
                 android:hint="Name" />
 
@@ -81,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="date"
                 android:ems="10"
-                android:id="@+id/editText_date"
+                android:id="@+id/updateText_date"
                 android:onClick="openDatePicker"
                 android:hint="dd.MM.yyyy"
                 android:clickable="true"
@@ -106,7 +106,7 @@
                    android:layout_height="wrap_content"
                    android:inputType="numberDecimal"
                    android:ems="10"
-                   android:id="@+id/editText_breakdownRate"
+                   android:id="@+id/updateText_breakdownRate"
                    android:layout_column="1"
                    android:numeric="decimal" />
            </TableRow>
@@ -130,7 +130,7 @@
                    android:layout_height="wrap_content"
                    android:inputType="numberDecimal"
                    android:ems="10"
-                   android:id="@+id/editText_incOfMaintenance"
+                   android:id="@+id/updateText_incOfMaintenance"
                    android:layout_column="1"
                    android:numeric="decimal" />
 
@@ -154,7 +154,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:ems="10"
-                android:id="@+id/editText_residualTime"
+                android:id="@+id/updateText_residualTime"
                 android:layout_column="1"
                 android:numeric="integer" />
 
@@ -178,7 +178,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:ems="10"
-                android:id="@+id/editText_periodOfOverflow"
+                android:id="@+id/updateText_periodOfOverflow"
                 android:layout_column="1"
                 android:numeric="integer" />
 
@@ -200,7 +200,7 @@
             <Spinner
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/spinnerPressureType"
+                android:id="@+id/update_spinnerPressureType"
                 android:textStyle="bold"
                 android:spinnerMode="dropdown" />
         </TableRow>
@@ -221,7 +221,7 @@
             <Spinner
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/spinnerTurbineType"
+                android:id="@+id/update_spinnerTurbineType"
                 android:spinnerMode="dropdown" />
         </TableRow>
 
@@ -244,7 +244,7 @@
             <Spinner
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/spinner_storageType"
+                android:id="@+id/update_spinnerStorageType"
                 android:layout_column="1"
                 android:spinnerMode="dropdown"/>
 
@@ -266,7 +266,7 @@
             <Spinner
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/spinner_maintenanceStrategy"
+                android:id="@+id/update_spinnerMaintenanceStrategy"
                 android:layout_column="1"
                 android:spinnerMode="dropdown"/>
 
@@ -280,10 +280,10 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Create"
-                android:id="@+id/buttonCreate"
-                android:onClick="createPowerPlant"
-                android:layout_above="@+id/textView_createPowerPlantId"
+                android:text="Speichern"
+                android:id="@+id/buttonUpdate"
+                android:onClick="updatePowerPlant"
+                android:layout_above="@+id/textView_updatePowerPlant"
                 android:layout_span="1"
                 android:textAlignment="center"
                 android:gravity="center" />

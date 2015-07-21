@@ -142,7 +142,7 @@ public class ActivityAllPowerPlants extends Activity {
                 dialog.dismiss();
             }
         });
-        alert.setNegativeButton("mm", new DialogInterface.OnClickListener() {
+        alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -151,6 +151,12 @@ public class ActivityAllPowerPlants extends Activity {
         });
 
         alert.show();
+    }
+
+    public void updatePowerPlant(final PowerPlant powerPlant) {
+        Intent i = new Intent(this, ActivityUpdatePowerPlant.class);
+        i.putExtra(ActivityAllPowerPlants.KEY, powerPlant.getId());
+        startActivity(i);
     }
 
     public class DeletePowerPlantTask extends AsyncTask<PowerPlant, Void, PowerPlant> {

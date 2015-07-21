@@ -60,6 +60,13 @@ public class PowerPlantAdapter extends RecyclerView.Adapter<PowerPlantAdapter.Po
                 context.deletePowerPlant(powerPlants.get(i));
             }
         });
+
+        holder.edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                context.updatePowerPlant(powerPlants.get(i));
+            }
+        });
     }
 
     @Override
@@ -98,10 +105,6 @@ public class PowerPlantAdapter extends RecyclerView.Adapter<PowerPlantAdapter.Po
             turbineType = (TextView)itemView.findViewById(R.id.powerPlant_turbineType);
             edit = (ImageButton)itemView.findViewById(R.id.powerPlant_edit);
             delete = (ImageButton)itemView.findViewById(R.id.powerPlant_delete);
-
-
-
-
 
             cv.setOnClickListener(this);
         }

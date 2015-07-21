@@ -194,6 +194,15 @@ public class KeyValueArrayAdapter extends ArrayAdapter<KeyValueArrayAdapter.KeyV
         }
     }
 
+    public int getPosition(final String key) {
+        for (int i = 0; i < getCount(); i++) {
+            if(getKey(i).equals(key)) {
+                return i;
+            }
+        }
+        return  -1;
+    }
+
     /**
      * Get the value of the KeyValue with the specified position in the data set.
      * 

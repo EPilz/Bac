@@ -10,9 +10,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        card_view:cardBackgroundColor="@android:color/transparent"
-        card_view:cardPreventCornerOverlap="false"
-        card_view:cardUseCompatPadding="true"
+
+
+        card_view:cardBackgroundColor="#282828"
+        card_view:cardCornerRadius="8dp"
+        card_view:cardElevation="4dp"
         android:id="@+id/cv_powerPlant"
         >
 
@@ -27,7 +29,7 @@
                 android:id="@+id/powerPlant_name"
                 android:layout_alignParentTop="true"
                 android:textSize="15sp"
-
+                android:textColor="#FFFFFF"
                 />
 
             <ImageButton
@@ -55,6 +57,7 @@
                 android:layout_below="@+id/powerPlant_name"
                 android:textSize="12sp"
                 android:layout_marginLeft="6dp"
+                android:textColor="#FFFFFF"
                 />
 
             <TextView
@@ -64,6 +67,7 @@
                 android:layout_below="@+id/powerPlant_commissioningDate"
                 android:textSize="12sp"
                 android:layout_marginLeft="6dp"
+                android:textColor="#FFFFFF"
                 />
 
 

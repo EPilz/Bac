@@ -10,6 +10,8 @@
     <string name="title_activity_main">MainActivity</string>
 
     <string name="title_activity_activity_power_plant_overview">Detail Kraftwerk</string>
+
+
     <string name="result_evaluation">The result of the evaluation is:</string>
     <string name="years">years</string>
     <string name="days">days</string>
@@ -20,6 +22,9 @@
 
     <string name="new_power_plant">  neu</string>
     <string name="create_power_plant">neues Kraftwerk anlegen</string>
+
+    <string name="title_activity_update_power_plant">Kraftwerk bearbeiten</string>
+    <string name="update_power_plant">Kraftwerk bearbeiten</string>
 
 
     <string-array name="option_array_turbineType_key">
