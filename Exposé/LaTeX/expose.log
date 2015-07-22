@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (MiKTeX 2.9) (preloaded format=pdflatex 2015.4.10)  12 MAY 2015 21:39
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (MiKTeX 2.9) (preloaded format=pdflatex 2015.4.10)  22 JUL 2015 16:02
 entering extended mode
 **expose.tex
 (expose.tex
@@ -1759,6 +1759,9 @@ Underfull \hbox (badness 10000) in paragraph at lines 49--56
 
  []
 
+
+LaTeX Warning: Reference `LastPage' on page 2 undefined on input line 56.
+
 Package babel Info: Redefining german shorthand "f
 (babel)             in language  on input line 56.
 Package babel Info: Redefining german shorthand "|
@@ -1798,6 +1801,9 @@ Underfull \vbox (badness 10000) detected at line 97
 Underfull \vbox (badness 10000) detected at line 118
  []
 
+
+LaTeX Warning: Reference `LastPage' on page 3 undefined on input line 118.
+
 Package babel Info: Redefining german shorthand "f
 (babel)             in language  on input line 118.
 Package babel Info: Redefining german shorthand "|
@@ -1831,25 +1837,33 @@ fr / me / restdroid-[]resource-[]oriented-[]rest-[]client-[]for-[]android$[]\OT
 1/cmr/m/n/10.95 ) 
  []
 
-<imgs/github_stars.png, id=83, 362.3136pt x 247.6452pt>
+<imgs/github_stars.png, id=80, 362.3136pt x 247.6452pt>
 File: imgs/github_stars.png Graphic file (type png)
 
 <use imgs/github_stars.png>
 Package pdftex.def Info: imgs/github_stars.png used on input line 140.
 (pdftex.def)             Requested size: 341.43437pt x 233.37221pt.
 
-<imgs/github_commits.png, id=85, 362.3136pt x 247.1634pt>
+<imgs/github_commits.png, id=82, 362.3136pt x 247.1634pt>
 File: imgs/github_commits.png Graphic file (type png)
 
 <use imgs/github_commits.png>
 Package pdftex.def Info: imgs/github_commits.png used on input line 141.
 (pdftex.def)             Requested size: 341.43437pt x 232.91818pt.
+
+
+LaTeX Warning: Reference `figure:github' on page 4 undefined on input line 146.
+
+
 Package babel Info: Redefining german shorthand "f
 (babel)             in language  on input line 155.
 Package babel Info: Redefining german shorthand "|
 (babel)             in language  on input line 155.
 Package babel Info: Redefining german shorthand "~
 (babel)             in language  on input line 155.
+
+LaTeX Warning: Reference `LastPage' on page 4 undefined on input line 183.
+
 Package babel Info: Redefining german shorthand "f
 (babel)             in language  on input line 183.
 Package babel Info: Redefining german shorthand "|
@@ -1862,7 +1876,10 @@ Package babel Info: Redefining german shorthand "|
 (babel)             in language  on input line 183.
 Package babel Info: Redefining german shorthand "~
 (babel)             in language  on input line 183.
- [4]
+[4]
+
+LaTeX Warning: Reference `LastPage' on page 5 undefined on input line 183.
+
 Package babel Info: Redefining german shorthand "f
 (babel)             in language  on input line 183.
 Package babel Info: Redefining german shorthand "|
@@ -1875,7 +1892,7 @@ Package babel Info: Redefining german shorthand "|
 (babel)             in language  on input line 183.
 Package babel Info: Redefining german shorthand "~
 (babel)             in language  on input line 183.
- [5 <./imgs/github_stars.png> <./imgs/github_commits.png>]
+[5 <./imgs/github_stars.png> <./imgs/github_commits.png>]
 Package babel Info: Redefining german shorthand "f
 (babel)             in language  on input line 183.
 Package babel Info: Redefining german shorthand "|
@@ -1885,6 +1902,9 @@ Package babel Info: Redefining german shorthand "~
 
 Underfull \vbox (badness 10000) detected at line 204
  []
+
+
+LaTeX Warning: Reference `LastPage' on page 6 undefined on input line 207.
 
 Package babel Info: Redefining german shorthand "f
 (babel)             in language  on input line 207.
@@ -1905,7 +1925,13 @@ e-work/Utility on An-dro-id\OT1/cmr/m/n/10.95 . [ab-ge-ru-fen am 10.04.2015].
  []
 
 
+Package lastpage Warning: Rerun to get the references right on input line 216.
+
+
 AED: lastpage setting LastPage
+
+LaTeX Warning: Reference `LastPage' on page 7 undefined on input line 216.
+
 Package babel Info: Redefining german shorthand "f
 (babel)             in language  on input line 216.
 Package babel Info: Redefining german shorthand "|
@@ -1932,6 +1958,13 @@ Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 216.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 216.
 Package rerunfilecheck Info: File `expose.out' has not changed.
 (rerunfilecheck)             Checksum: 0729A57BD4FE11E6C647BA7EE8BC99C8;303.
+
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
 Package logreq Info: Writing requests to 'expose.run.xml'.
  ) 
 Here is how much of TeX's memory you used:
@@ -1941,7 +1974,7 @@ Here is how much of TeX's memory you used:
  26575 multiletter control sequences out of 15000+200000
  10851 words of font info for 38 fonts, out of 3000000 for 9000
  1027 hyphenation exceptions out of 8191
- 71i,12n,66p,848b,1398s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 71i,12n,66p,848b,1403s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb>
 <C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><
 C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/
@@ -1955,9 +1988,9 @@ s (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmss12.pfb><C:/Program Files
 iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files (x86)/MiKT
 eX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Program Files (x86)/MiKTeX
  2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on expose.pdf (7 pages, 227929 bytes).
+Output written on expose.pdf (7 pages, 226816 bytes).
 PDF statistics:
- 198 PDF objects out of 1000 (max. 8388607)
+ 191 PDF objects out of 1000 (max. 8388607)
  44 named destinations out of 1000 (max. 500000)
  81 words of extra memory for PDF output out of 10000 (max. 10000000)
 
