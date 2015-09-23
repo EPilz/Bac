@@ -1,0 +1,55 @@
+\begin{spacing}{1.4}
+\begin{longtable}{|p{.7 \linewidth}|p{.2 \linewidth}|}
+	\hline
+	\multicolumn{1}{|c|}{\textbf{Allgemein}} & \textbf{in Framework?} \\ 
+	\hline \hline 
+	aktive Community & - \\ 
+	\hline
+	Dokumentation \newline (vorhanden?, Schnittstellenbeschreibung, JavaDoc) & - \\ 
+	\hline
+	Lizenz & - \\
+	\hline
+	Hilfestellung für Entwicklung \newline (Tutorial, Codebeispiele) & - \\
+	\hline
+\end{longtable}
+\begin{longtable}{|p{.7 \linewidth}|p{.2 \linewidth}|}
+	\hline
+	\multicolumn{1}{|c|}{\textbf{REST-Framework}} & \textbf{in Framework?} \\ 
+	\hline \hline 
+	Einbinden in vorhandenes Projekt (Zeitdauer) & - \\
+	\hline
+	Unterstützung von HTTP-Methoden \newline (GET, POST, PUT, DELETE) & - \\
+	\hline 
+	JSON Unterstützung & - \\
+	\hline
+	Übertragen von Parameter (bestimmtes Format) & - \\
+	\hline
+	Aufruf der URL (String, Object etc.) & - \\
+	\hline
+	HTTP-Header erweitern & - \\
+	\hline
+	Unterstützung von transaktionalen Verhalten im Framework (ACID-Eigenschaften)  & - \\
+	\hline
+\end{longtable}
+\begin{longtable}{|p{.7 \linewidth}|p{.2 \linewidth}|}
+	\hline
+	\multicolumn{1}{|c|}{\textbf{Architektur des Frameworks}} & \textbf{in Framework?} \\ 
+	\hline \hline 
+	Möglichkeiten zur Ressourcenidentifikation (z.B. URI) & - \\
+	\hline
+	Definiert das Framework eine eigene IDL\footnote{Schnittstellenbeschreibungssprachen} & - \\
+	\hline 
+	werden verschiedene Medientypen unterstützt \newline (HTML, XML, CSV) & - \\
+	\hline
+	Sicherheitsmechanismen \newline (Authentifizierung, Verschlüsselung bei Übertragung) & - \\
+	\hline
+	Möglichkeiten zustandsabhängige Links zu Repräsentationen hinzuzufügen (Hypermedia)& - \\
+	\hline
+	werden andere Protokolle außer HTTP noch unterstützt & - \\
+	\hline
+	Unterstützung von Asynchronität & - \\
+	\hline
+	\caption{Evaluierungskriterien}
+	\label{tab:tabEvaluierungskriterien}
+\end{longtable}
+\end{spacing}

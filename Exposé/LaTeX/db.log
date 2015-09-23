@@ -1,0 +1,22 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdftex 2015.9.23)  23 SEP 2015 11:24
+entering extended mode
+**C:/Users/pie83wi/Desktop/Sonstiges/Bac/Exposé/LaTeX/db.bib
+(C:/Users/pie83wi/Desktop/Sonstiges/Bac/Exposé/LaTeX/db.bib
+! Missing $ inserted.
+<inserted text> 
+                $
+<to be read again> 
+                   _
+l.37 ...ww.sigs.de/publications/os/2006/05/tilkov_
+                                                  ghadir_OS_05_06.pdf}
+? 
+! Extra }, or forgotten $.
+l.37 ...ons/os/2006/05/tilkov_ghadir_OS_05_06.pdf}
+                                                  
+? 
+! Emergency stop.
+l.37 ...ons/os/2006/05/tilkov_ghadir_OS_05_06.pdf}
+                                                  
+End of file on the terminal!
+
+!  ==> Fatal error occurred, no output PDF file produced!

@@ -13,7 +13,7 @@
 % \inputencoding{latin1} % linux, mac
 
 %
-\title{\centering Evaluierung von REST Frameworks im Kontext des Revex2020 Projekts\\}
+\title{\centering Evaluierung von REST Frameworks für Android im Kontext des Revex2020 Projekts\\}
 % Bitte setzen falls der Titel zu lang ist
 \shorttitle{Evaluierung von REST Frameworks}
 \author{Elisabeth Pilz}
@@ -36,9 +36,11 @@
 %=======================================================================
 %Allgemeine Problemstellung: Formulierung der konkreten Problemstellung in wenigen Sätzen. Welchem Themenbereich ist die Arbeit zuzuordnen?
 
-Das immer stärkere Aufkommen von Smartphones im Arbeitsalltag macht es notwendig geeignete Apps für diese zu entwickeln. Dabei soll auf bereits vorhandene Logik zurückgegriffen werden, um diese nicht neu implementieren zu müssen. Als Backend kann zum Beispiel ein REST\footnote{Representational State Transfer}-Webservice verwendet werden, der die Business-Logik abgewickelt. Dabei ist es wichtig ein geeignetes REST Framework auszuwählen, das eine vollständige und korrekte Anbindung an den Webservice ermöglicht.   
+Einer der größten Trends auf den Busniess Markt ist die Mobilisierung der Geschäftswelt, die sich in den verschiedensten Unternehmensstrategien widerspiegelt. Es gibt zahlreiche Innovatione, um unabhängig von Stackholdern, Zeit, Ort und Geräten auf Daten und Anwendungen zuzugreifen. Ein wesentlich Innovationsstrang ist dabei die Entwicklung von Business-Apps, um beispielsweise die Arbeitszeiten auf Geschäftsreisen effektiv ausnützen zu können. Dadurch hat die Bedeutung der Informations- und Kommunikationsindustrie (IKT) in den letzten Jahren in den Unternehmen stetig zugenommen\cite{smartMobileApps1}.
 \\\\
-Es existieren bereits zahlreiche Frameworks, die eine REST Implementierung unterstützen, diese unterscheiden sich aber maßgeblich in der Qualität. Auch bieten nicht alle diese Frameworks eine Unterstützung für Android an. Daher ist die Auswahl eines geeigneten Frameworks für die App Entwicklung maßgeblich, damit eine effiziente Implementierung erfolgen kann. 
+Durch die immer stärkere Nachfrage nach mobilen Apps im Arbeitsalltag, ist es notwendig mobile Endgräte in bestehende Geschäftsprozesse der Unternehmen zu integrieren. Dabei soll es vermieden werden, eine komplett neue IT-Infrastruktur unter Beteiligung von mobilen Endgeräten zu schaffen. In vielen Unternehmen wird daher die IT-Anwendungslandschaft  an das Paradigma der Service-orientierten Architektur ausgerichtet. Ein wesentliche Vorteil dabei ist, dass wohl definierte Schnittstellen vorhanden sind und angebotene Dienste flexibel und plattformunabhängig genutzt werden können. Sollen nur mobile Anwendung in die existierende  IT-Anwendungslandschaft eingegliedert werden, bedeutet dies in der Service-orientierten Architektur, dass Web Services benötigt werden. In der Praxis werden Web Services entweder mit dem Kommunikationsprotokoll SOAP\footnote{Simple Object Access Protocol} oder REST\footnote{Representational State Transfer} umgesetzt \cite{smartMobileApps17}.
+\\\\
+Im  Revex2020 Projekt wird das Kommunikationsprotokoll REST verwendet, dadurch ist es maßgeblich ein geeignetes Framework auf Seiten der mobilen App zu finden, dass eine vollständige und korrekte Anbindung an das Webservice ermöglicht. Es existieren bereits zahlreiche Frameworks, die eine REST Implementierung unterstützen, diese unterscheiden sich aber stark in der Qualität. Auch bieten nicht alle diese Frameworks eine Unterstützung für Android an. Daher ist die Auswahl eines geeigneten Frameworks für eine erfolgreiche Implementierung  ausschlaggebend. 
 
 %Das Projekt soll es Betreibern von Kleinwasserkraftwerken ermöglichen anhand von erfassten Daten aussagekräftige Bewertungen über den technischen Zustand von mechanischen, hydraulischen und elektrischen Kraftwerkskomponenten durchzuführen. So sollen z.B. Wartungskosten den Neuanschaffungskosten gegenübergestellt werden, um wirtschaftliche Entscheidungen zur Laufzeitverlängerung von Wasserkraftwerken treffen zu können.
 
@@ -46,82 +48,59 @@ Es existieren bereits zahlreiche Frameworks, die eine REST Implementierung unter
 \section{Zielsetzung/Motivation}
 %=======================================================================
 %Welches Ziel soll durch die Bachelorarbeit erreicht werden, was motiviert Sie zu dieser Arbeit? 
-Die Thematik rund um die Evaluierung von REST-Frameworks für Android ist noch relativ neu, deswegen existieren noch keine Publikationen dazu. Es gibt zwar zahlreiche Vergleiche von REST Frameworks für den allgemeinen Gebrauch, wie etwa die Fachstudie von Markus Fischer, Kalman Kepes und Alexander Wassiljew\cite{vergleich13}. Dabei wurde allerdings nicht darauf eingegangen, ob die Frameworks eine Implementierung auf Android unterstützen.
+
+Die Thematik rund um die Evaluierung von REST-Frameworks für Android ist noch relativ neu, deswegen existieren noch nicht ausreichend genug Publikationen, um ein geeignetes Framework für das Projekt Revex2020 auszuwählen. Es gibt zwar einige Vergleiche von REST Frameworks, wie etwa die Fachstudie von Markus Fischer, Kalman Kepes und Alexander Wassiljew\cite{vergleich13}. In dieser Studie wird allerdings nicht darauf eingegangen, ob die Frameworks eine Implementierung clientseitig mit Android unterstützen. Dies ist aber eine essentielle Anforderung, da eine Business-App für Android entwickelt werden soll. 
 \\\\
-Die immer stärke wachsende Bereich von mobilen Anwendungen, macht das zu untersuchende Thema besonders interessant. Herkömmliche Software rückt immer weiter in den Hintergrund, Daten sollen sofort und überall abgerufen werden können. Daraus ergibt sich die Problematik wie dies am besten zu gewährleisten ist, beispielsweise durch die Implementierung einer App. 
+Der immer stärke wachsende Bereich von mobilen Anwendungen, macht das zu untersuchende Thema besonders interessant. Herkömmliche Software rückt immer weiter in den Hintergrund, Daten sollen sofort und überall abgerufen werden können. Mobile Endgeräte wie Smartphone und Tablets verändern daher die Geschäftswelt nachhaltig, Führungskräfte und Mitarbeiter erhalten jederzeit Zugang zu Unternehmensinformationen und -prozessen. Die Unternehmen der Zukunft sind daher mobil \cite{smartMobileApps7}.  
 \\\\
-Revex2020 ist ein Forschungsprojekt zur Revitalisierung von Wasserkraftwerken, das in Kooperation mit dem Institut für Energietechnik und Thermodynamik entwickelt wird \cite{projektbeschreibung:revex2020}. Ein Ziel dieses Projektes ist es, Mitarbeitern zukünftig zu ermöglichen, mithilfe von mobilen Endgeräten den Zustand der Kraftwerkskomponenten vor Ort abzufragen und bewerten zu können. Es soll eine Android App entwickelt werden, die das bereits vorhandene Backend des REST-Webservices verwendet und aufbauend auf diesen eine neue Client-Seite implementiert werden.
+Revex2020 ist ein Forschungsprojekt zur Revitalisierung von Wasserkraftwerken, das in Kooperation mit dem Institut für Energietechnik und Thermodynamik entwickelt wird \cite{projektbeschreibung:revex2020}. Ein Ziel dieses Projektes ist es, Mitarbeitern zukünftig zu ermöglichen, mithilfe von mobilen Endgeräten den Zustand einzelner Kraftwerkskomponenten vor Ort erfassen zu können. Es soll eine Android App entwickelt werden, die das bereits vorhandene Backend über das REST-Webservices nutzt um exemplarisch den Anwendungsfall abzubilden.
 \\\\
-Ziel dieser Bachelorarbeit ist die Evaluierung von verschiedenen REST-Frameworks für Android im Revex2020 Kontext, um eine unkomplizierte Anbindung an das bereits vorhandene Backend zu ermöglichen. Dazu werden bestehende REST-Frameworks für Android getestet, indem diese in einem Anwendungsfall eingesetzt werden. Nach der Evaluierung dieser Frameworks soll eine Empfehlung abgegeben werden, welches sich am besten für das Revex2020 Projekt eignet.
+Ziel dieser Bachelorarbeit ist die Evaluierung verschiedener REST-Frameworks für Android im Kontext des Revex2020 Projekts, um eine unkomplizierte Anbindung an das bereits vorhandene Backend zu ermöglichen. Dazu werden bestehende REST-Frameworks für Android getestet, indem diese in einem Anwendungsfall eingesetzt werden. Nach der Evaluierung dieser Frameworks soll eine Empfehlung abgegeben werden, welches sich am besten für das Revex2020 Projekt eignet.
 \newpage
 %=======================================================================
 \section{Methodik}
 %=======================================================================
 %Werden theoretische, praktische oder empirische Analysen durchgeführt? Klare Darstellung der eingesetzten theoretischen und praktischen Methoden (Befragung, Recherche, Statistik, Rapid Prototyping, Objektorientierte Analyse, UML, Komponenten-basierte Entwicklung, Programmiersprachen etc.).
 
-Die Evaluierung der Frameworks erfolgt aufgrund von Prototypen, indem die REST Frameworks verwendet werden. Es wurde im Vorfeld ein Anwendungsfall definiert, indem die einzelnen REST Frameworks  integriert werden. Dazu wird in einem Szenario der Prozess des Kraftwerk erstellen, löschen, bearbeiten und anzeigen durchgespielt. Als Vorlage dazu wird die bestehende Web-Applikation des Projektes verwendet.
+Die Evaluierung der Frameworks erfolgt anhand von Prototypen, indem die REST Frameworks verwendet werden. Es wurde im Vorfeld ein Anwendungsfall definiert, indem die einzelnen REST Frameworks  integriert werden. Dazu werden in einem Szenario verschiedene Prozess durchgespielt, wie Kraftwerk erstellen, löschen, bearbeiten und anzeigen. Als Vorlage dazu wird die bestehende Web-Applikation des Projektes verwendet.
 \\\\
-Die Qualität der einzelnen Frameworks soll anhand folgender Kriterien verglichen werden, welche aus dem Kriterienkatalog der Fachstudie\cite{vergleich13} ausgewählt wurden:
-\begin{spacing}{1.4}
-\begin{longtable}{|p{.7 \linewidth}|p{.2 \linewidth}|}
-	\hline
-	\multicolumn{1}{|c|}{\textbf{Allgemein}} & \textbf{in Framework?} \\ 
-	\hline \hline 
-	aktive Community & - \\ 
-	\hline
-	Dokumentation \newline (vorhanden?, Schnittstellenbeschreibung, JavaDoc) & - \\ 
-	\hline
-	Lizenz & - \\
-	\hline
-	Hilfestellung für Entwicklung \newline (Tutorial, Codebeispiele) & - \\
-	\hline
-\end{longtable}
-\begin{longtable}{|p{.7 \linewidth}|p{.2 \linewidth}|}
-	\hline
-	\multicolumn{1}{|c|}{\textbf{REST-Framework}} & \textbf{in Framework?} \\ 
-	\hline \hline 
-	Einbinden in vorhandenes Projekt (Zeitdauer) & - \\
-	\hline
-	Unterstützung von HTTP-Methoden \newline (GET, POST, PUT, DELETE) & - \\
-	\hline 
-	JSON Unterstützung & - \\
-	\hline
-	Übertragen von Parameter (bestimmtes Format) & - \\
-	\hline
-	Aufruf der URL (String, Object etc.) & - \\
-	\hline
-	HTTP-Header erweitern & - \\
-	\hline
-	Unterstützung von transaktionalen Verhalten im Framework (ACID-Eigenschaften)  & - \\
-	\hline
-\end{longtable}
-\begin{longtable}{|p{.7 \linewidth}|p{.2 \linewidth}|}
-	\hline
-	\multicolumn{1}{|c|}{\textbf{Architektur des Frameworks}} & \textbf{in Framework?} \\ 
-	\hline \hline 
-	Möglichkeiten zur Ressourcenidentifikation (z.B. URI) & - \\
-	\hline
-	Definiert das Framework eine eigene IDL\footnote{Schnittstellenbeschreibungssprachen} & - \\
-	\hline 
-	werden verschiedene Medientypen unterstützt \newline (HTML, XML, CSV) & - \\
-	\hline
-	Sicherheitsmechanismen \newline (Authentifizierung, Verschlüsselung bei Übertragung) & - \\
-	\hline
-	Möglichkeiten zustandsabhängige Links zu Repräsentationen hinzuzufügen (Hypermedia)& - \\
-	\hline
-	werden andere Protokolle außer HTTP noch unterstützt & - \\
-	\hline
-	Unterstützung von Asynchronität & - \\
-	\hline
-	\caption{Evaluierungskriterien}
-	\label{tab:tabEvaluierungskriterien}
-\end{longtable}
-\end{spacing}
+Die Qualität der einzelnen Frameworks soll anhand folgender Kriterien verglichen werden, welche an dem Kriterienkatalog der Fachstudie "Vergleich von Frameworks zur Implementierung von REST-basierten Anwendungen" \cite{vergleich13} angelehnt sind:
+\\\\
+\textbf{Allgemein:}
+\begin{itemize}[label=$-$]
+	\item aktive Community
+	\item Dokumentation (vorhanden?, Schnittstellenbeschreibung, JavaDoc)
+	\item Lizenz
+	\item Hilfestellung für Entwicklung (Tutorial, Codebeispiele)
+\end{itemize}
+
+\textbf{REST-Framework:}
+\begin{itemize}[label=$-$]
+	\item Einbinden in vorhandenes Projekt (Zeitdauer)
+	\item Unterstützung von HTTP-Methoden (GET, POST, PUT, DELETE)
+	\item JSON Unterstützung
+	\item Ubertragen von Parameter (bestimmtes Format)
+	\item Aufruf der URL (String, Object etc.)
+	\item HTTP-Header erweitern
+	\item Unterstützung von transaktionalen Verhalten im Framework (ACID-Eigenschaften)
+\end{itemize}
+
+\textbf{Architektur des Frameworks}
+\begin{itemize}[label=$-$]
+	\item Möglichkeiten zur Ressourcenidentifikation (z.B. URI)
+	\item Definiert das Framework eine eigene IDL\footnote{Schnittstellenbeschreibungssprachen}
+	\item werden verschiedene Medientypen unterstützt (wie HTML, XML, CSV)
+	\item Sicherheitsmechanismen  (Authentifizierung, Verschlüsselung bei Übertragung)
+	\item Möglichkeiten zustandsabhängige Links zu Repräsentationen hinzuzufügen (Hypermedia)
+	\item werden andere Protokolle außer HTTP noch unterstützt
+	\item Unterstützung von Asynchronität
+\end{itemize}
+
 %=======================================================================
 \section{State of the Art}
 %=======================================================================
 %Welche Lösungen oder ähnlichen Projekte gibt es schon – Einbettung von Literaturzitaten (mind. 5); Fallbeispiele.
-Um Rest Framework für die Evaluierung zu finden, wurde eine Technologie-Recherche durchgeführt. Dabei konnten folgende Projekte gefunden, welche eine REST Anbindung für Android unterstützen:
+Um Rest Framework für die Evaluierung zu finden, wurde eine Technologie-Recherche durchgeführt. Dabei konnten folgende Projekte gefunden werden, welche eine REST Anbindung für Android unterstützen:
 \begin{itemize}
 	\item Resty (\url{http://beders.github.io/Resty/Resty/Overview.html})
 	\item Retrofit (\url{http://square.github.io/retrofit/})
@@ -133,8 +112,6 @@ Um Rest Framework für die Evaluierung zu finden, wurde eine Technologie-Recherc
 	\item Jersey (\url{https://jersey.java.net/})
 \end{itemize}
 
-
-
 \begin{figure}[!htbp]
 	\centering	
 	\subfigure[Diagramm: Github Stars]{\includegraphics[width=0.8\textwidth]{imgs/github_stars.png}}
@@ -143,7 +120,7 @@ Um Rest Framework für die Evaluierung zu finden, wurde eine Technologie-Recherc
 	\label{figure:github}
 \end{figure}
 
-Es würde den Rahmen der Bachelorarbeit sprengen alle REST Frameworks zu evaluieren, deswegen werden nur die populärsten drei ausgewählt. Diese wurden mithilfe von Github ermittelt, indem zu einem die Github Stars mit den Commits (seit dem 01.01.2014)  in den Repositories verglichen wurden, siehe Abbildung \ref{figure:github}. Es werden daher folgende REST-Frameworks evaluiert und miteinander verglichen:
+Es würde den Rahmen der Bachelorarbeit überschreiten all diese gefunden REST Frameworks zu evaluieren. Deswegen werden in einer Vorstudie die drei häufigsten und den Anforderungen entsprechenden Frameworks ausgewählt. Die Häufigkeit der Verwendung gibt oft eine gewisse Auskunft über die Qualität, da für diese Frameworks oft bessere Support zur Verfügung steht. Diese wurden mithilfe von Github ermittelt, indem zu einem die Github Stars mit den Commits (seit dem 01.01.2014)  in den Repositories verglichen wurden, siehe Abbildung \ref{figure:github}. Es werden daher folgende REST-Frameworks evaluiert und miteinander verglichen:
 
 \begin{itemize}
 	\item Retrofit 
