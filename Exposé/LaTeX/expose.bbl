@@ -147,6 +147,22 @@
   \endverb
 \endentry
 
+\entry{parnin2012crowd}{article}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Chris~Parnin}{C.~P.}%
+     {Lars Grammel Margaret-Anne~Storey}{L.~G. M.-A.~S.}%
+     {}{}%
+     {Christoph~Treude}{C.~T.}}%
+  }
+  \strng{namehash}{CPCTLGMAS1}
+  \strng{fullhash}{CPCTLGMAS1}
+  \field{title}{Crowd documentation: Exploring the coverage and the dynamics of
+  API discussions on Stack Overflow}
+  \field{journaltitle}{Georgia Institute of Technology, Tech. Rep}
+  \field{year}{2012}
+\endentry
+
 \entry{dobjanschi:developing-android}{inproceedings}{}
   \name{author}{1}{}{%
     {{}%

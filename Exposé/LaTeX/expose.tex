@@ -6,8 +6,12 @@
 \documentclass[a4paper,11pt,german,public]{INSOexpose}
 \usepackage{array,longtable}
 \usepackage{setspace}
-\usepackage{hyperref}
 \usepackage{subfigure} 
+
+\PassOptionsToPackage{hyphens}{url}
+\usepackage{hyperref}
+\usepackage{url}
+
 
 \inputencoding{utf8} % linux, mac
 % \inputencoding{latin1} % linux, mac
@@ -64,36 +68,33 @@ Ziel dieser Bachelorarbeit ist die Evaluierung verschiedener REST-Frameworks fü
 
 Die Evaluierung der Frameworks erfolgt anhand von Prototypen, indem die REST Frameworks verwendet werden. Es wurde im Vorfeld ein Anwendungsfall definiert, indem die einzelnen REST Frameworks  integriert werden. Dazu werden in einem Szenario verschiedene Prozess durchgespielt, wie Kraftwerk erstellen, löschen, bearbeiten und anzeigen. Als Vorlage dazu wird die bestehende Web-Applikation des Projektes verwendet.
 \\\\
-Die Qualität der einzelnen Frameworks soll anhand folgender Kriterien verglichen werden, welche an dem Kriterienkatalog der Fachstudie "Vergleich von Frameworks zur Implementierung von REST-basierten Anwendungen" \cite{vergleich13} angelehnt sind:
+Die Qualität der einzelnen Frameworks soll anhand folgender Kriterien verglichen werden, welche an dem Kriterienkatalog der Fachstudie "Vergleich von Frameworks zur Implementierung von REST-basierten Anwendungen" \cite{vergleich13} angelehnt sind. Dieser Kriterienkatalog beschäftigt sich mit den Eigenschaften für die Evaluierung von REST Frameworks, vorallem aus serverseitigen Sicht. Dieser Katalog wurde deshalb gekürzt, sowie einzelne Punkte zusammengefasst und abgeändert um eine Evaluierung, im Kontext des Projektes Revex2020, durchführen zu können.
 \\\\
 \textbf{Allgemein:}
 \begin{itemize}[label=$-$]
-	\item aktive Community
-	\item Dokumentation (vorhanden?, Schnittstellenbeschreibung, JavaDoc)
-	\item Lizenz
-	\item Hilfestellung für Entwicklung (Tutorial, Codebeispiele)
+	\item Existiert eine aktive Community?
+	\item Ist eine Dokumentation des Codes vorhanden? (Schnittstellenbeschreibung, JavaDoc)
+	\item Unter welcher Lizenz steht das Projekt zur Verfügung=
+	\item Gibt es Hilfestellung für Entwicklung? (Tutorial, Codebeispiele)
 \end{itemize}
 
-\textbf{REST-Framework:}
+\textbf{Implementierung mit REST-Framework:}
 \begin{itemize}[label=$-$]
-	\item Einbinden in vorhandenes Projekt (Zeitdauer)
-	\item Unterstützung von HTTP-Methoden (GET, POST, PUT, DELETE)
-	\item JSON Unterstützung
-	\item Ubertragen von Parameter (bestimmtes Format)
-	\item Aufruf der URL (String, Object etc.)
-	\item HTTP-Header erweitern
-	\item Unterstützung von transaktionalen Verhalten im Framework (ACID-Eigenschaften)
+	\item Wie lange wird benötigt um das Framework einzubinden?  (Zeitdauer)
+	\item Welche HTTP-Verben werden unterstützt? (GET, POST, PUT, DELETE etc.)
+	\item Gibt es Möglichkeiten den HTTP-Header zu verändern oder zu erweitern?
+	\item Welche Medientypen werden unterstützt? (JSON, HTML, XML etc.)
+	\item Wie erfolgt die Identifikation einzelner Ressourcen? (Aufruf der URL)
+	\item Wird das HATEOAS Konzept unterstützt?
 \end{itemize}
 
-\textbf{Architektur des Frameworks}
+\textbf{Erweiterte Technische Fähigkeiten}
 \begin{itemize}[label=$-$]
-	\item Möglichkeiten zur Ressourcenidentifikation (z.B. URI)
-	\item Definiert das Framework eine eigene IDL\footnote{Schnittstellenbeschreibungssprachen}
-	\item werden verschiedene Medientypen unterstützt (wie HTML, XML, CSV)
-	\item Sicherheitsmechanismen  (Authentifizierung, Verschlüsselung bei Übertragung)
-	\item Möglichkeiten zustandsabhängige Links zu Repräsentationen hinzuzufügen (Hypermedia)
-	\item werden andere Protokolle außer HTTP noch unterstützt
-	\item Unterstützung von Asynchronität
+	\item Definiert das Framework eine eigene IDL\footnote{Schnittstellenbeschreibungssprachen}?
+	\item Wie wird der Bereich Sicherheit gehandhabt?  (Authentifizierung, Verschlüsselung)
+	\item Werden andere Protokolle außer HTTP noch unterstützt?
+	\item Gibt es eine Möglichkeit für asynchronen Nachrichtenaustausch?
+	\item Wird transaktionales Verhalten vom Framework unterstützt? (ACID-Eigenschaften)
 \end{itemize}
 
 %=======================================================================
@@ -102,14 +103,14 @@ Die Qualität der einzelnen Frameworks soll anhand folgender Kriterien vergliche
 %Welche Lösungen oder ähnlichen Projekte gibt es schon – Einbettung von Literaturzitaten (mind. 5); Fallbeispiele.
 Um Rest Framework für die Evaluierung zu finden, wurde eine Technologie-Recherche durchgeführt. Dabei konnten folgende Projekte gefunden werden, welche eine REST Anbindung für Android unterstützen:
 \begin{itemize}
-	\item Resty (\url{http://beders.github.io/Resty/Resty/Overview.html})
-	\item Retrofit (\url{http://square.github.io/retrofit/})
-	\item RESTlet (\url{http://restlet.com/})
-	\item Spring for Android (\url{http://projects.spring.io/spring-android/})
-	\item CRest (\url{http://crest.codegist.org/index.html})
-	\item RESTeasy Mobile (\url{http://resteasy.jboss.org/})
-	\item RESTDroid (\url{http://pcreations.fr/me/restdroid-resource-oriented-rest-client-for-android})
-	\item Jersey (\url{https://jersey.java.net/})
+	\item Resty (\href{http://beders.github.io/Resty/Resty/Overview.html}{http://beders.github.io/Resty/Resty/Overview.html})
+	\item Retrofit (\href{http://square.github.io/retrofit/}{http://square.github.io/retrofit/})
+	\item RESTlet (\href{http://restlet.com/}{http://restlet.com/})
+	\item Spring for Android (\href{http://projects.spring.io/spring-android/}{http://projects.spring.io/spring-android/})
+	\item CRest (\href{http://crest.codegist.org/index.html}{http://crest.codegist.org/index.html})
+	\item RESTeasy Mobile (\href{http://resteasy.jboss.org/}{http://resteasy.jboss.org/})
+	\item RESTDroid (\href{http://pcreations.fr/me/restdroid-resource-oriented-rest-client-for-android}{http://pcreations.fr/me/restdroid-resource-oriented-rest-client-for-android})
+	\item Jersey (\href{https://jersey.java.net/}{https://jersey.java.net/})
 \end{itemize}
 
 \begin{figure}[!htbp]
@@ -120,7 +121,7 @@ Um Rest Framework für die Evaluierung zu finden, wurde eine Technologie-Recherc
 	\label{figure:github}
 \end{figure}
 
-Es würde den Rahmen der Bachelorarbeit überschreiten all diese gefunden REST Frameworks zu evaluieren. Deswegen werden in einer Vorstudie die drei häufigsten und den Anforderungen entsprechenden Frameworks ausgewählt. Die Häufigkeit der Verwendung gibt oft eine gewisse Auskunft über die Qualität, da für diese Frameworks oft bessere Support zur Verfügung steht. Diese wurden mithilfe von Github ermittelt, indem zu einem die Github Stars mit den Commits (seit dem 01.01.2014)  in den Repositories verglichen wurden, siehe Abbildung \ref{figure:github}. Es werden daher folgende REST-Frameworks evaluiert und miteinander verglichen:
+Es würde den Rahmen der Bachelorarbeit überschreiten, alle diese gefunden REST Frameworks zu evaluieren. Deswegen werden in einer Vorstudie die drei häufigsten und den Anforderungen entsprechenden Frameworks ausgewählt. Die Häufigkeit der Verwendung gibt oft eine gewisse Auskunft über die Qualität, da für diese Frameworks oft bessere Support zur Verfügung steht. Verschiedene Studien\cite{parnin2012crowd} beschäftigen sich damit wie Question and Answer (QA) Webseiten die Hilfestellung zu verschiedenen Frameworks verbessern. Diese wurden mithilfe von Github ermittelt, indem zu einem die Github Stars mit den Commits (seit dem 01.01.2014)  in den Repositories verglichen wurden, siehe Abbildung \ref{figure:github}. Es werden daher folgende REST-Frameworks evaluiert und miteinander verglichen:
 
 \begin{itemize}
 	\item Retrofit 
