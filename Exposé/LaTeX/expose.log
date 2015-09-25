@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2015.9.23)  24 SEP 2015 15:28
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2015.9.23)  25 SEP 2015 09:42
 entering extended mode
 **C:/Users/pie83wi/Desktop/Sonstiges/Bac/Exposé/LaTeX/expose.tex
 (C:/Users/pie83wi/Desktop/Sonstiges/Bac/Exposé/LaTeX/expose.tex
@@ -1797,75 +1797,87 @@ Overfull \hbox (22.88919pt too wide) in paragraph at lines 112--113
 iented-rest-client-for-android[]) 
  []
 
-<imgs/github_stars.png, id=94, 362.3136pt x 247.6452pt>
+
+LaTeX Warning: Reference `figure:github' on page 5 undefined on input line 116.
+
+
+<imgs/github_stars.png, id=95, 362.7954pt x 248.6088pt>
 File: imgs/github_stars.png Graphic file (type png)
 
 <use imgs/github_stars.png>
-Package pdftex.def Info: imgs/github_stars.png used on input line 118.
-(pdftex.def)             Requested size: 341.43437pt x 233.37221pt.
+Package pdftex.def Info: imgs/github_stars.png used on input line 120.
+(pdftex.def)             Requested size: 341.43437pt x 233.97679pt.
 
-<imgs/github_commits.png, id=96, 362.3136pt x 247.1634pt>
+<imgs/github_commits.png, id=97, 363.2772pt x 248.6088pt>
 File: imgs/github_commits.png Graphic file (type png)
 
 <use imgs/github_commits.png>
-Package pdftex.def Info: imgs/github_commits.png used on input line 119.
-(pdftex.def)             Requested size: 341.43437pt x 232.91818pt.
-Package babel Info: Redefining german shorthand "f
-(babel)             in language  on input line 133.
-Package babel Info: Redefining german shorthand "|
-(babel)             in language  on input line 133.
-Package babel Info: Redefining german shorthand "~
-(babel)             in language  on input line 133.
-Package babel Info: Redefining german shorthand "f
-(babel)             in language  on input line 161.
-Package babel Info: Redefining german shorthand "|
-(babel)             in language  on input line 161.
-Package babel Info: Redefining german shorthand "~
-(babel)             in language  on input line 161.
-Package babel Info: Redefining german shorthand "f
-(babel)             in language  on input line 161.
-Package babel Info: Redefining german shorthand "|
-(babel)             in language  on input line 161.
-Package babel Info: Redefining german shorthand "~
-(babel)             in language  on input line 161.
- [5]
-Package babel Info: Redefining german shorthand "f
-(babel)             in language  on input line 161.
-Package babel Info: Redefining german shorthand "|
-(babel)             in language  on input line 161.
-Package babel Info: Redefining german shorthand "~
-(babel)             in language  on input line 161.
-Package babel Info: Redefining german shorthand "f
-(babel)             in language  on input line 161.
-Package babel Info: Redefining german shorthand "|
-(babel)             in language  on input line 161.
-Package babel Info: Redefining german shorthand "~
-(babel)             in language  on input line 161.
- [6 <./imgs/github_stars.png> <./imgs/github_commits.png>]
-Package babel Info: Redefining german shorthand "f
-(babel)             in language  on input line 161.
-Package babel Info: Redefining german shorthand "|
-(babel)             in language  on input line 161.
-Package babel Info: Redefining german shorthand "~
-(babel)             in language  on input line 161.
+Package pdftex.def Info: imgs/github_commits.png used on input line 127.
+(pdftex.def)             Requested size: 341.43437pt x 233.67711pt.
 
-Underfull \vbox (badness 10000) detected at line 182
+<imgs/stackoverflow_questions.png, id=98, 363.2772pt x 239.9364pt>
+File: imgs/stackoverflow_questions.png Graphic file (type png)
+
+<use imgs/stackoverflow_questions.png>
+Package pdftex.def Info: imgs/stackoverflow_questions.png used on input line 13
+4.
+(pdftex.def)             Requested size: 341.43437pt x 225.52559pt.
+Package babel Info: Redefining german shorthand "f
+(babel)             in language  on input line 145.
+Package babel Info: Redefining german shorthand "|
+(babel)             in language  on input line 145.
+Package babel Info: Redefining german shorthand "~
+(babel)             in language  on input line 145.
+Package babel Info: Redefining german shorthand "f
+(babel)             in language  on input line 145.
+Package babel Info: Redefining german shorthand "|
+(babel)             in language  on input line 145.
+Package babel Info: Redefining german shorthand "~
+(babel)             in language  on input line 145.
+ [5 <./imgs/github_stars.png>]
+Package babel Info: Redefining german shorthand "f
+(babel)             in language  on input line 145.
+Package babel Info: Redefining german shorthand "|
+(babel)             in language  on input line 145.
+Package babel Info: Redefining german shorthand "~
+(babel)             in language  on input line 145.
+Package babel Info: Redefining german shorthand "f
+(babel)             in language  on input line 145.
+Package babel Info: Redefining german shorthand "|
+(babel)             in language  on input line 145.
+Package babel Info: Redefining german shorthand "~
+(babel)             in language  on input line 145.
+ [6 <./imgs/github_commits.png> <./imgs/stackoverflow_questions.png>]
+Package babel Info: Redefining german shorthand "f
+(babel)             in language  on input line 149.
+Package babel Info: Redefining german shorthand "|
+(babel)             in language  on input line 149.
+Package babel Info: Redefining german shorthand "~
+(babel)             in language  on input line 149.
+Package babel Info: Redefining german shorthand "f
+(babel)             in language  on input line 177.
+Package babel Info: Redefining german shorthand "|
+(babel)             in language  on input line 177.
+Package babel Info: Redefining german shorthand "~
+(babel)             in language  on input line 177.
+
+Underfull \vbox (badness 10000) detected at line 198
  []
 
 Package babel Info: Redefining german shorthand "f
-(babel)             in language  on input line 185.
+(babel)             in language  on input line 201.
 Package babel Info: Redefining german shorthand "|
-(babel)             in language  on input line 185.
+(babel)             in language  on input line 201.
 Package babel Info: Redefining german shorthand "~
-(babel)             in language  on input line 185.
+(babel)             in language  on input line 201.
 Package babel Info: Redefining german shorthand "f
-(babel)             in language  on input line 185.
+(babel)             in language  on input line 201.
 Package babel Info: Redefining german shorthand "|
-(babel)             in language  on input line 185.
+(babel)             in language  on input line 201.
 Package babel Info: Redefining german shorthand "~
-(babel)             in language  on input line 185.
+(babel)             in language  on input line 201.
 [7]
-Overfull \hbox (59.3509pt too wide) in paragraph at lines 193--193
+Overfull \hbox (59.3509pt too wide) in paragraph at lines 209--209
 []\OT1/cmr/m/n/10.95 Michael Kern. ``Smart Mo-bi-le Ap-ps -- Mit Business-Apps 
 ins Zeit-al-ter mo-bi-ler Gesch[]aftsprozesse''.
  []
@@ -1873,38 +1885,42 @@ ins Zeit-al-ter mo-bi-ler Gesch[]aftsprozesse''.
 
 AED: lastpage setting LastPage
 Package babel Info: Redefining german shorthand "f
-(babel)             in language  on input line 194.
+(babel)             in language  on input line 210.
 Package babel Info: Redefining german shorthand "|
-(babel)             in language  on input line 194.
+(babel)             in language  on input line 210.
 Package babel Info: Redefining german shorthand "~
-(babel)             in language  on input line 194.
+(babel)             in language  on input line 210.
 Package babel Info: Redefining german shorthand "f
-(babel)             in language  on input line 194.
+(babel)             in language  on input line 210.
 Package babel Info: Redefining german shorthand "|
-(babel)             in language  on input line 194.
+(babel)             in language  on input line 210.
 Package babel Info: Redefining german shorthand "~
-(babel)             in language  on input line 194.
+(babel)             in language  on input line 210.
 [8]
 Package babel Info: Redefining german shorthand "f
-(babel)             in language  on input line 194.
+(babel)             in language  on input line 210.
 Package babel Info: Redefining german shorthand "|
-(babel)             in language  on input line 194.
+(babel)             in language  on input line 210.
 Package babel Info: Redefining german shorthand "~
-(babel)             in language  on input line 194.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 194.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 194.
+(babel)             in language  on input line 210.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 210.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 210.
  (expose.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 194.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 194.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 210.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 210.
 Package rerunfilecheck Info: File `expose.out' has not changed.
 (rerunfilecheck)             Checksum: 0729A57BD4FE11E6C647BA7EE8BC99C8;303.
+
+
+LaTeX Warning: There were undefined references.
+
 Package logreq Info: Writing requests to 'expose.run.xml'.
  ) 
 Here is how much of TeX's memory you used:
- 23837 strings out of 493673
- 433612 string characters out of 3147292
- 669472 words of memory out of 3000000
- 26743 multiletter control sequences out of 15000+200000
+ 23845 strings out of 493673
+ 433849 string characters out of 3147292
+ 670472 words of memory out of 3000000
+ 26750 multiletter control sequences out of 15000+200000
  10851 words of font info for 38 fonts, out of 3000000 for 9000
  1027 hyphenation exceptions out of 8191
  71i,12n,66p,1085b,1398s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1919,9 +1935,9 @@ mss8.pfb><C:/workspace/MixTex/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/wor
 kspace/MixTex/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/workspace/MixTex/fon
 ts/type1/public/amsfonts/cm/cmti10.pfb><C:/workspace/MixTex/fonts/type1/public/
 amsfonts/cm/cmtt10.pfb>
-Output written on expose.pdf (8 pages, 233868 bytes).
+Output written on expose.pdf (8 pages, 255485 bytes).
 PDF statistics:
- 210 PDF objects out of 1000 (max. 8388607)
+ 211 PDF objects out of 1000 (max. 8388607)
  47 named destinations out of 1000 (max. 500000)
- 81 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 86 words of extra memory for PDF output out of 10000 (max. 10000000)
 
