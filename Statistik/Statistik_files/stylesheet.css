@@ -95,3 +95,20 @@ td
 	border-right:none;
 	border-bottom:.5pt solid windowtext;
 	border-left:none;}
+.xl72
+	{mso-style-parent:style0;
+	mso-number-format:"Short Date";
+	border-top:.5pt solid windowtext;
+	border-right:none;
+	border-bottom:none;
+	border-left:none;}
+.xl73
+	{mso-style-parent:style0;
+	mso-number-format:"Short Date";}
+.xl74
+	{mso-style-parent:style0;
+	mso-number-format:"Short Date";
+	border-top:none;
+	border-right:none;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;}

@@ -163,6 +163,24 @@
   \field{year}{2012}
 \endentry
 
+\entry{balter:strongOS}{online}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Balter}{B.}%
+     {Ben}{B.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{BB1}
+  \strng{fullhash}{BB1}
+  \field{note}{[abgerufen am {28.09.2015}]}
+  \field{title}{How to identify a strong open source project}
+  \verb{url}
+  \verb http://ben.balter.com/2014/06/02/how-to-identify-a-strong-open-source-p
+  \verb roject/
+  \endverb
+\endentry
+
 \entry{dobjanschi:developing-android}{inproceedings}{}
   \name{author}{1}{}{%
     {{}%
@@ -255,8 +273,8 @@
   \list{publisher}{1}{%
     {John Wiley \& Sons}%
   }
-  \strng{namehash}{BB1}
-  \strng{fullhash}{BB1}
+  \strng{namehash}{BB2}
+  \strng{fullhash}{BB2}
   \field{series}{For dummies}
   \field{title}{Android Application Development All-in-One For Dummies}
   \field{year}{2011}
