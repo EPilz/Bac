@@ -1,0 +1,157 @@
+% $ biblatex auxiliary file $
+% $ biblatex version 2.5 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated as
+% required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+\entry{projektbeschreibung:revex2020}{online}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Artner}{A.}%
+     {Thomas}{T.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{AT1}
+  \strng{fullhash}{AT1}
+  \field{sortinit}{A}
+  \field{note}{[abgerufen am {27.04.2015}]}
+  \field{title}{Projektbeschreibung REVEX2020}
+  \verb{url}
+  \verb https://www.inso.tuwien.ac.at/?id=471
+  \endverb
+\endentry
+
+\entry{smartMobileApps17}{inbook}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Carsten~Kleiner}{C.~K.}%
+     {Jens~Bertram}{J.~B.}%
+     {und}{u.}%
+     {}{}}%
+  }
+  \name{editor}{1}{}{%
+    {{}%
+     {Claudia Linnhoff-Popien}{C.~L.-P.}%
+     {Stephan~Verclas}{S.~V.}%
+     {und}{u.}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Springer}%
+  }
+  \strng{namehash}{CKJBu1}
+  \strng{fullhash}{CKJBu1}
+  \field{sortinit}{C}
+  \field{chapter}{17: Mobile Apps in Enterprise-Anwendungen unter
+  Berücksichtigung von Sicherheitsaspekten}
+  \field{pages}{253\bibrangedash 267}
+  \field{series}{Xpert.press}
+  \field{title}{Smart Mobile Apps -- Mit Business-Apps ins Zeitalter mobiler
+  Geschäftsprozesse}
+  \field{year}{2012}
+\endentry
+
+\entry{vergleich13}{misc}{}
+  \name{author}{3}{}{%
+    {{}%
+     {Fischer}{F.}%
+     {Markus}{M.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Képes}{K.}%
+     {Kálmán}{K.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Wassiljew}{W.}%
+     {Alexander}{A.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{FMKKWA1}
+  \strng{fullhash}{FMKKWA1}
+  \field{sortinit}{F}
+  \field{title}{Vergleich von Frameworks zur Implementierung von REST-basierten
+  Anwendungen}
+  \verb{url}
+  \verb http://elib.uni-stuttgart.de/opus/volltexte/2013/8731
+  \endverb
+  \field{year}{2013}
+\endentry
+
+\entry{smartMobileApps7}{inbook}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Kern}{K.}%
+     {Michael}{M.}%
+     {}{}%
+     {}{}}%
+  }
+  \name{editor}{1}{}{%
+    {{}%
+     {Claudia Linnhoff-Popien}{C.~L.-P.}%
+     {Stephan~Verclas}{S.~V.}%
+     {und}{u.}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Springer}%
+  }
+  \strng{namehash}{KM1}
+  \strng{fullhash}{KM1}
+  \field{sortinit}{K}
+  \field{chapter}{7: Eine neue Generation von Geschäftsanwendungen}
+  \field{pages}{95\bibrangedash 106}
+  \field{series}{Xpert.press}
+  \field{title}{Smart Mobile Apps -- Mit Business-Apps ins Zeitalter mobiler
+  Geschäftsprozesse}
+  \field{year}{2012}
+\endentry
+
+\entry{smartMobileApps1}{inbook}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Stephan~Verclas}{S.~V.}%
+     {Claudia Linnhoff-Popien}{C.~L.-P.}%
+     {und}{u.}%
+     {}{}}%
+  }
+  \name{editor}{1}{}{%
+    {{}%
+     {Claudia Linnhoff-Popien}{C.~L.-P.}%
+     {Stephan~Verclas}{S.~V.}%
+     {und}{u.}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Springer}%
+  }
+  \strng{namehash}{SVCLPu1}
+  \strng{fullhash}{SVCLPu1}
+  \field{sortinit}{S}
+  \field{chapter}{1: Mit Business-Apps ins Zeitalter mobiler Geschäftsprozesse}
+  \field{pages}{3\bibrangedash 14}
+  \field{series}{Xpert.press}
+  \field{title}{Smart Mobile Apps -- Mit Business-Apps ins Zeitalter mobiler
+  Geschäftsprozesse}
+  \field{year}{2012}
+\endentry
+
+\lossort
+\endlossort
+
+\endinput

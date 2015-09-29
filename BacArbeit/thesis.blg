@@ -1,0 +1,14 @@
+This is BibTeX, Version 0.99dThe top-level auxiliary file: thesis.aux
+The style file: biblatex.bst
+A level-1 auxiliary file: chapters/titlepages/titlepage_inso.aux
+Database file #1: thesis-blx.bib
+Database file #2: bibliography/references.bib
+I was expecting a `,' or a `}'---line 13 of file bibliography/references.bib
+ :  publisher = Carl 
+ :                   Hanser Verlag GmbH \& Company KG},
+I'm skipping whatever remains of this entry
+Warning--I didn't find a database entry for "fankhauser:2009:softwaretechnik-security"
+Warning--I didn't find a database entry for "schanes:2011:voip-fuzzer"
+Warning--I didn't find a database entry for "oasis:2010:homepage"
+Biblatex version: 3.0
+(There was 1 error message)
