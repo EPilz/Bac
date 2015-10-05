@@ -1,5 +1,5 @@
 % $ biblatex auxiliary file $
-% $ biblatex version 2.5 $
+% $ biblatex version 2.4 $
 % Do not modify the above lines!
 %
 % This is an auxiliary file used by the 'biblatex' package.
@@ -34,6 +34,25 @@
   \endverb
 \endentry
 
+\entry{balter:strongOS}{online}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Balter}{B.}%
+     {Ben}{B.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{BB1}
+  \strng{fullhash}{BB1}
+  \field{sortinit}{B}
+  \field{note}{[abgerufen am {28.09.2015}]}
+  \field{title}{How to identify a strong open source project}
+  \verb{url}
+  \verb http://ben.balter.com/2014/06/02/how-to-identify-a-strong-open-source-p
+  \verb roject/
+  \endverb
+\endentry
+
 \entry{smartMobileApps17}{inbook}{}
   \name{author}{1}{}{%
     {{}%
@@ -56,11 +75,28 @@
   \strng{fullhash}{CKJBu1}
   \field{sortinit}{C}
   \field{chapter}{17: Mobile Apps in Enterprise-Anwendungen unter
-  Berücksichtigung von Sicherheitsaspekten}
+  Ber\"{u}cksichtigung von Sicherheitsaspekten}
   \field{pages}{253\bibrangedash 267}
   \field{series}{Xpert.press}
   \field{title}{Smart Mobile Apps -- Mit Business-Apps ins Zeitalter mobiler
-  Geschäftsprozesse}
+  Gesch\"{a}ftsprozesse}
+  \field{year}{2012}
+\endentry
+
+\entry{parnin2012crowd}{article}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Chris~Parnin}{C.~P.}%
+     {Lars Grammel Margaret-Anne~Storey}{L.~G. M.-A.~S.}%
+     {}{}%
+     {Christoph~Treude}{C.~T.}}%
+  }
+  \strng{namehash}{CPCTLGMAS1}
+  \strng{fullhash}{CPCTLGMAS1}
+  \field{sortinit}{C}
+  \field{title}{Crowd documentation: Exploring the coverage and the dynamics of
+  API discussions on Stack Overflow}
+  \field{journaltitle}{Georgia Institute of Technology, Tech. Rep}
   \field{year}{2012}
 \endentry
 
@@ -72,8 +108,8 @@
      {}{}%
      {}{}}%
     {{}%
-     {Képes}{K.}%
-     {Kálmán}{K.}%
+     {K\'{e}pes}{K.}%
+     {K\'{a}lm\'{a}n}{K.}%
      {}{}%
      {}{}}%
     {{}%
@@ -114,11 +150,11 @@
   \strng{namehash}{KM1}
   \strng{fullhash}{KM1}
   \field{sortinit}{K}
-  \field{chapter}{7: Eine neue Generation von Geschäftsanwendungen}
+  \field{chapter}{7: Eine neue Generation von Gesch\"{a}ftsanwendungen}
   \field{pages}{95\bibrangedash 106}
   \field{series}{Xpert.press}
   \field{title}{Smart Mobile Apps -- Mit Business-Apps ins Zeitalter mobiler
-  Geschäftsprozesse}
+  Gesch\"{a}ftsprozesse}
   \field{year}{2012}
 \endentry
 
@@ -143,11 +179,12 @@
   \strng{namehash}{SVCLPu1}
   \strng{fullhash}{SVCLPu1}
   \field{sortinit}{S}
-  \field{chapter}{1: Mit Business-Apps ins Zeitalter mobiler Geschäftsprozesse}
+  \field{chapter}{1: Mit Business-Apps ins Zeitalter mobiler
+  Gesch\"{a}ftsprozesse}
   \field{pages}{3\bibrangedash 14}
   \field{series}{Xpert.press}
   \field{title}{Smart Mobile Apps -- Mit Business-Apps ins Zeitalter mobiler
-  Geschäftsprozesse}
+  Gesch\"{a}ftsprozesse}
   \field{year}{2012}
 \endentry
 
