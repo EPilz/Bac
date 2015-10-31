@@ -719,6 +719,11 @@
 }
 
 % listing settings
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{myback}{RGB}{240,240,240}
+
 \lstset{
   basicstyle={\small\singlespacing},
   tabsize=2,
@@ -734,6 +739,10 @@
   captionpos=b,
   xleftmargin=16pt,
   fontadjust,
+  keywordstyle=\color{blue},       
+  stringstyle=\color{mymauve},
+  commentstyle=\color{mygreen},
+  backgroundcolor=\color{myback}
 }
 
 % Verhinderung von "Schusterjungen"

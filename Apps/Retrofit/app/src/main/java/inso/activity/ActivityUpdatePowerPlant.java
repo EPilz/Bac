@@ -27,6 +27,10 @@ import inso.rest.ServiceGenerator;
 import inso.rest.model.PowerPlant;
 import inso.rest.service.PowerPlantService;
 import inso.util.UtilitiesManager;
+import retrofit.Call;
+import retrofit.Callback;
+import retrofit.Response;
+import retrofit.Retrofit;
 
 
 public class ActivityUpdatePowerPlant extends Activity {
@@ -125,7 +129,7 @@ public class ActivityUpdatePowerPlant extends Activity {
 
             AlertDialog.Builder alert = new AlertDialog.Builder(ActivityUpdatePowerPlant.this);
             alert.setTitle("Warning");
-            alert.setMessage("Bitte alle Felder ausfüllen");
+            alert.setMessage("Bitte alle Felder ausfÃ¼llen");
             alert.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
@@ -179,17 +183,22 @@ public class ActivityUpdatePowerPlant extends Activity {
         }
     }
 
-    private class UpdatePowerPlantTask extends AsyncTask<PowerPlant, Void, PowerPlant> {
+    private class UpdatePowerPlantTask extends AsyncTask<PowerPlant, Void, Void> implements Callback<PowerPlant>{
 
         @Override
-        protected PowerPlant doInBackground(PowerPlant... params) {
+        protected Void doInBackground(PowerPlant... params) {
             PowerPlantService powerPlantService = ServiceGenerator.
                     createServiceWithAuthToken(PowerPlantService.class, UtilitiesManager.getInstance().getAuthToken());
-            return powerPlantService.updatePowerPlant(id, params[0]);
+
+            Call<PowerPlant> call = powerPlantService.updatePowerPlant(id, params[0]);
+            call.enqueue(this);
+
+            return null;
         }
 
         @Override
-        protected void onPostExecute(PowerPlant powerPlant) {
+        public void onResponse(Response<PowerPlant> response, Retrofit retrofit) {
+            PowerPlant powerPlant = response.body();
             AlertDialog.Builder alert = new AlertDialog.Builder(ActivityUpdatePowerPlant.this);
             alert.setTitle("Update PowerPlant");
             alert.setMessage("Kraftwerk " + powerPlant.getName() + " wurde erfolgreich bearbeitet.");
@@ -198,27 +207,37 @@ public class ActivityUpdatePowerPlant extends Activity {
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.dismiss();
 
-                   startActivity(new Intent(ActivityUpdatePowerPlant.this, ActivityAllPowerPlants.class));
+                    startActivity(new Intent(ActivityUpdatePowerPlant.this, ActivityAllPowerPlants.class));
                 }
             });
 
             alert.show();
         }
+
+        @Override
+        public void onFailure(Throwable t) {
+            t.fillInStackTrace();
+        }
     }
 
 
-    private class LoadPowerPlantDataTask extends AsyncTask<Void, Void, PowerPlant> {
+    private class LoadPowerPlantDataTask extends AsyncTask<Void, Void, Void> implements Callback<PowerPlant>{
 
         @Override
-        protected PowerPlant doInBackground(Void... params) {
+        protected Void doInBackground(Void... params) {
             PowerPlantService powerPlantService = ServiceGenerator.
                     createServiceWithAuthToken(PowerPlantService.class, UtilitiesManager.getInstance().getAuthToken());
 
-            return powerPlantService.getPowerPlantById(id);
+            Call<PowerPlant> call = powerPlantService.getPowerPlantById(id);
+            call.enqueue(this);
+
+            return null;
         }
 
         @Override
-        protected void onPostExecute(PowerPlant powerPlant) {
+        public void onResponse(Response<PowerPlant> response, Retrofit retrofit) {
+            PowerPlant powerPlant = response.body();
+
             SimpleDateFormat sdf = new SimpleDateFormat("MMMM dd, yyyy", Locale.US);
             DecimalFormat df = (DecimalFormat)NumberFormat.getNumberInstance(Locale.US);
             df.applyPattern("0.00");
@@ -256,6 +275,11 @@ public class ActivityUpdatePowerPlant extends Activity {
             Spinner spinnerMaintenanceStrategy = (Spinner) findViewById(R.id.update_spinnerMaintenanceStrategy);
             KeyValueArrayAdapter adapterMaintenanceStrategy = (KeyValueArrayAdapter) spinnerMaintenanceStrategy.getAdapter();
             spinnerMaintenanceStrategy.setSelection(adapterMaintenanceStrategy.getPosition(powerPlant.getMaintenanceStrategy()));
+        }
+
+        @Override
+        public void onFailure(Throwable t) {
+            t.fillInStackTrace();
         }
     }
 }

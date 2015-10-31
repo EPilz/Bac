@@ -2,14 +2,17 @@ package inso.activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.AttributeSet;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,10 +23,15 @@ import java.util.List;
 
 import inso.activity.adapter.PowerPlantAdapter;
 import inso.rest.ServiceGenerator;
+import inso.rest.model.AuthToken;
 import inso.rest.model.PowerPlant;
 import inso.rest.service.PowerPlantService;
 import inso.rest.service.UserService;
 import inso.util.UtilitiesManager;
+import retrofit.Call;
+import retrofit.Callback;
+import retrofit.Response;
+import retrofit.Retrofit;
 
 
 public class ActivityAllPowerPlants extends Activity {
@@ -35,9 +43,16 @@ public class ActivityAllPowerPlants extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_power_plant);
 
+        RecyclerView rv = (RecyclerView) findViewById(R.id.recyclerView_powerPlants);
+        rv.setHasFixedSize(true);
+
+        LinearLayoutManager llm = new LinearLayoutManager(ActivityAllPowerPlants.this);
+        rv.setLayoutManager(llm);
+
+        rv.setItemAnimator(new DefaultItemAnimator());
+
         LoadTask loadTask = new LoadTask();
         loadTask.execute();
-
     }
 
     @Override
@@ -45,6 +60,12 @@ public class ActivityAllPowerPlants extends Activity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_all_power_plant, menu);
         return true;
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(String name, Context context, AttributeSet attrs) {
+        return super.onCreateView(name, context, attrs);
     }
 
     @Override
@@ -68,63 +89,49 @@ public class ActivityAllPowerPlants extends Activity {
         startActivity(i);
     }
 
-    private class LoadTask extends AsyncTask<Void, Void, List<PowerPlant>> {
+    private class LoadTask extends AsyncTask<Void, Void, Void> implements Callback<AuthToken> {
 
         @Override
-        protected List<PowerPlant> doInBackground(Void... params) {
+        protected Void doInBackground(Void... params) {
             UserService userService = ServiceGenerator.createService(UserService.class);
-            UtilitiesManager.getInstance().
-                    setAuthToken(userService.getAuthToken(UtilitiesManager.getInstance().getUser()));
 
-            PowerPlantService powerPlantService = ServiceGenerator.
-                    createServiceWithAuthToken(PowerPlantService.class, UtilitiesManager.getInstance().getAuthToken());
+            Call<AuthToken> call = userService.getAuthToken(UtilitiesManager.getInstance().getUser());
+            call.enqueue(this);
 
-            return  powerPlantService.getPowerPlants();
+            return null;
         }
 
         @Override
-        protected void onPostExecute(List<PowerPlant> powerPlants) {
-            RecyclerView rv = (RecyclerView)findViewById(R.id.recyclerView_powerPlants);
-            rv.setHasFixedSize(true);
+        public void onResponse(Response<AuthToken> response, Retrofit retrofit) {
+            PowerPlantService powerPlantService = ServiceGenerator.
+                    createServiceWithAuthToken(PowerPlantService.class, UtilitiesManager.getInstance().getAuthToken());
 
-            LinearLayoutManager llm = new LinearLayoutManager(ActivityAllPowerPlants.this);
-            rv.setLayoutManager(llm);
+            Call<List<PowerPlant>> call = powerPlantService.getPowerPlants();
 
-            PowerPlantAdapter adapter = new PowerPlantAdapter(powerPlants, ActivityAllPowerPlants.this);
-            rv.setAdapter(adapter);
-          //  rv.addItemDecoration(new SimpleDividerItemDecoration(getResources()));
-            rv.setItemAnimator(new DefaultItemAnimator());
-            adapter.notifyDataSetChanged();
+            call.enqueue(new Callback<List<PowerPlant>>() {
+                @Override
+                public void onResponse(Response<List<PowerPlant>> response, Retrofit retrofit) {
+                    List<PowerPlant> powerPlants = response.body();
 
-            /*LinearLayout linearLayout = (LinearLayout) findViewById(R.id.listViewPowerPlants);
-            for (final PowerPlant powerPlant : powerPlants) {
-                LinearLayout linearLayoutInline = new LinearLayout(ActivityAllPowerPlants.this);
-                linearLayoutInline.setOrientation(LinearLayout.HORIZONTAL);
+                    RecyclerView rv = (RecyclerView) findViewById(R.id.recyclerView_powerPlants);
 
-                Button buttonPowerPlant = new Button(ActivityAllPowerPlants.this);
-                buttonPowerPlant.setText(powerPlant.getName());
-                buttonPowerPlant.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent i = new Intent(ActivityAllPowerPlants.this, ActivityPowerPlantOverview.class);
-                        i.putExtra(ActivityAllPowerPlants.KEY, powerPlant.getId());
-                        startActivity(i);
-                    }
-                });
+                    PowerPlantAdapter adapter = new PowerPlantAdapter(powerPlants, ActivityAllPowerPlants.this);
+                    rv.setAdapter(adapter);
 
-                Button buttonDelete = new Button(ActivityAllPowerPlants.this);
-                buttonDelete.setText("D");
-                buttonDelete.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        DeletePowerPlantTask deletePowerPlantTask = new DeletePowerPlantTask();
-                        deletePowerPlantTask.execute(powerPlant);
-                    }
-                });
-                linearLayoutInline.addView(buttonPowerPlant);
-                linearLayoutInline.addView(buttonDelete);
-                linearLayout.addView(linearLayoutInline);
-            }*/
+                    adapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onFailure(Throwable t) {
+
+                }
+            });
+        }
+
+        @Override
+        public void onFailure(Throwable t) {
+            System.err.println("Error");
+            t.fillInStackTrace();
         }
     }
 
@@ -159,20 +166,29 @@ public class ActivityAllPowerPlants extends Activity {
         startActivity(i);
     }
 
-    public class DeletePowerPlantTask extends AsyncTask<PowerPlant, Void, PowerPlant> {
+    public class DeletePowerPlantTask extends AsyncTask<PowerPlant, Void, Void> implements Callback<PowerPlant> {
 
         @Override
-        protected PowerPlant doInBackground(PowerPlant... params) {
+        protected Void doInBackground(PowerPlant... params) {
             PowerPlantService powerPlantService = ServiceGenerator.
                     createServiceWithAuthToken(PowerPlantService.class, UtilitiesManager.getInstance().getAuthToken());
 
-            return  powerPlantService.deletePowerPlantById(params[0].getId());
+
+            Call<PowerPlant> call = powerPlantService.deletePowerPlantById(params[0].getId());
+            call.enqueue(this);
+
+            return null;
         }
 
         @Override
-        protected void onPostExecute(PowerPlant powerPlant) {
+        public void onResponse(Response<PowerPlant> response, Retrofit retrofit) {
             Intent i = new Intent(ActivityAllPowerPlants.this, ActivityAllPowerPlants.class);
             startActivity(i);
+        }
+
+        @Override
+        public void onFailure(Throwable t) {
+            t.fillInStackTrace();
         }
     }
 }

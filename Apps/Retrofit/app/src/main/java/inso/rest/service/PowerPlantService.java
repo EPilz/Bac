@@ -6,6 +6,7 @@ import inso.rest.model.Component;
 import inso.rest.model.Evaluation;
 import inso.rest.model.PowerPlant;
 import inso.rest.model.ProductionLine;
+import retrofit.Call;
 import retrofit.http.Body;
 import retrofit.http.DELETE;
 import retrofit.http.GET;
@@ -18,34 +19,34 @@ import retrofit.http.Path;
  */
 public interface PowerPlantService {
 
-    @GET("/powerplants")
-    public List<PowerPlant> getPowerPlants();
+    @GET("powerplants")
+    public Call<List<PowerPlant>> getPowerPlants();
 
-    @GET("/powerplants/{id}")
-    public PowerPlant getPowerPlantById(@Path("id") int id);
+    @GET("powerplants/{id}")
+    public Call<PowerPlant> getPowerPlantById(@Path("id") int id);
 
-    @GET("/powerplants/{id}/evaluation")
-    public Evaluation getPowerPlantEvaluation(@Path("id") int id);
+    @GET("powerplants/{id}/evaluation")
+    public Call<Evaluation> getPowerPlantEvaluation(@Path("id") int id);
 
-    @GET("/powerplants/{id}/productionlines")
-    public List<ProductionLine> getProductionLines(@Path("id") int id);
+    @GET("powerplants/{id}/productionlines")
+    public Call<List<ProductionLine>> getProductionLines(@Path("id") int id);
 
-    @GET("/productionlines/{id}/components")
-    public List<Component> getComponentsFromProductionLines(@Path("id") int id);
+    @GET("productionlines/{id}/components")
+    public Call<List<Component>> getComponentsFromProductionLines(@Path("id") int id);
 
-    @GET("/productionlines/{id}/evaluation")
-    public Evaluation getProductionLineEvaluation(@Path("id") int id);
+    @GET("productionlines/{id}/evaluation")
+    public Call<Evaluation> getProductionLineEvaluation(@Path("id") int id);
 
-    @GET("/components/{id}/evaluation")
-    public Evaluation getComponentEvaluation(@Path("id") int id);
+    @GET("components/{id}/evaluation")
+    public Call<Evaluation> getComponentEvaluation(@Path("id") int id);
 
-    @POST("/powerplants")
-    public PowerPlant createPowerPlant(@Body PowerPlant powerPlant);
+    @POST("powerplants")
+    public Call<PowerPlant> createPowerPlant(@Body PowerPlant powerPlant);
 
-    @DELETE("/powerplants/{id}")
-    public PowerPlant deletePowerPlantById(@Path("id") int id);
+    @DELETE("powerplants/{id}")
+    public Call<PowerPlant> deletePowerPlantById(@Path("id") int id);
 
-    @PUT("/powerplants/{id}")
-    public PowerPlant updatePowerPlant(@Path("id") int id, @Body PowerPlant powerPlant);
+    @PUT("powerplants/{id}")
+    public Call<PowerPlant> updatePowerPlant(@Path("id") int id, @Body PowerPlant powerPlant);
 
 }

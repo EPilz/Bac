@@ -21,6 +21,10 @@ import inso.rest.model.AuthToken;
 import inso.rest.model.User;
 import inso.rest.service.UserService;
 import inso.util.UtilitiesManager;
+import retrofit.Call;
+import retrofit.Callback;
+import retrofit.Response;
+import retrofit.Retrofit;
 
 
 public class MainActivity extends Activity {
@@ -113,13 +117,23 @@ public class MainActivity extends Activity {
         return -1;
     }
 
-    private class LoginTask extends AsyncTask<Void, Void, AuthToken> {
+    private class LoginTask extends AsyncTask<Void, Void, Void> implements Callback<AuthToken> {
 
         @Override
-        protected AuthToken doInBackground(Void... params) {
+        protected Void doInBackground(Void... params) {
             UserService userService = ServiceGenerator.createService(UserService.class);
-            UtilitiesManager.getInstance().
-                    setAuthToken(userService.getAuthToken(UtilitiesManager.getInstance().getUser()));
+
+            Call<AuthToken> call = userService.getAuthToken(UtilitiesManager.getInstance().getUser());
+            call.enqueue(this);
+
+            return null;
+        }
+
+        @Override
+        public void onResponse(Response<AuthToken> response, Retrofit retrofit) {
+            AuthToken authToken = response.body();
+
+            UtilitiesManager.getInstance().setAuthToken(authToken);
 
             SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT);
 
@@ -128,10 +142,12 @@ public class MainActivity extends Activity {
             editor.putString(KEY_TOKEN, UtilitiesManager.getInstance().getAuthToken().getToken());
             editor.putString(KEY_TOKENTIME, formatter.format(new Date()));
             editor.commit();
-
-            return UtilitiesManager.getInstance().getAuthToken();
         }
 
+        @Override
+        public void onFailure(Throwable t) {
+            t.fillInStackTrace();
+        }
     }
 
 }

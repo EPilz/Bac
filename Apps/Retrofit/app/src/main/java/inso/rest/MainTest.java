@@ -7,6 +7,10 @@ import inso.rest.model.PowerPlant;
 import inso.rest.model.User;
 import inso.rest.service.PowerPlantService;
 import inso.rest.service.UserService;
+import retrofit.Call;
+import retrofit.Callback;
+import retrofit.Response;
+import retrofit.Retrofit;
 
 /**
  * Created by Elisabeth on 13.05.2015.
@@ -16,18 +20,19 @@ public class MainTest {
     public static void main(String[] args) {
         UserService userService = ServiceGenerator.createService(UserService.class);
 
-        AuthToken token = userService.getAuthToken(new User("admin", "admin"));
+        Call<AuthToken> call = userService.getAuthToken(new User("admin", "admin"));
 
-        System.out.println(token.getToken());
+        call.enqueue(new Callback<AuthToken>() {
+            @Override
+            public void onResponse(Response<AuthToken> response, Retrofit retrofit) {
+                AuthToken token = response.body();
+                System.out.println(response.body().getToken());
+            }
 
-        userService = ServiceGenerator.createServiceWithAuthToken(UserService.class, token);
-        User user = userService.getUserAccount();
-
-        System.out.println(user);
-        System.out.println(user.getRoles().toString());
-
-        PowerPlantService powerPlantService = ServiceGenerator.createServiceWithAuthToken(PowerPlantService.class, token);
-        List<PowerPlant> powerPlantList = powerPlantService.getPowerPlants();
-        System.out.println(powerPlantList);
+            @Override
+            public void onFailure(Throwable t) {
+                t.fillInStackTrace();
+            }
+        });
     }
 }

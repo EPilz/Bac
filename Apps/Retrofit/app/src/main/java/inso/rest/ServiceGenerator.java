@@ -1,68 +1,91 @@
 package inso.rest;
 
-import com.google.gson.ExclusionStrategy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
+import com.squareup.okhttp.Interceptor;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
+import com.squareup.okhttp.Request.Builder;
+import com.squareup.okhttp.logging.HttpLoggingInterceptor;
 
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.Collection;
 
 import inso.rest.model.AuthToken;
-import inso.rest.service.UserService;
-import retrofit.RequestInterceptor;
-import retrofit.RestAdapter;
-import retrofit.converter.GsonConverter;
+import retrofit.GsonConverterFactory;
+import retrofit.Retrofit;
 
 /**
  * Created by Elisabeth on 13.05.2015.
  */
 public class ServiceGenerator {
 
-    private static final String BASE_URL = "https://revex.inso.tuwien.ac.at/api";
+    private static final String BASE_URL = "https://revex.inso.tuwien.ac.at/api/";
 
     private ServiceGenerator() {
     }
 
-    private static RestAdapter.Builder getBuilder() {
+    private static Gson getGson() {
         Gson gson = new GsonBuilder()
                 .registerTypeHierarchyAdapter(Collection.class, new CollectionAdapter())
                 .setDateFormat("yyyy-MM-dd")
                 .create();
 
-        RestAdapter.Builder builder = new RestAdapter.Builder()
-                .setLogLevel(RestAdapter.LogLevel.FULL)
-                .setEndpoint(BASE_URL)
-                .setConverter(new GsonConverter(gson));
-
-        return builder;
+        return gson;
     }
 
     public static <S> S createService(Class<S> serviceClass) {
-        RestAdapter.Builder builder = getBuilder();
+        OkHttpClient client = new OkHttpClient();
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        client.interceptors().add(interceptor);
 
-        RestAdapter adapter = builder.build();
-        return adapter.create(serviceClass);
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create(getGson()))
+                .client(client)
+                .build();
+
+        return retrofit.create(serviceClass);
     }
 
     public static <S> S createServiceWithAuthToken(Class<S> serviceClass, final AuthToken token) {
-        RestAdapter.Builder builder = getBuilder();
-
         if (token != null) {
-            builder.setRequestInterceptor(new RequestInterceptor() {
+            Interceptor interceptor = new Interceptor() {
                 @Override
-                public void intercept(RequestFacade request) {
-                    request.addHeader("Accept", "application/json");
-                    request.addHeader("X-Auth-Token", token.getToken());
-                }
-            });
-        }
+                public Response intercept(Chain chain) throws IOException {
+                    Request newRequest = chain.request().newBuilder()
+                            .addHeader("Accept", "application/json")
+                            .addHeader("X-Auth-Token", token.getToken())
+                            .build();
 
-        RestAdapter adapter = builder.build();
-        return adapter.create(serviceClass);
+                    return chain.proceed(newRequest);
+                }
+            };
+
+            HttpLoggingInterceptor httpInterceptor = new HttpLoggingInterceptor();
+            httpInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+            OkHttpClient client = new OkHttpClient();
+            client.interceptors().add(interceptor);
+            client.interceptors().add(httpInterceptor);
+
+            Retrofit retrofit = new Retrofit.Builder()
+                    .client(client)
+                    .baseUrl(BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create(getGson()))
+                    .build();
+
+            return retrofit.create(serviceClass);
+        } else {
+            return createService(serviceClass);
+        }
     }
 
     static class CollectionAdapter implements JsonSerializer<Collection<?>> {

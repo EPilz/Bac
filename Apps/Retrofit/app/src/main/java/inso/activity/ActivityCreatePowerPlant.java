@@ -26,6 +26,10 @@ import inso.rest.ServiceGenerator;
 import inso.rest.model.PowerPlant;
 import inso.rest.service.PowerPlantService;
 import inso.util.UtilitiesManager;
+import retrofit.Call;
+import retrofit.Callback;
+import retrofit.Response;
+import retrofit.Retrofit;
 
 
 public class ActivityCreatePowerPlant extends Activity {
@@ -177,31 +181,41 @@ public class ActivityCreatePowerPlant extends Activity {
         }
     }
 
-    private class CreatePowerPlantTask extends AsyncTask<PowerPlant, Void, PowerPlant> {
+    private class CreatePowerPlantTask extends AsyncTask<PowerPlant, Void, Void> {
 
         @Override
-        protected PowerPlant doInBackground(PowerPlant... params) {
+        protected Void doInBackground(PowerPlant... params) {
             PowerPlantService powerPlantService = ServiceGenerator.
                     createServiceWithAuthToken(PowerPlantService.class, UtilitiesManager.getInstance().getAuthToken());
-            return powerPlantService.createPowerPlant(params[0]);
-        }
 
-        @Override
-        protected void onPostExecute(PowerPlant powerPlant) {
-            AlertDialog.Builder alert = new AlertDialog.Builder(ActivityCreatePowerPlant.this);
-            alert.setTitle("Create PowerPlant");
-            alert.setMessage("Kraftwerk " + powerPlant.getName() + " wurde erstellt.");
-            alert.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+            Call<PowerPlant> call = powerPlantService.createPowerPlant(params[0]);
+
+            call.enqueue(new Callback<PowerPlant>() {
                 @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
+                public void onResponse(Response<PowerPlant> response, Retrofit retrofit) {
+                    PowerPlant powerPlant = response.body();
+                    AlertDialog.Builder alert = new AlertDialog.Builder(ActivityCreatePowerPlant.this);
+                    alert.setTitle("Create PowerPlant");
+                    alert.setMessage("Kraftwerk " + powerPlant.getName() + " wurde erstellt.");
+                    alert.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
 
-                    startActivity(new Intent(ActivityCreatePowerPlant.this, ActivityAllPowerPlants.class));
+                            startActivity(new Intent(ActivityCreatePowerPlant.this, ActivityAllPowerPlants.class));
+                        }
+                    });
+
+                    alert.show();
+                }
+
+                @Override
+                public void onFailure(Throwable t) {
+                    t.fillInStackTrace();
                 }
             });
 
-            alert.show();
+            return null;
         }
-
     }
 }

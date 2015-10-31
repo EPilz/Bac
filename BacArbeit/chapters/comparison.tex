@@ -1,0 +1,38 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Vergleich}
+\label{sec:comparison}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%=======================================================================
+\section{Retrofit}
+%=======================================================================
+Retrofit ist ein typsicherer HTTP Client für Android und Java, welcher von Square Open Source entwickelt wurde \cite{retrofit}. Das Framework baut auf OkHttp auf, welches die Kommunikation auf der Netzwerkebene übernimmt \cite{okhttp}. Retrofit sagt über sich selbst:
+
+\begin{center}
+	\textit{\textquotedblleft Retrofit turns your HTTP API into a Java interface.\textquotedblright}, \cite[Webseite von Retrofit]{retrofit} 
+	\\
+\end{center}
+
+Mithilfe von Annotation bei den Interface Methoden wird angegeben wie Request zu verarbeiten sind. Daher muss jede Interface-Methode eine HTTP Annotation besitzen, die angibt welche Request Methode zu verwenden ist \cite{retrofit}. Es stehen dabei fünf built-in HTTP Methoden zur Auswahl \texttt{GET}, \texttt{POST}, \texttt{PUT}, \texttt{DELETE} und \texttt{HEAD}.
+\\\\
+Standardmäßig kann Retrofit nur \texttt{ResponseBody} und \texttt{RequestBody} von OkHttp serialisieren und deserialisieren. Durch das hinzufügen von Konvertern ist es jedoch möglich, dass weitere Formate wie JSON oder XML zum Übertragen von Daten unterstützt werden. Seit der Veröffentlichung von Retrofit 2 werden auch verschiedene Parser zur Serialisierung und Deserialisierung von JSON-Daten unterstützt. In der Vergangenheit wurde nur die GSON Bibliothek unterstützt, welche daher die häufig verwendetste Bibliothek zum Parsen von JSON Daten darstellt \cite{consumingRetrofit}.
+
+Um Requests zur Server API versenden zu können muss die Retrofit Builder Klasse verwendet werden, welche die Basis URl des Services spezifiziert.
+
+%Durch Annotations bei Interface Methoden und Parametern wird ein Request genau spezifiziert.
+
+
+This library makes downloading JSON or XML data from a web API fairly straightforward. Once the data is downloaded then it is parsed into a Plain Old Java Object (POJO) which must be defined for each "resource" in the response.
+
+
+
+Mithilfe der Annotation \texttt{@GET} und einer relativen URL wird die Abfrage einer Ressource genau spezifiziert.
+
+\begin{lstlisting}[language=java, caption={GET Abfrage},label=getRetrofit]
+public interface PowerPlantService {
+	
+	@GET("/powerplants")
+	public List<PowerPlant> getPowerPlants();
+
+}
+\end{lstlisting}

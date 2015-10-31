@@ -1,0 +1,33 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Rest}
+\label{sec:rest}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Der Architekturstil \acrlong{REST}, kurz \acrshort{REST} wurde erstmals im Jahr 2000 in der Dissertation von Roy Fielding vorgestellt. REST beschreibt dabei ein Konzept, dass die Prinzipien des World Wide Web zusammenfasst. Roy Fielding abstrahierte sich dabei von konkreten Architekturen wie HTTP oder URIs. Er legte nur Kernprinzipien fest, die mit unterschiedlichen Protokollen umgesetzt werden können. Zum Beispiel wie Ressourcen im WEB identifiziert oder adressiert werden \cite{fielding:restDis}. \\
+\\
+Es werden dabei folgende 5 Kernprinzipien unterschieden \cite{restHttp:book}: 
+\begin{enumerate}
+	\item \textbf{Ressourcen mit eindeutiger Identifikation}\\
+	Durch einen global definierten Namensraum wird sichergestellt, dass Ressourcen weltweit eindeutig identifiziert werden. Im Web heißt dieses Konzept für die Vergabe von IDs, \textit{Uniform Resource Identifier} oder kurz URI. 
+	
+	\item \textbf{Hypermedia}\\
+	Mithilfe dieses Konzeptes ist es mögliche andere Ressourcen zu referenzieren, um beispielsweise an zusätzliche Informationen zu gelangen. Ein weiterer wichtiger Aspekt ist die Möglichkeit die Applikation durch Links zu steuern. Ein Server kann dem Client über Hypermedia-Elemente mitteilen, welche Aktion er als Nächstes auszuführen hat - indem der Client einen Link \textit{folgt}.
+	
+	\item \textbf{Standardmethoden}\\
+	Jede Ressource unterstützt den gleichen Satz an Methoden, mit dem diese verarbeitet werden können. Bei HTTP zählen dazu folgende:
+	\begin{itemize}
+		\item GET, für die Dartstellung von Ressourcen
+		\item POST, für das Erstellen einer Ressource
+		\item PUT, für das Aktualisieren einer Ressource
+		\item DELETE, für das Löschen einer Ressource
+		\item HEAD, um Methadaten einer Ressource Abzurufen
+	\end{itemize}
+
+	
+	\item \textbf{Unterschiedliche Repräsentationen}\\
+	HTTP verfolgte einen Ansatz zur Trennung der Verantwortlichkeiten, für Daten und Operationen. Ein Client der ein bestimmtes Dateiformat verarbeiten kann, ist in der Lage jede Ressource mit diesem Format zu verarbeiten, da die Operationen dafür dieselben sind. 
+	
+	\item \textbf{Statuslose Kommunikation}\\
+	Serverseitig wir der Zustand des Clients nicht gespeichert. Der aktuelle Zustand muss vollständig auf Seiten des Clients abgespeichert werden und bei Reqeuests müssen die nötigen Informationen an den Server übermittelt werden.
+	
+\end{enumerate}
+

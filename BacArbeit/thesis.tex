@@ -1,11 +1,11 @@
-\documentclass [bachelor,german,a4paper,11pt,oneside,webreferences,glossary]{INSOthesis}
+\documentclass [bachelor,german,a4paper,11pt,oneside,webreferences,glossary,acronym,listofabbrev,indextop,nolistoftables,nolistoflistings,nolistofalgorithms]{INSOthesis}
 % change encoding in the document
 \inputencoding{utf8} % default
 %\inputencoding{latin1} % for windows
 
-\thesistitle{Evaluierung von REST Frameworks für Android im Kontext des Revex2020 Projekts}
+\thesistitle{Evaluierung von REST Frameworks für Android}
 \thesisshorttitle{Evaluierung von REST Frameworks}
-%\thesissubtitle{Optional Subtitle} % optional
+\thesissubtitle{im Kontext des Revex2020 Projekts} % optional
 \thesisdate{\today}
 
 % all titles and designations have to be gender-related!
@@ -43,7 +43,6 @@
 % \AfterListOfTables{}
 % \AfterAbbreviations{}
 % \AfterBibliography{}
-
 \renewcommand\afterchapternum{\hspace{1em}}
 \begin{document}
 
@@ -55,13 +54,14 @@
 
 \input{chapters/introduction}
 \input{chapters/stateArt}
+\input{chapters/rest}
+\input{chapters/comparison}
 
 % insert bibliography and such stuff
 \BackMatter
-
 \cleardoublepage
-\appendix
 
-\input{chapters/appendix}
+\appendix
+%\input{chapters/appendix}
 
 \end{document}

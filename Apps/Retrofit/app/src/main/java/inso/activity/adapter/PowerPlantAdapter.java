@@ -112,7 +112,7 @@ public class PowerPlantAdapter extends RecyclerView.Adapter<PowerPlantAdapter.Po
 
         @Override
         public void onClick(View v) {
-            onItemClick(v, getAdapterPosition());
+            onItemClick(v, getPosition());
         }
     }
 }
