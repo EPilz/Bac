@@ -237,6 +237,7 @@ public class ActivityPowerPlantOverview extends Activity {
                             int indexProductionLine = (Integer) getData();
                             List<Component> componentList = response.body();
                             int count = 1;
+                            positionStore.addProductionLine(indexProductionLine, componentList.size());
                             for (Component component : componentList) {
                                 final TableRow tr2 = new TableRow(ActivityPowerPlantOverview.this);
 
@@ -267,7 +268,7 @@ public class ActivityPowerPlantOverview extends Activity {
                                 });
 
                                 tableLayout.addView(tr2, positionStore.getPosition(indexProductionLine) + count);
-                                positionStore.addCountOnIndex(indexProductionLine);
+                                //positionStore.addCountOnIndex(indexProductionLine);
                                 count++;
                             }
                         }

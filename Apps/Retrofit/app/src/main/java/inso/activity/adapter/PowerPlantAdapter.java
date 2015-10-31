@@ -71,7 +71,10 @@ public class PowerPlantAdapter extends RecyclerView.Adapter<PowerPlantAdapter.Po
 
     @Override
     public int getItemCount() {
-        return powerPlants.size();
+        if(powerPlants != null) {
+            return powerPlants.size();
+        }
+        return 0;
     }
 
     @Override

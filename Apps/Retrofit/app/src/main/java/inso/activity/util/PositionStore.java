@@ -26,12 +26,26 @@ public class PositionStore {
         positionMapping.put(index, 0);
     }
 
+    public synchronized void addProductionLine(int index, int count) {
+        positionMapping.put(index, count);
+    }
+
     public synchronized void addCountOnIndex(int index) {
         Integer count = positionMapping.get(index);
         positionMapping.put(index, count++);
     }
 
     public synchronized int getPosition(int index) {
+        int pos = 0;
+        for(Integer key : positionMapping.keySet()) {
+            if(key < index) {
+                pos += 1 + positionMapping.get(key);
+            }
+        }
+        return pos;
+    }
+
+    public synchronized int getPositionMinus(int index) {
         int pos = 0;
         for(Integer key : positionMapping.keySet()) {
             if(key < index) {
