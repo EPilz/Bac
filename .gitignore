@@ -12,3 +12,18 @@ Apps/Retrofit/.idea
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+BacArbeit/thesis.synctex.gz
+*.blg
+*.glo
+*.acn
+*.toc
+BacArbeit/thesis.run.xml
+BacArbeit/thesis-blx.bib
+BacArbeit/thesis.out
+*.log
+*.lof
+*.ist
+*.glsdefs
+*.bbl
+BacArbeit/thesis.aux
+*.aux

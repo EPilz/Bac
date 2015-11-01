@@ -15,24 +15,93 @@ Retrofit ist ein typsicherer HTTP Client für Android und Java, welcher von Squa
 
 Mithilfe von Annotation bei den Interface Methoden wird angegeben wie Request zu verarbeiten sind. Daher muss jede Interface-Methode eine HTTP Annotation besitzen, die angibt welche Request Methode zu verwenden ist \cite{retrofit}. Es stehen dabei fünf built-in HTTP Methoden zur Auswahl \texttt{GET}, \texttt{POST}, \texttt{PUT}, \texttt{DELETE} und \texttt{HEAD}.
 \\\\
-Standardmäßig kann Retrofit nur \texttt{ResponseBody} und \texttt{RequestBody} von OkHttp serialisieren und deserialisieren. Durch das hinzufügen von Konvertern ist es jedoch möglich, dass weitere Formate wie JSON oder XML zum Übertragen von Daten unterstützt werden. Seit der Veröffentlichung von Retrofit 2 werden auch verschiedene Parser zur Serialisierung und Deserialisierung von JSON-Daten unterstützt. In der Vergangenheit wurde nur die GSON Bibliothek unterstützt, welche daher die häufig verwendetste Bibliothek zum Parsen von JSON Daten darstellt \cite{consumingRetrofit}.
+Standardmäßig kann Retrofit nur \texttt{ResponseBody} und \texttt{RequestBody} von OkHttp serialisieren und deserialisieren. Durch das hinzufügen von Konvertern ist es jedoch möglich, weitere Formate wie JSON oder XML zum Übertragen von Daten zu verwenden. Seit der Veröffentlichung von Retrofit in der Version 2, werden auch noch zusätzliche Parser zur Serialisierung und Deserialisierung von JSON-Daten unterstützt. In der Vergangenheit wurde nur die GSON Bibliothek unterstützt, welche daher die häufig verwendetste Bibliothek zum Parsen von JSON-Daten darstellt \cite{consumingRetrofit}. Dadurch wurde die GSON Biliothek auch im Rahmen der Bachelorarbeit zum Übertragen von Daten verwendet.
 
-Um Requests zur Server API versenden zu können muss die Retrofit Builder Klasse verwendet werden, welche die Basis URl des Services spezifiziert.
+\subsection{Funktionsweise}
+Um Retrofit verwenden zu können, müssen folgende Abhängigkeiten zum Projekt hinzugefügt werden:
 
-%Durch Annotations bei Interface Methoden und Parametern wird ein Request genau spezifiziert.
-
-
-This library makes downloading JSON or XML data from a web API fairly straightforward. Once the data is downloaded then it is parsed into a Plain Old Java Object (POJO) which must be defined for each "resource" in the response.
-
-
-
-Mithilfe der Annotation \texttt{@GET} und einer relativen URL wird die Abfrage einer Ressource genau spezifiziert.
-
-\begin{lstlisting}[language=java, caption={GET Abfrage},label=getRetrofit]
-public interface PowerPlantService {
-	
-	@GET("/powerplants")
-	public List<PowerPlant> getPowerPlants();
-
+\begin{lstlisting}[language=java, caption={app\textbackslash build.gradle},label=dependenciesRetrofit]
+dependencies {
+	compile 'com.squareup.retrofit:retrofit:2.0.0-beta2'
+	compile 'com.squareup.retrofit:converter-gson:2.0.0-beta2'
+	compile 'com.google.code.gson:gson:2.4'
+	compile 'com.squareup.okhttp:okhttp:2.4.0'
 }
 \end{lstlisting}
+
+Um Requests zur Server Schnittstelle versenden zu können, muss die Retrofit Builder Klasse verwendet werden, welche auch die Basis URL der Server REST-Schnittstelle spezifiziert.
+
+\begin{lstlisting}[language=java, caption={Retrofit Builder},label=retrofitBuilder]
+private static final String BASE_URL = "https://revex.inso.tuwien.ac.at/api/";
+ 
+public static <S> S createService(Class<S> serviceClass) {
+
+	Retrofit retrofit = new Retrofit.Builder()
+			.baseUrl(BASE_URL)
+			.addConverterFactory(GsonConverterFactory.create())
+			.build();
+	
+	return retrofit.create(serviceClass);
+}
+\end{lstlisting}
+
+Die Endpoints werden durch spezielle Annotationen bei Interface Methoden spezifiziert, die Details über Parameter und die verwendete Request Methode beinhalten. Es stehen unter anderem folgende Annotationen zur Verfügung:
+
+\begin{list}{-}{}
+	\item \texttt{@GET}, \texttt{@POST}, \texttt{@PUT}, \texttt{@DELETE}\\
+	Diese Annotationen geben an, welche Request Methode zu verwenden ist.
+	\item \texttt{@Path} \\
+	Durch diese Annotation ist es möglich, die URL des Endpoints dynamisch zu konfigurieren. Dabei wird ein bestimmter Teil in der URL der durch Klammer gekennzeichnet wurde, durch den dazugehörenden Parameter ersetzt (siehe Listing \ref{lst:retrofitPowerPlantService}, Zeile \ref{line:path}).
+	\item \texttt{@Body} \\
+	Jeder Parameter der über diese Annotation verfügt, wird in den Body der Request Anfrage eingefügt - nachdem das dazugehörende Java Objekt serialisiert wurde (Listing \ref{lst:retrofitPowerPlantService}, Zeile \ref{line:body}).
+\end{list}
+
+Der return Wert ist dabei immer ein parametrisiertes \texttt{Call<T>} Objekt, beispielsweise \texttt{Call <PowerPlant>}. Wir kein typenspezifischer Response benötigt oder erwartet, kann als return Wert \texttt{Call<Response>} angegeben werden.
+ 
+\begin{lstlisting}[language=java, caption={Auszug aus dem PowerPlantService},label={lst:retrofitPowerPlantService}, escapechar=|]
+public interface PowerPlantService {
+
+	@GET("powerplants")
+	public Call<List<PowerPlant>> getPowerPlants();
+	
+	@POST("powerplants")
+	public Call<PowerPlant> createPowerPlant(@Body PowerPlant powerPlant);
+	
+	@DELETE("powerplants/{id}")
+	public Call<PowerPlant> deletePowerPlantById(@Path("id") int id); |\label{line:path}|
+	
+	@PUT("powerplants/{id}")
+	public Call<PowerPlant> updatePowerPlant(@Path("id") int id, @Body PowerPlant powerPlant); |\label{line:body}|
+}
+\end{lstlisting}
+
+Sollen bei einem Request noch zusätzlich Daten in den Header eingefügt oder dieser manipuliert werden, ist dies durch das Interface \texttt{Interceptor} möglich. Dadurch kann zum Beispiel vor jeder Anfrage an den Server, ein Token hinzugefügt werden, welches angibt ob ein User eingeloggt ist.
+
+\begin{lstlisting}[language=java, caption={Hinzufügen des Tokens, für gültigen Login},label={lst:addToken}, escapechar=|]
+public static <S> S createServiceWithAuthToken(Class<S> serviceClass, final AuthToken token) {
+	Interceptor interceptor = new Interceptor() {
+		@Override
+		public Response intercept(Chain chain) throws IOException {
+			Request newRequest = chain.request().newBuilder()
+				.addHeader("Accept", "application/json")
+				.addHeader("X-Auth-Token", token.getToken())
+				.build();
+		
+			return chain.proceed(newRequest);
+		}
+	};
+		
+	OkHttpClient client = new OkHttpClient();
+	client.interceptors().add(interceptor);
+		
+	Retrofit retrofit = new Retrofit.Builder()
+		.client(client)
+		.baseUrl(BASE_URL)
+		.addConverterFactory(GsonConverterFactory.create())
+		.build();
+	
+	return retrofit.create(serviceClass);
+}
+\end{lstlisting}
+
+

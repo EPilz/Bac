@@ -48,5 +48,4 @@ public interface PowerPlantService {
 
     @PUT("powerplants/{id}")
     public Call<PowerPlant> updatePowerPlant(@Path("id") int id, @Body PowerPlant powerPlant);
-
 }
