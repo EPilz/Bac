@@ -1,5 +1,6 @@
-package revex.inso.spring.adapter;
+package revex.inso.activity.adapter;
 
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,9 +13,10 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
 
+import revex.inso.activity.ActivityAllPowerPlants;
+import revex.inso.activity.ActivityPowerPlantOverview;
+import revex.inso.activity.R;
 import revex.inso.rest.model.PowerPlant;
-import revex.inso.spring.ActivityAllPowerPlants;
-import revex.inso.spring.R;
 
 /**
  * Created by Elisabeth on 30.06.2015.
@@ -80,9 +82,9 @@ public class PowerPlantAdapter extends RecyclerView.Adapter<PowerPlantAdapter.Po
     public void onItemClick(View view, int position) {
         PowerPlant powerPlant = powerPlants.get(position);
 
-       // Intent i = new Intent(context, ActivityPowerPlantOverview.class);
-       // i.putExtra(ActivityAllPowerPlants.KEY, powerPlant.getId());
-      //  context.startActivity(i);
+        Intent i = new Intent(context, ActivityPowerPlantOverview.class);
+        i.putExtra(ActivityAllPowerPlants.KEY, powerPlant.getId());
+        context.startActivity(i);
     }
 
 
@@ -106,10 +108,9 @@ public class PowerPlantAdapter extends RecyclerView.Adapter<PowerPlantAdapter.Po
             cv.setOnClickListener(this);
         }
 
-
         @Override
         public void onClick(View v) {
-            onItemClick(v, getAdapterPosition());
+            onItemClick(v, getPosition());
         }
     }
 }

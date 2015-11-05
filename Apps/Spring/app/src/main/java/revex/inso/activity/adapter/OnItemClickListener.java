@@ -1,4 +1,4 @@
-package revex.inso.spring.adapter;
+package revex.inso.activity.adapter;
 
 import android.view.View;
 

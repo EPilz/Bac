@@ -1,9 +1,21 @@
 package revex.inso.rest;
 
 
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.client.BufferingClientHttpRequestFactory;
+import org.springframework.http.client.ClientHttpRequestInterceptor;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import revex.inso.util.UtilitiesManager;
 
 
 /**
@@ -17,69 +29,23 @@ public class ServiceGenerator {
     }
 
     public static RestTemplate getRestTemplate() {
-        RestTemplate restTemplate = new RestTemplate();
+        RestTemplate restTemplate = new RestTemplate(new BufferingClientHttpRequestFactory(new SimpleClientHttpRequestFactory()));
+        List<ClientHttpRequestInterceptor> interceptors = new ArrayList<>();
+        interceptors.add(new LoggingRequestInterceptor());
+        restTemplate.setInterceptors(interceptors);
 
         restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-      //  restTemplate.setRequestFactory(new HttpComponentsClientHttpRequestFactory());
         restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
-
 
         return restTemplate;
     }
 
-    /*private static RestAdapter.Builder getBuilder() {
-        Gson gson = new GsonBuilder()
-                .registerTypeHierarchyAdapter(Collection.class, new CollectionAdapter())
-                .setDateFormat("yyyy-MM-dd")
-                .create();
+    public static HttpEntity getHttpEntity() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("X-Auth-Token", UtilitiesManager.getInstance().getAuthToken().getToken());
+        headers.setContentType(MediaType.APPLICATION_JSON);
 
-        RestAdapter.Builder builder = new RestAdapter.Builder()
-                .setLogLevel(RestAdapter.LogLevel.FULL)
-                .setEndpoint(BASE_URL)
-                .setConverter(new GsonConverter(gson));
-
-        return builder;
+        return new HttpEntity(headers);
     }
 
-    public static <S> S createService(Class<S> serviceClass) {
-        RestAdapter.Builder builder = getBuilder();
-
-        RestAdapter adapter = builder.build();
-        return adapter.create(serviceClass);
-    }
-
-    public static <S> S createServiceWithAuthToken(Class<S> serviceClass, final AuthToken token) {
-        RestAdapter.Builder builder = getBuilder();
-
-        if (token != null) {
-            builder.setRequestInterceptor(new RequestInterceptor() {
-                @Override
-                public void intercept(RequestFacade request) {
-                    request.addHeader("Accept", "application/json");
-                    request.addHeader("X-Auth-Token", token.getToken());
-                }
-            });
-        }
-
-        RestAdapter adapter = builder.build();
-        return adapter.create(serviceClass);
-    }
-
-    static class CollectionAdapter implements JsonSerializer<Collection<?>> {
-        @Override
-        public JsonElement serialize(Collection<?> src, Type typeOfSrc, JsonSerializationContext context) {
-            if (src == null || src.isEmpty()) {
-                return null;
-            }
-
-            JsonArray array = new JsonArray();
-
-            for (Object child : src) {
-                JsonElement element = context.serialize(child);
-                array.add(element);
-            }
-
-            return array;
-        }
-    }*/
 }

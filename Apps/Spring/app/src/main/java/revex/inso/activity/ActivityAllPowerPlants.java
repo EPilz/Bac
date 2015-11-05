@@ -1,4 +1,4 @@
-package revex.inso.spring;
+package revex.inso.activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -15,9 +15,9 @@ import android.view.View;
 
 import java.util.List;
 
+import revex.inso.activity.adapter.PowerPlantAdapter;
 import revex.inso.rest.model.PowerPlant;
 import revex.inso.rest.service.PowerPlantService;
-import revex.inso.spring.adapter.PowerPlantAdapter;
 
 
 public class ActivityAllPowerPlants extends Activity {
@@ -28,6 +28,14 @@ public class ActivityAllPowerPlants extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_power_plant);
+
+        RecyclerView rv = (RecyclerView) findViewById(R.id.recyclerView_powerPlants);
+        rv.setHasFixedSize(true);
+
+        LinearLayoutManager llm = new LinearLayoutManager(ActivityAllPowerPlants.this);
+        rv.setLayoutManager(llm);
+
+        rv.setItemAnimator(new DefaultItemAnimator());
 
         LoadTask loadTask = new LoadTask();
         loadTask.execute();
@@ -66,59 +74,17 @@ public class ActivityAllPowerPlants extends Activity {
 
         @Override
         protected List<PowerPlant> doInBackground(Void... params) {
-          /*  UserService userService = ServiceGenerator.createService(UserService.class);
-            UtilitiesManager.getInstance().
-                    setAuthToken(userService.getAuthToken(UtilitiesManager.getInstance().getUser()));
-
-            PowerPlantService powerPlantService = ServiceGenerator.
-                   createServiceWithAuthToken(PowerPlantService.class, UtilitiesManager.getInstance().getAuthToken());*/
-
             return PowerPlantService.getPowerPlants();
         }
 
         @Override
         protected void onPostExecute(List<PowerPlant> powerPlants) {
-            RecyclerView rv = (RecyclerView)findViewById(R.id.recyclerView_powerPlants);
-            rv.setHasFixedSize(true);
-
-            LinearLayoutManager llm = new LinearLayoutManager(ActivityAllPowerPlants.this);
-            rv.setLayoutManager(llm);
+            RecyclerView rv = (RecyclerView) findViewById(R.id.recyclerView_powerPlants);
 
             PowerPlantAdapter adapter = new PowerPlantAdapter(powerPlants, ActivityAllPowerPlants.this);
             rv.setAdapter(adapter);
-          //  rv.addItemDecoration(new SimpleDividerItemDecoration(getResources()));
-            rv.setItemAnimator(new DefaultItemAnimator());
+
             adapter.notifyDataSetChanged();
-
-            /*LinearLayout linearLayout = (LinearLayout) findViewById(R.id.listViewPowerPlants);
-            for (final PowerPlant powerPlant : powerPlants) {
-                LinearLayout linearLayoutInline = new LinearLayout(ActivityAllPowerPlants.this);
-                linearLayoutInline.setOrientation(LinearLayout.HORIZONTAL);
-
-                Button buttonPowerPlant = new Button(ActivityAllPowerPlants.this);
-                buttonPowerPlant.setText(powerPlant.getName());
-                buttonPowerPlant.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent i = new Intent(ActivityAllPowerPlants.this, ActivityPowerPlantOverview.class);
-                        i.putExtra(ActivityAllPowerPlants.KEY, powerPlant.getId());
-                        startActivity(i);
-                    }
-                });
-
-                Button buttonDelete = new Button(ActivityAllPowerPlants.this);
-                buttonDelete.setText("D");
-                buttonDelete.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        DeletePowerPlantTask deletePowerPlantTask = new DeletePowerPlantTask();
-                        deletePowerPlantTask.execute(powerPlant);
-                    }
-                });
-                linearLayoutInline.addView(buttonPowerPlant);
-                linearLayoutInline.addView(buttonDelete);
-                linearLayout.addView(linearLayoutInline);
-            }*/
         }
     }
 

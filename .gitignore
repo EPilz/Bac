@@ -27,3 +27,5 @@ BacArbeit/thesis.out
 *.bbl
 BacArbeit/thesis.aux
 *.aux
+Apps/Spring/.idea/
+*.iml

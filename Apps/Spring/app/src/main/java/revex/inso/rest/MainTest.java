@@ -1,5 +1,8 @@
 package revex.inso.rest;
 
+import org.springframework.web.util.UriComponentsBuilder;
+
+import java.net.URI;
 import java.util.List;
 
 
@@ -15,18 +18,12 @@ public class MainTest {
 
     public static void main(String[] args) {
 
-        AuthToken token = UserService.getAuthToken(new User("admin", "admin"));
+        URI url = UriComponentsBuilder.fromUriString(ServiceGenerator.BASE_URL)
+                .path("/powerplants/{id}")
 
-        System.out.println(token.getToken());
+                .build()
+                .toUri();
 
-        /*userService = ServiceGenerator.createServiceWithAuthToken(UserService.class, token);
-        User user = userService.getUserAccount();
-
-        System.out.println(user);
-        System.out.println(user.getRoles().toString());
-
-        PowerPlantService powerPlantService = ServiceGenerator.createServiceWithAuthToken(PowerPlantService.class, token);
-        List<PowerPlant> powerPlantList = powerPlantService.getPowerPlants();
-        System.out.println(powerPlantList);*/
+        System.out.println(url.toString());
     }
 }

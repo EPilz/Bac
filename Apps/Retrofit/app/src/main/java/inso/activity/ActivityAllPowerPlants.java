@@ -123,7 +123,7 @@ public class ActivityAllPowerPlants extends Activity {
 
                 @Override
                 public void onFailure(Throwable t) {
-
+                    t.fillInStackTrace();
                 }
             });
         }

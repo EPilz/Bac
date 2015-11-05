@@ -1,4 +1,4 @@
-package revex.inso.spring;
+package revex.inso.activity;
 
 import android.app.Activity;
 import android.content.Intent;
