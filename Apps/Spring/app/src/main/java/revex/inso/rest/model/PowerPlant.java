@@ -1,8 +1,11 @@
 package revex.inso.rest.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.Date;
 import java.util.List;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class PowerPlant {
 
     public PowerPlant() {
@@ -29,8 +32,6 @@ public class PowerPlant {
     private String storageType;
 
     private String maintenanceStrategy;
-
-    private List<Link> links;
 
     public String getName() {
         return name;
@@ -119,14 +120,6 @@ public class PowerPlant {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public List<Link> getLinks() {
-        return links;
-    }
-
-    public void setLinks(List<Link> links) {
-        this.links = links;
     }
 
     @Override

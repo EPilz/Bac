@@ -66,8 +66,8 @@ public class ActivityAllPowerPlants extends Activity {
 
 
     public void createPowerPlant(View view) {
-     //   Intent i = new Intent(ActivityAllPowerPlants.this, ActivityCreatePowerPlant.class);
-       //  startActivity(i);
+        Intent i = new Intent(ActivityAllPowerPlants.this, ActivityCreatePowerPlant.class);
+        startActivity(i);
     }
 
     private class LoadTask extends AsyncTask<Void, Void, List<PowerPlant>> {
@@ -114,20 +114,16 @@ public class ActivityAllPowerPlants extends Activity {
     }
 
     public void updatePowerPlant(final PowerPlant powerPlant) {
-      /*  Intent i = new Intent(this, ActivityUpdatePowerPlant.class);
+        Intent i = new Intent(this, ActivityUpdatePowerPlant.class);
         i.putExtra(ActivityAllPowerPlants.KEY, powerPlant.getId());
-        startActivity(i);*/
+        startActivity(i);
     }
 
     public class DeletePowerPlantTask extends AsyncTask<PowerPlant, Void, PowerPlant> {
 
         @Override
         protected PowerPlant doInBackground(PowerPlant... params) {
-          /*  PowerPlantService powerPlantService = ServiceGenerator.
-                    createServiceWithAuthToken(PowerPlantService.class, UtilitiesManager.getInstance().getAuthToken());
-
-            return  powerPlantService.deletePowerPlantById(params[0].getId());*/
-            return null;
+            return PowerPlantService.deletePowerPlantById(params[0].getId());
         }
 
         @Override

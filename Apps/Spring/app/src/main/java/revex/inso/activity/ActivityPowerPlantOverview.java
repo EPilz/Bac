@@ -4,17 +4,25 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.Locale;
 
+import revex.inso.activity.util.PositionStore;
+import revex.inso.rest.model.Component;
 import revex.inso.rest.model.Evaluation;
 import revex.inso.rest.model.PowerPlant;
+import revex.inso.rest.model.ProductionLine;
 import revex.inso.rest.service.PowerPlantService;
 
 
@@ -35,25 +43,20 @@ public class ActivityPowerPlantOverview extends Activity {
         LoadPowerPlantMainDataTask loadPowerPlantMainDataTask = new LoadPowerPlantMainDataTask();
         loadPowerPlantMainDataTask.execute();
 
-       /* LoadPowerPlantEvaluationTask loadPowerPlantEvaluationTask = new LoadPowerPlantEvaluationTask();
-        loadPowerPlantEvaluationTask.execute();*/
+        LoadPowerPlantEvaluationTask loadPowerPlantEvaluationTask = new LoadPowerPlantEvaluationTask();
+        loadPowerPlantEvaluationTask.execute();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_activity_power_plant_overview, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
@@ -70,8 +73,8 @@ public class ActivityPowerPlantOverview extends Activity {
 
         @Override
         protected void onPostExecute(PowerPlant powerPlant) {
-           //TODO LoadProductLinesTask loadProductLinesTask = new LoadProductLinesTask();
-           //  loadProductLinesTask.execute(powerPlant);
+            LoadProductLinesTask loadProductLinesTask = new LoadProductLinesTask();
+            loadProductLinesTask.execute(powerPlant);
 
             SimpleDateFormat sdf = new SimpleDateFormat("MMMM dd, yyyy", Locale.US);
             DecimalFormat df = (DecimalFormat)NumberFormat.getNumberInstance(Locale.US);
@@ -106,57 +109,34 @@ public class ActivityPowerPlantOverview extends Activity {
         }
     }
 
-   /* private class LoadPowerPlantEvaluationTask extends AsyncTask<Void, Void, Void> implements Callback<Evaluation>{
+    private class LoadPowerPlantEvaluationTask extends AsyncTask<Void, Void, Evaluation> {
 
         @Override
-        protected Void doInBackground(Void... params) {
-            PowerPlantService powerPlantService = ServiceGenerator.
-                    createServiceWithAuthToken(PowerPlantService.class, UtilitiesManager.getInstance().getAuthToken());
-
-            Call<Evaluation> call =  powerPlantService.getPowerPlantEvaluation(id);
-            call.enqueue(this);
-
-            return null;
+        protected Evaluation doInBackground(Void... params) {
+            return PowerPlantService.getPowerPlantEvaluation(id);
         }
 
         @Override
-        public void onResponse(Response<Evaluation> response, Retrofit retrofit) {
-            Evaluation evaluation = response.body();
-
+        protected void onPostExecute(Evaluation evaluation) {
             DecimalFormat df = (DecimalFormat)NumberFormat.getNumberInstance(Locale.US);
             df.applyPattern("0.00");
 
             TextView textViewTurbineType = (TextView) findViewById(R.id.textView_resultEvaluation);
             textViewTurbineType.setText(df.format(evaluation.getState()));
         }
-
-        @Override
-        public void onFailure(Throwable t) {
-            t.fillInStackTrace();
-        }
     }
 
-    private class LoadProductLinesTask extends AsyncTask<PowerPlant, Void, Void> implements Callback<List<ProductionLine>>{
+    private class LoadProductLinesTask extends AsyncTask<PowerPlant, Void, List<ProductionLine>> {
 
         @Override
-        protected Void doInBackground(PowerPlant... params) {
-            PowerPlantService powerPlantService = ServiceGenerator.
-                    createServiceWithAuthToken(PowerPlantService.class, UtilitiesManager.getInstance().getAuthToken());
+        protected List<ProductionLine> doInBackground(PowerPlant... params) {
             PowerPlant powerPlant = params[0];
 
-            Call<List<ProductionLine>> call = powerPlantService.getProductionLines(powerPlant.getId());
-            call.enqueue(this);
-
-            return null;
+            return PowerPlantService.getProductionLines(powerPlant.getId());
         }
 
         @Override
-        public void onResponse(Response<List<ProductionLine>> response, Retrofit retrofit) {
-            final PowerPlantService powerPlantService = ServiceGenerator.
-                    createServiceWithAuthToken(PowerPlantService.class, UtilitiesManager.getInstance().getAuthToken());
-
-            List<ProductionLine> productionLines = response.body();
-
+        protected void onPostExecute(List<ProductionLine> productionLines) {
             final TableLayout tableLayout = (TableLayout) findViewById(R.id.tableLayoutProdutionLines);
 
             if(productionLines.isEmpty()) {
@@ -188,81 +168,105 @@ public class ActivityPowerPlantOverview extends Activity {
 
                     tableLayout.addView(tr);
 
-                    Call<Evaluation> callEvaluation = powerPlantService.getProductionLineEvaluation(productionLine.getId());
-                    callEvaluation.enqueue(new CallWithData<Evaluation>(textViewEvalProduct) {
-                        @Override
-                        public void onResponse(Response<Evaluation> response, Retrofit retrofit) {
-                            TextView textViewEvalProduct = (TextView) getData();
-                            changeTextViewColorAndSetText(textViewEvalProduct, response.body());
-                        }
+                    LoadProductionLineEvaluationTask productionLineEvaluationTask = new LoadProductionLineEvaluationTask(textViewEvalProduct);
+                    productionLineEvaluationTask.execute(productionLine);
 
-                        @Override
-                        public void onFailure(Throwable t) {
-                            t.fillInStackTrace();
-                        }
-                    });
+                    LoadComponentsForProductionLineTask componentsForProductionLineTask = new LoadComponentsForProductionLineTask(indexProductionLine);
+                    componentsForProductionLineTask.execute(productionLine);
 
-                    Call<List<Component>> callComponents = powerPlantService.getComponentsFromProductionLines(productionLine.getId());
-
-                    callComponents.enqueue(new CallWithData<List<Component>>(indexProductionLine) {
-                        @Override
-                        public void onResponse(Response<List<Component>> response, Retrofit retrofit) {
-                            int indexProductionLine = (Integer) getData();
-                            List<Component> componentList = response.body();
-                            int count = 1;
-                            positionStore.addProductionLine(indexProductionLine, componentList.size());
-                            for (Component component : componentList) {
-                                final TableRow tr2 = new TableRow(ActivityPowerPlantOverview.this);
-
-                                Button buttonComponent = new Button(ActivityPowerPlantOverview.this);
-                                buttonComponent.setBackgroundColor(Color.TRANSPARENT);
-                                buttonComponent.setText(component.getName());
-                                buttonComponent.setGravity(Gravity.LEFT);
-                                tr2.addView(buttonComponent);
-
-                                TextView textViewEval = new TextView(ActivityPowerPlantOverview.this);
-                                textViewEval.setText("-");
-                                textViewEval.setGravity(Gravity.RIGHT);
-                                tr2.addView(textViewEval);
-
-                                Call<Evaluation> callComponentEvaluation = powerPlantService.getComponentEvaluation(component.getId());
-                                callComponentEvaluation.enqueue(new CallWithData<Evaluation>(textViewEval) {
-
-                                    @Override
-                                    public void onResponse(Response<Evaluation> response, Retrofit retrofit) {
-                                        TextView textViewEval = (TextView) getData();
-                                        changeTextViewColorAndSetText(textViewEval, response.body());
-                                    }
-
-                                    @Override
-                                    public void onFailure(Throwable t) {
-                                        t.fillInStackTrace();
-                                    }
-                                });
-
-                                tableLayout.addView(tr2, positionStore.getPosition(indexProductionLine) + count);
-                                //positionStore.addCountOnIndex(indexProductionLine);
-                                count++;
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Throwable t) {
-                            t.fillInStackTrace();
-                        }
-                    });
                     indexProductionLine++;
                 }
             }
         }
+    }
 
+    private class LoadComponentsForProductionLineTask extends AsyncTask<ProductionLine, Void, List<Component>> {
+
+        private int indexProductionLine;
+
+        public LoadComponentsForProductionLineTask(int indexProductionLine) {
+            this.indexProductionLine = indexProductionLine;
+        }
 
         @Override
-        public void onFailure(Throwable t) {
-            t.fillInStackTrace();
+        protected List<Component> doInBackground(ProductionLine... params) {
+            ProductionLine productionLine = params[0];
+
+            return PowerPlantService.getComponentsFromProductionLines(productionLine.getId());
+        }
+
+        @Override
+        protected void onPostExecute(List<Component> componentList) {
+            PositionStore positionStore = PositionStore.getInstance();
+            TableLayout tableLayout = (TableLayout) findViewById(R.id.tableLayoutProdutionLines);
+
+            int count = 1;
+            positionStore.addProductionLine(indexProductionLine, componentList.size());
+            for (Component component : componentList) {
+                final TableRow tr2 = new TableRow(ActivityPowerPlantOverview.this);
+
+                Button buttonComponent = new Button(ActivityPowerPlantOverview.this);
+                buttonComponent.setBackgroundColor(Color.TRANSPARENT);
+                buttonComponent.setText(component.getName());
+                buttonComponent.setGravity(Gravity.LEFT);
+                tr2.addView(buttonComponent);
+
+                TextView textViewEval = new TextView(ActivityPowerPlantOverview.this);
+                textViewEval.setText("-");
+                textViewEval.setGravity(Gravity.RIGHT);
+                tr2.addView(textViewEval);
+
+                LoadComponentEvaluationTask componentEvaluationTask = new LoadComponentEvaluationTask(textViewEval);
+                componentEvaluationTask.execute(component);
+
+                tableLayout.addView(tr2, positionStore.getPosition(indexProductionLine) + count);
+                count++;
+            }
         }
     }
-*/
+
+    private class LoadProductionLineEvaluationTask extends AsyncTask<ProductionLine, Void, Evaluation> {
+
+        private TextView textView;
+
+        public LoadProductionLineEvaluationTask(TextView textView) {
+            this.textView = textView;
+        }
+
+        @Override
+        protected Evaluation doInBackground(ProductionLine... params) {
+            ProductionLine productionLine = params[0];
+
+            return PowerPlantService.getProductionLineEvaluation(productionLine.getId());
+        }
+
+        @Override
+        protected void onPostExecute(Evaluation evaluation) {
+            changeTextViewColorAndSetText(textView, evaluation);
+        }
+    }
+
+    private class LoadComponentEvaluationTask extends AsyncTask<Component, Void, Evaluation> {
+
+        private TextView textView;
+
+        public LoadComponentEvaluationTask(TextView textView) {
+            this.textView = textView;
+        }
+
+        @Override
+        protected Evaluation doInBackground(Component... params) {
+            Component component = params[0];
+
+            return PowerPlantService.getComponentEvaluation(component.getId());
+        }
+
+        @Override
+        protected void onPostExecute(Evaluation evaluation) {
+            changeTextViewColorAndSetText(textView, evaluation);
+        }
+    }
+
     private void changeTextViewColorAndSetText(TextView textView, Evaluation evaluation) {
         if(evaluation != null) {
             DecimalFormat df = (DecimalFormat) NumberFormat.getNumberInstance(Locale.US);

@@ -40,12 +40,16 @@ public class ServiceGenerator {
         return restTemplate;
     }
 
-    public static HttpEntity getHttpEntity() {
+    public static HttpHeaders getHttpHeaders() {
         HttpHeaders headers = new HttpHeaders();
         headers.set("X-Auth-Token", UtilitiesManager.getInstance().getAuthToken().getToken());
         headers.setContentType(MediaType.APPLICATION_JSON);
 
-        return new HttpEntity(headers);
+        return headers;
+    }
+
+    public static HttpEntity getHttpEntity() {
+        return new HttpEntity(getHttpHeaders());
     }
 
 }

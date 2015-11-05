@@ -70,7 +70,7 @@ public class PowerPlantService {
     }
 
     /*@GET("/powerplants/{id}/productionlines")*/
-    public List<ProductionLine> getProductionLines(int id) {
+    public static List<ProductionLine> getProductionLines(int id) {
         RestTemplate restTemplate = ServiceGenerator.getRestTemplate();
 
         URI url = UriComponentsBuilder.fromUriString(ServiceGenerator.BASE_URL)
@@ -85,23 +85,101 @@ public class PowerPlantService {
         return Arrays.asList(response.getBody());
     }
 
-   /* @GET("/productionlines/{id}/components")
-    public List<Component> getComponentsFromProductionLines(@Path("id") int id);
+   /* @GET("/productionlines/{id}/components")*/
+    public static List<Component> getComponentsFromProductionLines(int id) {
+        RestTemplate restTemplate = ServiceGenerator.getRestTemplate();
 
-    @GET("/productionlines/{id}/evaluation")
-    public Evaluation getProductionLineEvaluation(@Path("id") int id);
+        URI url = UriComponentsBuilder.fromUriString(ServiceGenerator.BASE_URL)
+                .path("/productionlines/" + id + "/components")
+                .build()
+                .toUri();
 
-    @GET("/components/{id}/evaluation")
-    public Evaluation getComponentEvaluation(@Path("id") int id);
+        HttpEntity entity = ServiceGenerator.getHttpEntity();
 
-    @POST("/powerplants")
-    public PowerPlant createPowerPlant(@Body PowerPlant powerPlant);
+        HttpEntity<Component[]> response = restTemplate.exchange(url, HttpMethod.GET, entity, Component[].class);
 
-    @DELETE("/powerplants/{id}")
-    public PowerPlant deletePowerPlantById(@Path("id") int id);
+        return Arrays.asList(response.getBody());
+    }
 
-    @PUT("/powerplants/{id}")
-    public PowerPlant updatePowerPlant(@Path("id") int id, @Body PowerPlant powerPlant);*/
+    /*@GET("/productionlines/{id}/evaluation")*/
+    public static Evaluation getProductionLineEvaluation(int id) {
+        RestTemplate restTemplate = ServiceGenerator.getRestTemplate();
+
+        URI url = UriComponentsBuilder.fromUriString(ServiceGenerator.BASE_URL)
+                .path("/productionlines/" + id + "/evaluation")
+                .build()
+                .toUri();
+
+        HttpEntity entity = ServiceGenerator.getHttpEntity();
+
+        HttpEntity<Evaluation> response = restTemplate.exchange(url, HttpMethod.GET, entity, Evaluation.class);
+
+        return response.getBody();
+    }
+
+    //@GET("/components/{id}/evaluation")
+    public static Evaluation getComponentEvaluation(int id) {
+        RestTemplate restTemplate = ServiceGenerator.getRestTemplate();
+
+        URI url = UriComponentsBuilder.fromUriString(ServiceGenerator.BASE_URL)
+                .path("/components/" + id + "/evaluation")
+                .build()
+                .toUri();
+
+        HttpEntity entity = ServiceGenerator.getHttpEntity();
+
+        HttpEntity<Evaluation> response = restTemplate.exchange(url, HttpMethod.GET, entity, Evaluation.class);
+
+        return response.getBody();
+    }
+
+    /*@POST("/powerplants")*/
+    public static PowerPlant createPowerPlant(PowerPlant powerPlant) {
+        RestTemplate restTemplate = ServiceGenerator.getRestTemplate();
+
+        URI url = UriComponentsBuilder.fromUriString(ServiceGenerator.BASE_URL)
+                .path("/powerplants")
+                .build()
+                .toUri();
+
+        HttpEntity<PowerPlant> requestEntity = new HttpEntity<>(powerPlant, ServiceGenerator.getHttpHeaders());
+
+        HttpEntity<PowerPlant> response = restTemplate.exchange(url, HttpMethod.POST, requestEntity, PowerPlant.class);
+
+        return response.getBody();
+    }
+
+   /* @DELETE("/powerplants/{id}")*/
+    public static PowerPlant deletePowerPlantById(int id) {
+        RestTemplate restTemplate = ServiceGenerator.getRestTemplate();
+
+        URI url = UriComponentsBuilder.fromUriString(ServiceGenerator.BASE_URL)
+                .path("/powerplants/" + id )
+                .build()
+                .toUri();
+
+        HttpEntity entity = ServiceGenerator.getHttpEntity();
+
+        HttpEntity<PowerPlant> response = restTemplate.exchange(url, HttpMethod.DELETE, entity, PowerPlant.class);
+
+        return response.getBody();
+    }
+
+    /*@PUT("/powerplants/{id}")*/
+    public static PowerPlant updatePowerPlant(int id, PowerPlant powerPlant) {
+        RestTemplate restTemplate = ServiceGenerator.getRestTemplate();
+
+        URI url = UriComponentsBuilder.fromUriString(ServiceGenerator.BASE_URL)
+                .path("/powerplants/" + id)
+                .build()
+                .toUri();
+
+        HttpEntity<PowerPlant> requestEntity = new HttpEntity<>(powerPlant, ServiceGenerator.getHttpHeaders());
+
+        HttpEntity<PowerPlant> response = restTemplate.exchange(url, HttpMethod.PUT, requestEntity, PowerPlant.class);
+
+        return response.getBody();
+    }
 
 
 }

@@ -1,5 +1,8 @@
 package revex.inso.rest.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Evaluation {
 
 	private Double state;

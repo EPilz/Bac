@@ -1,7 +1,10 @@
 package revex.inso.rest.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.List;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ProductionLine {
 
     private Integer id;
