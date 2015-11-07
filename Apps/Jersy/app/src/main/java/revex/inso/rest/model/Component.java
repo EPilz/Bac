@@ -1,8 +1,14 @@
-package rest.model;
+package revex.inso.rest.model;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Component {
 
 	private Integer id;

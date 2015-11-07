@@ -1,7 +1,13 @@
-package rest.model;
+package revex.inso.rest.model;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ProductionLine {
 
     private Integer id;
