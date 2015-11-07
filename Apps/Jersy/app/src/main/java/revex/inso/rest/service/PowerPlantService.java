@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.ws.rs.GET;
+import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.Invocation.Builder;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
@@ -68,14 +69,31 @@ public class PowerPlantService {
         Evaluation evaluation = builder.accept(MediaType.APPLICATION_JSON).get(Evaluation.class);
         return evaluation;
     }
+    
+    public static PowerPlant createPowerPlant(PowerPlant powerPlant) {
+        Builder builder = ServiceGenerator.getBuilderFromUrlWithAuthToken("/powerplants");
 
-   /* @POST("/powerplants")
-    public PowerPlant createPowerPlant(@Body PowerPlant powerPlant);
+        PowerPlant newPowerPlant = builder.accept(MediaType.APPLICATION_JSON).
+                post(Entity.entity(powerPlant, MediaType.APPLICATION_JSON), PowerPlant.class);
 
-    @DELETE("/powerplants/{id}")
-    public PowerPlant deletePowerPlantById(@Path("id") int id);
+        return newPowerPlant;
+    }
 
-    @PUT("/powerplants/{id}")
-    public PowerPlant updatePowerPlant(@Path("id") int id, @Body PowerPlant powerPlant);*/
+    public static PowerPlant deletePowerPlantById(int id) {
+        Builder builder = ServiceGenerator.getBuilderFromUrlWithAuthToken("/powerplants/" + id);
+
+        PowerPlant removedPowerPlant = builder.accept(MediaType.APPLICATION_JSON).delete(PowerPlant.class);
+
+        return removedPowerPlant;
+    }
+
+    public static PowerPlant updatePowerPlant(int id, PowerPlant powerPlant) {
+        Builder builder = ServiceGenerator.getBuilderFromUrlWithAuthToken("/powerplants/" + id);
+
+        PowerPlant updatedPowerPlant = builder.accept(MediaType.APPLICATION_JSON).
+                put(Entity.entity(powerPlant, MediaType.APPLICATION_JSON), PowerPlant.class);
+
+        return updatedPowerPlant;
+    }
 
 }

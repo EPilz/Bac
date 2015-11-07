@@ -20,7 +20,6 @@ public class UserService {
                 accept(MediaType.APPLICATION_JSON).
                 post(Entity.entity(user, MediaType.APPLICATION_JSON), AuthToken.class);
 
-        System.out.println(authToken.getToken());
         return authToken;
     }
 }

@@ -58,14 +58,14 @@ public class PowerPlantAdapter extends RecyclerView.Adapter<PowerPlantAdapter.Po
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO context.deletePowerPlant(powerPlants.get(i));
+                context.deletePowerPlant(powerPlants.get(i));
             }
         });
 
         holder.edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               //TODO context.updatePowerPlant(powerPlants.get(i));
+               context.updatePowerPlant(powerPlants.get(i));
             }
         });
     }

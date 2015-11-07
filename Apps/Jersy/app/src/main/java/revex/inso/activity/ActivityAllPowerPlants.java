@@ -74,8 +74,8 @@ public class ActivityAllPowerPlants extends Activity {
 
 
     public void createPowerPlant(View view) {
-        //TODO Intent i = new Intent(ActivityAllPowerPlants.this, ActivityCreatePowerPlant.class);
-        //startActivity(i);
+        Intent i = new Intent(ActivityAllPowerPlants.this, ActivityCreatePowerPlant.class);
+        startActivity(i);
     }
 
     private class LoadTask extends AsyncTask<Void, Void, List<PowerPlant>> {
@@ -96,7 +96,7 @@ public class ActivityAllPowerPlants extends Activity {
         }
     }
 
-   /* public void deletePowerPlant(final PowerPlant powerPlant) {
+    public void deletePowerPlant(final PowerPlant powerPlant) {
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         alert.setTitle("Delete PowerPlant");
         alert.setMessage("Are you sure you want delete this?");
@@ -127,29 +127,17 @@ public class ActivityAllPowerPlants extends Activity {
         startActivity(i);
     }
 
-    public class DeletePowerPlantTask extends AsyncTask<PowerPlant, Void, Void> implements Callback<PowerPlant> {
+    public class DeletePowerPlantTask extends AsyncTask<PowerPlant, Void, PowerPlant> {
 
         @Override
-        protected Void doInBackground(PowerPlant... params) {
-            PowerPlantService powerPlantService = ServiceGenerator.
-                    createServiceWithAuthToken(PowerPlantService.class, UtilitiesManager.getInstance().getAuthToken());
-
-
-            Call<PowerPlant> call = powerPlantService.deletePowerPlantById(params[0].getId());
-            call.enqueue(this);
-
-            return null;
+        protected PowerPlant doInBackground(PowerPlant... params) {
+            return PowerPlantService.deletePowerPlantById(params[0].getId());
         }
 
         @Override
-        public void onResponse(Response<PowerPlant> response, Retrofit retrofit) {
+        protected void onPostExecute(PowerPlant powerPlant) {
             Intent i = new Intent(ActivityAllPowerPlants.this, ActivityAllPowerPlants.class);
             startActivity(i);
         }
-
-        @Override
-        public void onFailure(Throwable t) {
-            t.fillInStackTrace();
-        }
-    }*/
+    }
 }
