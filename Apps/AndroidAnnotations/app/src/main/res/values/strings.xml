@@ -1,0 +1,80 @@
+<resources>
+    <string name="app_name">Revex AndroidAnnotation</string>
+
+    <string name="main_title">Revex 2020 - AndroidAnnotation</string>
+    <string name="button_login">Login</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="label_allPowerPlants">Meine Kraftwerke</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="title_activity_activity_power_plant_overview">Detail Kraftwerk</string>
+
+
+    <string name="result_evaluation">The result of the evaluation is:</string>
+    <string name="years">years</string>
+    <string name="days">days</string>
+    <string name="prozent">%</string>
+    <string name="per_year">per year</string>
+    <string name="not_found">Keine Daten gefunden</string>
+    <string name="title_activity_create_power_plant">Create Power Plant</string>
+
+    <string name="new_power_plant">  neu</string>
+    <string name="create_power_plant">neues Kraftwerk anlegen</string>
+
+    <string name="title_activity_update_power_plant">Kraftwerk bearbeiten</string>
+    <string name="update_power_plant">Kraftwerk bearbeiten</string>
+
+
+    <string-array name="option_array_turbineType_key">
+        <item>FRANCIS</item>
+        <item>KAPLAN</item>
+        <item>PELTON</item>
+    </string-array>
+
+    <string-array name="option_array_turbineType_value">
+        <item>Francis</item>
+        <item>Kaplan</item>
+        <item>Pelton</item>
+    </string-array>
+
+    <string-array name="option_array_pressureType_key">
+        <item>LOW</item>
+        <item>MEDIUM</item>
+        <item>HIGH</item>
+    </string-array>
+
+    <string-array name="option_array_pressureType_value">
+        <item>Low</item>
+        <item>Medium</item>
+        <item>High</item>
+    </string-array>
+
+    <string-array name="option_array_storageType_key">
+        <item>NONE</item>
+        <item>DAILY</item>
+        <item>MONTHLY</item>
+        <item>YEARLY</item>
+    </string-array>
+
+    <string-array name="option_array_storageType_value">
+        <item>NONE</item>
+        <item>DAILY</item>
+        <item>MONTHLY</item>
+        <item>YEARLY</item>
+    </string-array>
+
+    <string-array name="option_array_maintenanceStrategy_key">
+        <item>CONDITION_BASED</item>
+        <item>PREVENTIVE</item>
+        <item>OPERATIVE</item>
+    </string-array>
+
+    <string-array name="option_array_maintenanceStrategy_value">
+        <item>CONDITION_BASED</item>
+        <item>PREVENTIVE</item>
+        <item>OPERATIVE</item>
+    </string-array>
+
+</resources>

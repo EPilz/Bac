@@ -30,3 +30,9 @@ BacArbeit/thesis.aux
 Apps/Spring/.idea/
 *.iml
 Apps/Jersy/.idea/
+*.apk
+Apps/AndroidAnnotations/.idea/
+Apps/AndroidAnnotations/gradle/
+Apps/AndroidAnnotations/gradlew
+Apps/AndroidAnnotations/gradlew.bat
+Apps/AndroidAnnotations/app/proguard-rules.pro
