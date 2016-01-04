@@ -105,3 +105,60 @@ public static <S> S createServiceWithAuthToken(Class<S> serviceClass, final Auth
 \end{lstlisting}
 
 
+%=======================================================================
+\section{Spring for Android}
+%=======================================================================
+Spring gliedert sich in zahlreiche Projekte, mit dem Ziel Java Entwicklung zu vereinfachen. Die Idee zum Spring Framework hatte Rod Johnson im Jahr 2003. An den zahlreichen Open Source Projekten von Spring  beteiligen sich weltweit eine große Anzahl von Entwicklern \cite{springITWissen}. Spring for Android ist ein Projekt von Spring, dass die Entwicklung von Andorid-Apps vereinfachen soll. Es stellt dabei ausgewählte Komponenten von Spring, gebündelt für Android zur Verfügung \cite{springForAndroid:website}. Das sind im speziellen 
+
+\begin{itemize}
+	\item ein Rest Client (RestTemplate) und
+	\item Authentifikation Unterstützung für Security APIs (OAuth).
+\end{itemize}
+
+Spring for Android unterstützt dabei nicht Dependency Injection, eine der Kernfunktionen des Core Spring Frameworks. Es ist daher nicht möglich Inversion of Control auf Android Plattformen zu verwenden \cite{springForAndroid:dahanne}.
+\\\\
+Grundbaustein des Frameworks ist die Klasse \texttt{RestTemplate}, welche Teil des im Jahr 2009 erschienen Frameworks "Spring for MVC" ist. Diese Klasse ermögliche Java-Entwicklern eine High-Level-Abstraktion von untergeordneten Java-APIs, wie HTTP Clients. \texttt{RestTemplate} for Android unterstützt dabei auch die gzip Komprimierung und die Übertragung von JSON und XML Daten, indem POJO Objekte automatisiert umgewandelt werden \cite{springForAndroid:dahanne}.
+
+\subsection{Funktionsweise}
+Um Spring for Android verwenden zu können, muss folgende Abhängigkeit zum Projekt hinzugefügt werden:
+
+\begin{lstlisting}[language=java, caption={app\textbackslash build.gradle},label=dependenciesSpring for Android]
+dependencies {
+	compile 'org.springframework.android:spring-android-rest-template:2.0.0.M1'
+}
+\end{lstlisting}
+
+Mithilfe der Klasse \texttt{RestTemplate} werden HTTP Anfragen zusammengebaut, um mit der Server REST-Schnittstelle kommunizieren zu können.
+
+\begin{lstlisting}[language=java, caption={Anfrage um alle Kraftwerke zu erhalten},label={lst:getAllPowerPlants}, escapechar=|]
+public static List<PowerPlant> getPowerPlants() {
+  RestTemplate restTemplate = new RestTemplate(new BufferingClientHttpRequestFactory(new SimpleClientHttpRequestFactory()));
+  restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+ 
+ URI url = UriComponentsBuilder.fromUriString(ServiceGenerator.BASE_URL)
+ .path("/powerplants").build().toUri();
+ 
+ HttpHeaders headers = new HttpHeaders();
+ headers.set("X-Auth-Token", UtilitiesManager.getInstance().getAuthToken().getToken());
+ headers.setContentType(MediaType.APPLICATION_JSON);
+ 
+ HttpEntity entity = new HttpEntity(headers);
+ 
+ HttpEntity<PowerPlant[]> response = restTemplate.exchange(url, HttpMethod.GET, entity, PowerPlant[].class);
+ 
+ return Arrays.asList(response.getBody());
+}
+
+\end{lstlisting}
+
+Die Klasse \texttt{RestTemplate} ist dabei das Kernstück für den clientseitigen Zugriff auf einen RESTful Service. Das Verhalten kann durch Callback Methoden und durch konfigurieren des \texttt{HttpMessageConverter} angepasst werden. Der \texttt{HttpMessageConverter} wird dabei verwendet um einen HTTP Request Body zu erstellen oder den Response in Java Objekte zu konvertieren. Die Klasse \texttt{MappingJackson2HttpMessageConverter} ist ein Message Converter mit dem JSON Daten verarbeitet werden können.
+
+\texttt{RestTemplate} stellt verschiedene Methoden zur Verfügung, um die zugrundeliegenden HTTP Methoden verwenden zu können. Diese sind unter anderem \texttt{DELETE}, \texttt{GET}, \texttt{HEAD}, \texttt{OPTIONS}, \texttt{POST} and \texttt{PUT} \cite{springDokuRestTemplate}.c
+
+
+%=======================================================================
+\section{Jersey}
+%=======================================================================
+In Java gibt es mit JAX-RS einen Standard zum Implementieren von REST-basierten Webservices. Dieser wurde in der JSR-311 "JAX-RS: The Java API for RESTful Web Services" \cite{jsr311} genauer spezifiziert und ist deshalb ein offizieller Teil von Java. Das Jersey Framework ist dabei eine robuste Open-Source Referenz Implementierung der Spezifikation \cite{restfulWS:Kubert}.
+
+
