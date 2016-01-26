@@ -16,12 +16,12 @@ Android ist ein Betriebssystems, welches primär für Smartphones und Tablets ko
 	\vspace{2ex}
 \end{minipage}
 
-Durch die quelloffene Struktur des Betriebssystems ist Android bei vielen Konsumenten und Entwicklern sehr beliebt, wodurch Unternehmen ihre mobilen Applikationen auf dieses Betriebssystem ausrichten. Gemäß der Vorhersage von IDC, wird Android zwar eine gewisse Prozentzahl an das Windows Phone Betriebssystem verlieren, aber weiterhin der Marktführer bleiben \cite{statsticMobileOS}.
+Durch die quelloffene Struktur des Betriebssystems ist Android bei vielen Konsumenten und Entwicklern sehr beliebt, wodurch viele Unternehmen ihre mobilen Applikationen auf dieses Betriebssystem ausrichten. Gemäß einer Vorhersage von IDC, wird Android zwar eine gewisse Prozentzahl an das Windows Phone Betriebssystem verlieren, aber weiterhin der Marktführer bleiben \cite{statsticMobileOS}. Auf Grund dessen wurde die Evaluierung der REST Frameworks auf Android ausgerichtet, um auch in den folgenden Jahren einen hohen Abnehmerkreis erreichen zu können.
 
 %=======================================================================
 \section{Architektur}
 %=======================================================================
-Das Android Betriebssystem ist ein Stack von Software Komponenten, welche typischerweise in vier Bereiche gegliedert werden (vgl. \ref{figure:androidArchitekture}). Diese Bereiche sind der Linux Kernel, die Native Bibliotheken, die Laufzeitumgebung, das Application-Framework und die Applikationen \cite{androidTutorialOS}. \\
+Das Android Betriebssystem ist ein Stack von Software Komponenten, welche typischerweise in vier Bereiche gegliedert werden (vgl. \ref{figure:androidArchitekture}). Diese Bereiche sind der Linux Kernel, die Native Bibliotheken, die Laufzeitumgebung, das Application-Framework und die Applikationen selbst \cite{androidTutorialOS}. \\
 
 \begin{minipage}{\textwidth} 
 	\centering	
@@ -44,38 +44,20 @@ Beschreibung der Software Komponenten der Android Architektur \cite{overviewAndr
 	Durch die Java Kernbibliotheken in der Laufzeitumgebung können Software Entwickler Android Applikationen mithilfe der Programmiersprache Java entwickeln.   
 	\item \textbf{Linux Kernel}\\
 	Der Linux Kernel stellt die unterste Schicht der Android Architektur dar, welcher leicht von Google abgeändert wurde. Der Kernel ist dabei die Schnittstelle zur Geräte Hardware (Kamera, Display etc.) und ist gleichzeitig für die Speicher- und Prozessverwaltung verantwortlich.
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 \end{itemize}
+	
+%=======================================================================
+\section{Cross Compiling}
+%=======================================================================	
+Um eine Applikation auf Android ausführen zu können, muss eine .apk-Datei erstellt werden. Dazu wird als erstes eine .java-Datei vom Entwickler erstellt, welche den Quellcode der Applikation enthält. Danach wird mit einem Java-Compiler der Bytecode in Form von .class-Dateien erstellt. Dieser Bytecode wird mit dem dx-Tool aus dem Android SDK in eine .dex-Datei (Dalvik Executable) umgewandelt. Den Bytecode welche die Dalvik VM ausführt ist daher kein Java-Bytecode mehr, sondern Dalvik-Bytecode. Dieser Vorgang wird auch als Cross Compiling bezeichnet. Des weiteren werden mehrere .class-Dateien in eine .dex-Datei zusammengefasst um Speicherplatz zu sparen. Die .dex-Datein werden zusammen mit einem Manifest in eine .apk-Datei verpackt. Diese .apk-Datei wird dann auf das Smartphone übertragen und installiert, wodurch eine App ausgeführt werden kann \cite{unterschied:dirscherl}.	
+
+%=======================================================================
+\section{Android und Java}
+%=======================================================================	
+Die meisten Android Applikationen werden in Java geschrieben und haben als Grundlage die Java 6 Standard Edition (SE). Einige Java 7 Funktionalitäten werden ab der Android Versionen 4.4 (KitKat) unterstützt, davor muss darauf geachtet werden, dass keine spezifischen Funktionen von Java 7 verwendet werden \cite{android:burnette}. Dabei unterstützt die Android Java API einen Großteil der packages welche in der Java Standard Edition (SE) Bibliothek vorhanden sind. Einige packages wurden aber weggelassen, da sie auf einer mobilen Plattform keinen Sinn machen \cite{implemenationSDK}, wie etwa das Drucken (javax.print). Jedoch wurden zusätzlich einige Drittanbieter Bibliotheken hinzugefügt, um Entwicklern die Arbeit zu erleichtern, beispielsweise die Apache HttpComponents Bibliothek (org.apache.commons.httpclient) \cite{android:libs}. 
+\\\\	
+Dadurch das Android nicht alle Java SE Funktionen der neuesten Version unterstützt, musste bei der Auswahl der Frameworks darauf geachtet werden, dass sie Java 6 kompatibel sind und keine weggelassenen packages verwenden.	
+
+	
+	
+	
