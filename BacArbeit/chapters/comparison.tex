@@ -1,11 +1,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{Vergleich}
+\chapter{Frameworks}
 \label{sec:comparison}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %=======================================================================
 \section{Retrofit}
 %=======================================================================
+
+\subsection{Allgemein}
 Retrofit ist ein typsicherer HTTP Client für Android und Java, welcher von Square Open Source entwickelt wurde \cite{retrofit}. Das Framework baut auf OkHttp auf, welches die Kommunikation auf der Netzwerkebene übernimmt \cite{okhttp}. Retrofit sagt über sich selbst:
 
 \begin{center}
@@ -108,16 +110,18 @@ public static <S> S createServiceWithAuthToken(Class<S> serviceClass, final Auth
 %=======================================================================
 \section{Spring for Android}
 %=======================================================================
-Spring gliedert sich in zahlreiche Projekte, mit dem Ziel Java Entwicklung zu vereinfachen. Die Idee zum Spring Framework hatte Rod Johnson im Jahr 2003. An den zahlreichen Open Source Projekten von Spring  beteiligen sich weltweit eine große Anzahl von Entwicklern \cite{springITWissen}. Spring for Android ist ein Projekt von Spring, dass die Entwicklung von Andorid-Apps vereinfachen soll. Es stellt dabei ausgewählte Komponenten von Spring, gebündelt für Android zur Verfügung \cite{springForAndroid:website}. Das sind im speziellen 
+
+\subsection{Allgemein}
+Spring gliedert sich in zahlreiche Projekte, mit dem Ziel Java Entwicklung zu vereinfachen. Die Idee zum Spring Framework hatte Rod Johnson im Jahr 2003. An den zahlreichen Open Source Projekten von Spring  beteiligen sich weltweit eine große Anzahl von Entwicklern \cite{springITWissen}. Spring for Android ist ein Projekt von Spring, dass die Entwicklung von Andorid-Apps vereinfachen soll. Es stellt dabei ausgewählte Komponenten von Spring, gebündelt für Android zur Verfügung \cite{springForAndroid:website}. Dies sind im speziellen 
 
 \begin{itemize}
 	\item ein Rest Client (RestTemplate) und
 	\item Authentifikation Unterstützung für Security APIs (OAuth).
 \end{itemize}
 
-Spring for Android unterstützt dabei nicht Dependency Injection, eine der Kernfunktionen des Core Spring Frameworks. Es ist daher nicht möglich Inversion of Control auf Android Plattformen zu verwenden \cite{springForAndroid:dahanne}.
+Spring for Android unterstützt dabei nicht, Dependency Injection, eine der Kernfunktionen des Core Spring Frameworks. Es ist daher nicht möglich Inversion of Control auf Android Plattformen zu verwenden \cite{springForAndroid:dahanne}.
 \\\\
-Grundbaustein des Frameworks ist die Klasse \texttt{RestTemplate}, welche Teil des im Jahr 2009 erschienen Frameworks "Spring for MVC" ist. Diese Klasse ermögliche Java-Entwicklern eine High-Level-Abstraktion von untergeordneten Java-APIs, wie HTTP Clients. \texttt{RestTemplate} for Android unterstützt dabei auch die gzip Komprimierung und die Übertragung von JSON und XML Daten, indem POJO Objekte automatisiert umgewandelt werden \cite{springForAndroid:dahanne}.
+Grundbaustein des Frameworks ist die Klasse \texttt{RestTemplate}, welche Teil des im Jahr 2009 erschienen Framework \textquotedblleft Spring for MVC\textquotedblright ist. Diese Klasse ermögliche Java-Entwicklern eine High-Level-Abstraktion von untergeordneten Java-APIs, wie HTTP Clients. \texttt{RestTemplate} for Android unterstützt dabei auch die gzip Komprimierung und die Übertragung von JSON und XML Daten, indem POJO Objekte automatisiert umgewandelt werden \cite{springForAndroid:dahanne}.
 
 \subsection{Funktionsweise}
 Um Spring for Android verwenden zu können, muss folgende Abhängigkeit zum Projekt hinzugefügt werden:
@@ -148,17 +152,100 @@ public static List<PowerPlant> getPowerPlants() {
  
  return Arrays.asList(response.getBody());
 }
-
 \end{lstlisting}
 
 Die Klasse \texttt{RestTemplate} ist dabei das Kernstück für den clientseitigen Zugriff auf einen RESTful Service. Das Verhalten kann durch Callback Methoden und durch konfigurieren des \texttt{HttpMessageConverter} angepasst werden. Der \texttt{HttpMessageConverter} wird dabei verwendet um einen HTTP Request Body zu erstellen oder den Response in Java Objekte zu konvertieren. Die Klasse \texttt{MappingJackson2HttpMessageConverter} ist ein Message Converter mit dem JSON Daten verarbeitet werden können.
 
-\texttt{RestTemplate} stellt verschiedene Methoden zur Verfügung, um die zugrundeliegenden HTTP Methoden verwenden zu können. Diese sind unter anderem \texttt{DELETE}, \texttt{GET}, \texttt{HEAD}, \texttt{OPTIONS}, \texttt{POST} and \texttt{PUT} \cite{springDokuRestTemplate}.c
+\texttt{RestTemplate} stellt verschiedene Methoden zur Verfügung, um die zugrundeliegenden HTTP Methoden verwenden zu können. Diese sind unter anderem \texttt{DELETE}, \texttt{GET}, \texttt{HEAD}, \texttt{OPTIONS}, \texttt{POST} and \texttt{PUT} \cite{springDokuRestTemplate}.
 
 
 %=======================================================================
 \section{Jersey}
 %=======================================================================
+
+\subsection{Allgemein}
 In Java gibt es mit JAX-RS einen Standard zum Implementieren von REST-basierten Webservices. Dieser wurde in der JSR-311 "JAX-RS: The Java API for RESTful Web Services" \cite{jsr311} genauer spezifiziert und ist deshalb ein offizieller Teil von Java. Das Jersey Framework ist dabei eine robuste Open-Source Referenz Implementierung der Spezifikation \cite{restfulWS:Kubert}.
+\\\\
+Die JAX-RS-Client-API Implementierung von Jersey kann mit eine beliebige Web-Service, der auf das HTTP-Protokoll aufsetzt, kommunizieren. Der serverseitige Endpoint muss nicht unbedingt mit JAX-RS implementiert sein.
+\\\\
+Den Grundbaustein der Jersey-Client Implementierung bildet die Klasse \texttt{ClientBuilder}. Diese wird dazu verwendet neue \texttt{Client}-Instanzen anzulegen, über welche Requests zum Server versendet werden. Mithilfe der \texttt{ClientBuilder}-Klasse können auch zusätzliche Eigenschaften für den \texttt{Client} definiert werden, wie zum Beispiel die SSL Transport Konfiguration. Des weiteren kann ein \texttt{Client} mithilfe der \texttt{ClientConfig}-Klasse speziell konfiguriert werden, diese Konfiguration wird bei der Erstellung des \texttt{Client} einer Factory Methode übergeben. Mithilfe der \texttt{ClientConfig}-Klasse können Provider registriert oder Filter hinzugefügt werden. Ein oft verwendeter Filter ist zum Beispiel der \texttt{LoggingFilter}. Dieser ist ein Protokollierungsfilter, der die Kommunikation zwischen Server und Client aufzeichnet und dessen Aufzeichnung später für Debugging Zwecke genutzt werden kann \cite{jersey:doku}. 
+\\\\
+Nachdem eine \texttt{Client}-Instanz erfolgreich erstellt wurde, kann mit dieser Instanz ein \texttt{WebTarget} Objekt erzeugt werden, welches den Endpoint zum Server spezifiziert. Um nun erfolgreich einen HTTP Request abzusetzen, muss ein \texttt{Invocation.Builder} Objekt erzeugt werden. Dieses Objekt wird dazu genutzt um die Anfrage zum Server genauer zu konfigurieren und abzusenden. Es gibt sowohl Methoden um den Media Type des Request und Response anzugeben, die HTTP Methode zu definieren und den HTTP Header genauer zu spezifizieren \cite{jersey:doku}.
+\\\\
+Die Client API von Jersey unterstützt alle gängigen HTTP Methoden, welche \texttt{GET}, \texttt{POST}, \texttt{PUT}, \texttt{DELETE}, \texttt{HEAD} und \texttt{OPTION} sind \cite{invocation:api}.
+
+\subsection{Workaround für Android}
+Jersey kann erst ab der Version 2.16 auf Android verwendet werden. Davor war es nicht möglich Jersey auf Android auszuführen, aufgrund der Abhängigkeit des Client Core Moduls zum package \texttt{javax.xml.stream}, welches in der Android Java API nicht vorkommt. In der neuen Jersey Version wurden alle JAXB-B Provider Abhängigkeiten in ein eigenes Modul ausgelagert \cite{jerseyAndroid:podlesak}. Fügt man nun die Abhängigkeit zu diesem Modul in das Projekt ein, funktioniert die grundlegende Kommunikation zwischen einem Android Jersey Client und den REST Server. 
+
+\begin{lstlisting}[language=java, caption={JAXB-B Dependency in der bulid.grade Datei}]
+compile 'javax.xml.bind:jaxb-api:2.1'
+\end{lstlisting}
+ 
+Dennoch ist es noch immer nicht möglich, den Jersey Client ohne Fehler in einer Android Umgebung zu verwenden. Es werden noch immer Abhängigkeiten zu packages benötigt, die in der Android-Umgebung nicht verfügbar sind. Mithilfe der HK2 API ist es möglich Komponenten ohne Vorbereitung aus dem HK2 Service Locator zu entfernen. Der folgende Workaround hilft die geworfenen Fehler durch fehlenden Abhängigkeiten zu unterdrücken und dennoch alle Funktionen des Jersey Clients in der Android Umgebung zu unterstützen \cite{jerseyAndroid2:podlesak}.
+
+\begin{lstlisting}[language=java, caption={Workaround Jersey Client auf Android},label={lst:jerseyAndroid }, escapechar=|]
+public static class AndroidFriendlyFeature implements Feature {
+	
+	@Override
+	public boolean configure(FeatureContext context) {
+		context.register(new AbstractBinder() {
+		
+			@Override
+			protected void configure() {
+				addUnbindFilter(new Filter() {
+				
+					@Override
+					public boolean matches(Descriptor d) {
+					  String implClass = d.getImplementation();
+					  return implClass.startsWith(
+						"org.glassfish.jersey.message.internal.DataSource")
+						|| implClass.startsWith(
+					   "org.glassfish.jersey.message.internal.RenderedImage");
+					}
+				});
+			}
+		});
+		return true;
+	}
+}
+\end{lstlisting}
+
+Das Feature für den Workaround muss später noch bei der \texttt{Client}-Instanz registriert werden.
+
+\begin{lstlisting}[language=java, caption={Feature registrieren}]
+client = ClientBuilder.newClient().
+							register(AndroidFriendlyFeature.class);
+\end{lstlisting}
+
+
+\subsection{Funktionsweise}
+Hat man alle erforderlichen Abhängigkeiten zum Projekt hinzugefügt, kann durch folgenden Implementierung ein einfacher \texttt{GET} Request realisiert werden, der ein \texttt{PowerPlant} Objekt zurückgibt. Der Media Type wird mithilfe der \texttt{accept}-Methode spezifiziert, die Art der HTTP Request Methode wird durch \texttt{get(PowerPlant.class)} angegeben. Dabei wird durch den Parameter in der Methode der Returntyp des Response festgelegt, in diesem Fall wird genau ein Objekt des Typs \texttt{PowerPlant} erwartet. 
+
+\begin{lstlisting}[language=java, caption={GET Request},label={lst:jerseyGET}, escapechar=|]
+
+public static PowerPlant getPowerPlantById(int id) {
+	ClientConfig clientConfig = new ClientConfig().
+					register(JacksonFeature.class);
+	
+	Client client = ClientBuilder.newClient(clientConfig).
+					register(AndroidFriendlyFeature.class);
+	
+	Invocation.Builder builder = client.target(BASE_URL).path("/powerplants/" + id).request(MediaType.APPLICATION_JSON);
+	
+	PowerPlant powerPlant = builder.accept(MediaType.APPLICATION_JSON).get(PowerPlant.class);
+	
+	return powerPlant;
+}
+\end{lstlisting}
+
+Im folgenden Beispiel wird ein \texttt{POST} Request abgesendet, der ein Objekt an den Server im JSON Format übergibt und auch einen Returnwert im JSON Format erwartet. 
+\begin{lstlisting}[language=java, caption={POST Request},label={lst:jerseyPOST}, escapechar=|]
+
+PowerPlant newPowerPlant = builder.
+			accept(MediaType.APPLICATION_JSON).
+			post(Entity.entity(powerPlant, MediaType.APPLICATION_JSON), 
+					PowerPlant.class);
+
+\end{lstlisting}
 
 
