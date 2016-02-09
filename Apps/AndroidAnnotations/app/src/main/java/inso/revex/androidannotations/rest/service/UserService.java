@@ -1,8 +1,10 @@
 package inso.revex.androidannotations.rest.service;
 
 
-import org.androidannotations.annotations.rest.Post;
-import org.androidannotations.annotations.rest.Rest;
+
+import org.androidannotations.rest.spring.annotations.Body;
+import org.androidannotations.rest.spring.annotations.Post;
+import org.androidannotations.rest.spring.annotations.Rest;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 
 import java.net.URI;
@@ -19,6 +21,6 @@ import inso.revex.androidannotations.rest.model.User;
 public interface UserService {
 
     @Post("/account/authentication")
-    public  AuthToken getAuthToken(User user);
+    public  AuthToken getAuthToken(@Body User user);
 
 }

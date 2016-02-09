@@ -15,7 +15,7 @@ import android.widget.EditText;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
-import org.androidannotations.annotations.rest.RestService;
+import org.androidannotations.rest.spring.annotations.RestService;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

@@ -1,17 +1,15 @@
 package inso.revex.androidannotations.rest.service;
 
-import org.androidannotations.annotations.rest.Delete;
-import org.androidannotations.annotations.rest.Get;
-import org.androidannotations.annotations.rest.Post;
-import org.androidannotations.annotations.rest.Put;
-import org.androidannotations.annotations.rest.Rest;
-import org.springframework.http.HttpRequest;
-import org.springframework.http.client.ClientHttpRequestExecution;
-import org.springframework.http.client.ClientHttpRequestInterceptor;
-import org.springframework.http.client.ClientHttpResponse;
+
+import org.androidannotations.rest.spring.annotations.Body;
+import org.androidannotations.rest.spring.annotations.Delete;
+import org.androidannotations.rest.spring.annotations.Get;
+import org.androidannotations.rest.spring.annotations.Path;
+import org.androidannotations.rest.spring.annotations.Post;
+import org.androidannotations.rest.spring.annotations.Put;
+import org.androidannotations.rest.spring.annotations.Rest;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 
-import java.io.IOException;
 import java.util.List;
 
 import inso.revex.androidannotations.rest.model.Component;
@@ -25,34 +23,34 @@ import inso.revex.androidannotations.rest.model.ProductionLine;
 public interface PowerPlantService {
 
     @Get("/powerplants")
-    public List<PowerPlant> getPowerPlants();
+    List<PowerPlant> getPowerPlants();
 
     @Get("/powerplants/{id}")
-    public PowerPlant getPowerPlantById(int id);
+    PowerPlant getPowerPlantById(@Path int id);
 
     @Get("/powerplants/{id}/evaluation")
-    public Evaluation getPowerPlantEvaluation(int id);
+    Evaluation getPowerPlantEvaluation(@Path int id);
 
     @Get("/powerplants/{id}/productionlines")
-    public List<ProductionLine> getProductionLines(int id);
+    List<ProductionLine> getProductionLines(@Path int id);
 
     @Get("/productionlines/{id}/components")
-    public List<Component> getComponentsFromProductionLines(int id);
+    List<Component> getComponentsFromProductionLines(@Path int id);
 
     @Get("/productionlines/{id}/evaluation")
-    public Evaluation getProductionLineEvaluation(int id);
+    Evaluation getProductionLineEvaluation(@Path int id);
 
     @Get("/components/{id}/evaluation")
-    public Evaluation getComponentEvaluation(int id);
+    Evaluation getComponentEvaluation(@Path int id);
 
     @Post("/powerplants")
-    public PowerPlant createPowerPlant(PowerPlant powerPlant);
+    PowerPlant createPowerPlant(@Body PowerPlant powerPlant);
 
     @Delete("/powerplants/{id}")
-    public PowerPlant deletePowerPlantById(int id);
+    PowerPlant deletePowerPlantById(@Path int id);
 
     @Put("/powerplants/{id}")
-    public PowerPlant updatePowerPlant(int id, PowerPlant powerPlant);
+    PowerPlant updatePowerPlant(@Path int id, @Body PowerPlant powerPlant);
 
 }
 

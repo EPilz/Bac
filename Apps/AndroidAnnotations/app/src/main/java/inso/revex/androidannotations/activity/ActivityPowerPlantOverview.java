@@ -3,10 +3,7 @@ package inso.revex.androidannotations.activity;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.view.Gravity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -14,7 +11,7 @@ import android.widget.TextView;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
-import org.androidannotations.annotations.rest.RestService;
+import org.androidannotations.rest.spring.annotations.RestService;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
