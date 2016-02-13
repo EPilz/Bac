@@ -160,6 +160,7 @@
 \RequirePackage{longtable}
 \RequirePackage{multirow}
 \RequirePackage{float}
+\RequirePackage{lscape}
 
 % programming packages
 \RequirePackage{calc}
@@ -172,7 +173,7 @@
 % important packages
 \RequirePackage{styles/INSO}
 \RequirePackage{styles/TUINFDA}
-\RequirePackage[backend=bibtex,style=numeric-comp]{biblatex}
+\RequirePackage[backend=bibtex,style=numeric-comp,sorting=none]{biblatex}
 \RequirePackage[lined,linesnumbered,algochapter]{algorithm2e} % Algorithm-Environment
 \RequirePackage{listings}
 \RequirePackage[hang,bottom,norule]{footmisc}

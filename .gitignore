@@ -36,3 +36,11 @@ Apps/AndroidAnnotations/gradle/
 Apps/AndroidAnnotations/gradlew
 Apps/AndroidAnnotations/gradlew.bat
 Apps/AndroidAnnotations/app/proguard-rules.pro
+*.alg
+*.stackdump
+*.acr
+*.glg
+*.gls
+BacArbeit/thesis.lol
+Literatur/Android.pdf
+Literatur/Instant Spring for Android Starter.pdf
