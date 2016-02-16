@@ -6,6 +6,13 @@ Es folgt nun eine Gegenüberstellung der einzelnen Frameworks, anhand der in Kap
 
 \section{Gegenüberstellung der Frameworks}
 
+\textbf{Entwicklungskultur rund um die Frameworks}\\
+Alle Frameworks werden unter einer Open Source Lizenz zur Verfügung gestellt. Einige Lizenzen beinhalten aber ein Copyleft, was verlangt, dass die entwickelte Software ebenfalls wieder unter der gleichen Lizenz als \acrfull{OSS} zur Verfügung gestellt wird. Die wichtigste Copyleft-Lizenz ist die \acrfull{GPL}. Die GPL bestimmt, dass Software, welche eine Framework unter dieser Lizenz nutzt, wiederum nur unter GPL vertrieben werden darf. Die Apache License ist eine Lizenz ohne Copyleft, es ist daher zulässig Frameworks mit dieser Lizenz in proprietärer Software zu verwenden. Die \acrfull{CDDL} beinhaltet ein abgeschwächtes Copyleft, lizenzierter Code kann in einem anderen Framework verwendet werden, solange dieser Code nicht auf Dateiebene gemischt wird. Die CDDL verbietet nicht, entwickelte Software unter einer anderen Lizenz zu veröffentlichen. Für die reinen Nutzer von OSS, welche die Frameworks weder weiterentwickeln noch vertreiben wollen, spielen die Unterschiede der verschiedenen OSS-Lizenzen kaum eine Rolle. Will ein Entwickler jedoch seine Arbeitsergebnisse nicht als OSS veröffentlichen, darf er für seine Arbeiten keine OSS Frameworks verwenden, welche mit einem strengen Copyleft lizenziert sind \cite{openSource}. Die Lizenzen der einzelnen Frameworks könnten aus der Tabelle \ref{tableVergleich} entnommen werden.
+\\\\
+OSS wird durch Communities entwickelt, weiterentwickelt und gewartet. Dabei übernimmt die Community zahlreiche Aufgaben, die bei Closed Software vom Hersteller oder Anbieter wahrgenommen werden. In der Regel gibt es zu jeder OSS genau eine Community. User der Software können dabei registriertes Mitglied der Community sein und aktiv am Projekt als Entwickler oder Tester mitarbeiten. Die Qualität einer Software hängt dabei maßgeblich von der Größe und der Struktur der Community ab. Sind zahlreiche aktive Mitglieder mit unterschiedlichen Rollen am Projekt beteiligt, ist dies eine Grundlage für eine gute Qualität der Software \cite{openSource:community}. Alle untersuchten Frameworks weisen eine aktive und starke Community auf.
+\\\\
+Um die Anwendung neuer Frameworks zu lernen, lesen 78 Prozent der Entwickler die Dokumentation, 55 Prozent verwenden Codebeispiele und 29 Prozent fragen Kollegen \cite{robillard:apis}. Dadurch ist es besonders wichtig auf eine aktuelle Dokumentation des Source-Codes Zugriff zu haben. Wird nur eine veraltete Dokumentation zur Verfügung gestellt, kann es passieren das die entwickelte Software Sicherheitslücken hat oder mehr Zeit für eine korrekte Implementierung benötigt wird \cite{lethbridge:documentation}. Für alle Frameworks ist eine aktuelle Dokumentation vorhanden. Die Dokumentation von Retrofit deckt nur die grundlegend Funktionsweise ab und ist im Vergleich zu den anderen schwächer, da diese umfangreicher und genauer sind. Es konnten auch Codebeispiele für alle Frameworks gefunden werden, diese sind gut erklärt und ermöglichen es eine lauffähige Anwendung zu implementieren. Problematisch war es allerdings die gefunden Jersey Codebeispiele unter Android zu starten, da keines dieser speziell für Android entwickelt wurde. Es musste zuerst ein Workaround (siehe Kapitel \ref{workaroundAndroid}) durchgeführt werden, um die Beispiel auf einem Android Gerät starten zu können.
+\\\\
 \textbf{Performance}\\
 Mobile Geräte haben längst Einzug in das Alltagsleben erhalten, viele Nutzer erweitern die Funktionalität der Geräte mit zahlreichen Anwendungen. Jede installierte App auf einen mobilen Endgerät hat Einfluss auf den Energieverbrauch. Je mehr Anwendungen auf eine Endgerät installiert sind und je öfter diese genutzt werden, desto höher ist der Energieverbrauch und die Betriebszeit sinkt dadurch massiv \cite{Wil2012}. Daher ist bei der Entwicklung darauf zu achten, das der Energieverbrauch so gering wie möglich gehalten wird. Auswirkungen auf den Energieverbrauch eines Smartphones haben sowohl der Bildschirm, die \acrfull{CPU}, die Kommunikation über das Mobilfunknetz, als auch das WLAN-Modul. Werden die einzelnen Komponenten so wenig wie möglich beansprucht, ist der Energieverbrauch der Anwendung gering \cite{vetter}. 
 \\\\
@@ -14,7 +21,6 @@ Umso länger und mehr Daten bei einem Request über das Mobilfunknetz oder das W
 Für den Performance Vergleich wurden daher sowohl die CPU-Auslastung, als auch die Dauer für GET- und POST Requests (Dauer der Netzwerkkommunikation) der einzelnen Frameworks gegenübergestellt. Um Vergleichswerte zu ermitteln, wurden jede App einzeln in einem Emulator gestartet und die gleich Abfolge an Funktionsaufrufen durchgeführt. 
 \\\\
 Die Zeitdauer der GET-Requests bei der Abbildung \ref{getRequests} setzt sich aus 11 einzeln abgesetzte GET-Requests zusammen. Diese Requests werden benötigt, um die Details zu einem bestimmten Kraftwerke anzuzeigen. Es werden in der Praxis oft mehrere GET-Request hintereinander abgesetzt, daher wurde die Dauer ermittelt um alle Details zu einem Kraftwerk abzurufen. Es konnte dabei festgestellt werden, dass Retrofit am schnellsten ist, dicht gefolgt von AndroidAnnotations und Jersey am langsamsten ist.
-\newpage
 
 \begin{figure} [ht]
 	\centering
@@ -50,28 +56,34 @@ In der Abbildung \ref{cpuAuslastung} wird die CPU Auslastung der einzelnen Frame
 	\label{cpuAuslastung}
 \end{figure} 
 
-\newpage
 \textbf{Speicherplatz}\\
 
 \begin{landscape}
-	
-\begin{tabular}{p{3.2cm}|p{4.8cm}|p{4.8cm}|p{4.8cm}|p{4.8cm}}
-   & \textbf{Retrofit} & \textbf{Jersey} & \textbf{Spring for Android}  & \textbf{AndroidAnnotations}  \\  \hline
-  \textbf{Lizenz} &
-  Apache License 2.0 & 
-  CDDL und GPL 2.0 & 
-  Apache License 2.0 & 
-  Apache License 2.0 und CDDL \\ \hline
-  \textbf{Community} \\ \hline
-  \textbf{Dokumentation} \\ \hline
-  \multicolumn{5}{c}{\textbf{Performance}} \\ \hline
-  
-  \textbf{Zeit GET Request} & \textasciitilde3s & \textasciitilde12s  & \textasciitilde5s & \textasciitilde3.5s\\ \hline
-  
-  \textbf{Zeit POST Request} & \textasciitilde1s &  \textasciitilde1s & \textasciitilde1.5s & \textasciitilde1s \\ \hline
-  
-  \textbf{CPU Auslastung} & max. \textasciitilde55\%  & max. \textasciitilde87\% & max. \textasciitilde52\% & max. \textasciitilde40\%\\ \hline
-\end{tabular} 
+
+\begin{table}[h]
+    \caption{Gegenüberstellung der Frameworks} 
+	\begin{tabular}{m{3.2cm}|m{4.8cm}|m{4.8cm}|m{4.8cm}|m{4.8cm}}
+	  \centering
+	  \label{tableVergleich}	 
+	   & \textbf{Retrofit} & \textbf{Jersey} & \textbf{Spring for Android}  & \textbf{AndroidAnnotations}  \\  \hline \hline
+	   \multicolumn{5}{c}{\textbf{Allgemein}} \\ \hline \hline
+	  \textbf{Lizenz} &
+	  Apache License Version 2.0 & CDDL Version 1.1 \newline GPL Version 2 & 
+	  Apache License Version 2.0 & 
+	  Apache License 2.0 \newline CDDL \\ \hline
+	  \textbf{aktive Community} & Ja & Ja & Ja & Ja\\ \hline
+	  \textbf{Dokumentation} & Grundlegen Verwendungsweise auf der Homepage erklärt & aktuelle und umfangreiche Dokumentation vorhanden & aktuelle und umfangreiche Dokumentation vorhanden  & aktuelle und umfangreiche Dokumentation vorhanden\\ \hline 
+	  \textbf{Codebeispiele vorhanden} &  Ja  & Ja, aber nur für die clientseite Implementierung - nicht spezielle für die Androidentwicklung & Ja & Ja\\ \hline \hline
+	  \multicolumn{5}{c}{\textbf{Performance}} \\ \hline \hline
+	  
+	  \textbf{Zeit GET Request} & \textasciitilde3s & \textasciitilde12s  & \textasciitilde5s & \textasciitilde3.5s\\ \hline
+	  
+	  \textbf{Zeit POST Request} & \textasciitilde1s &  \textasciitilde1s & \textasciitilde1.5s & \textasciitilde1s \\ \hline
+	  
+	  \textbf{CPU Auslastung} & max. \textasciitilde55\%  & max. \textasciitilde87\% & max. \textasciitilde52\% & max. \textasciitilde40\%\\ \hline
+	\end{tabular} 
+\end{table}
+
 
 Heap Size:
 AA: 6,469 MB	

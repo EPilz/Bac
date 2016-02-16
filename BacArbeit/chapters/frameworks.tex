@@ -222,6 +222,7 @@ Nachdem eine \texttt{Client}-Instanz erfolgreich erstellt wurde, kann mit dieser
 Die Client API von Jersey unterstützt alle gängigen HTTP Methoden, welche \texttt{GET}, \texttt{POST}, \texttt{PUT}, \texttt{DELETE}, \texttt{HEAD} und \texttt{OPTION} sind \cite{invocation:api}.
 
 \subsection{Workaround für Android}
+\label{workaroundAndroid}
 Jersey kann erst ab der Version 2.16 auf Android verwendet werden. Davor war es nicht möglich Jersey auf Android auszuführen, aufgrund der Abhängigkeit des Client Core Moduls zum package \texttt{javax.xml.stream}, welches in der Android Java API nicht vorkommt. In der neuen Jersey Version wurden alle JAXB-B Provider Abhängigkeiten in ein eigenes Modul ausgelagert \cite{jerseyAndroid:podlesak}. Fügt man nun die Abhängigkeit zu diesem Modul in das Projekt ein, funktioniert die grundlegende Kommunikation zwischen einem Android Jersey Client und den REST Server. 
 
 \begin{lstlisting}[language=java]

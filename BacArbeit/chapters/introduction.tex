@@ -47,15 +47,15 @@ Die Qualität der einzelnen Frameworks soll anhand folgender Kriterien vergliche
 \\\\
 Das Hauptaugenmerk der Evaluierung liegt auf der Clientseite, da die entwickelte App eine Client Applikation darstellt. Deswegen wurden spezifische Kriterien der Fachstudie zu einer REST Server Applikation gestrichen. Beispielsweise wurde der gesamte Kriterienblock über Ressourcentypen \cite{ressourcen:rest} weggelassen, da es für die clientseitige Verarbeitung irrelevant ist, welche Ressourcentypen serverseitig implementiert werden können. 
 \\\\
-\textbf{Allgemein:}
+\textbf{Entwicklungskultur rund um die Frameworks:}
 \begin{itemize}
-	\item Existiert eine aktive Community?
-	\item Ist eine Dokumentation des Codes vorhanden? (Schnittstellenbeschreibung, JavaDoc)
 	\item Unter welcher Lizenz steht das Projekt zur Verfügung?
+	\item Existiert eine aktive Community?
+	\item Ist eine Dokumentation des Codes vorhanden? (Schnittstellenbeschreibung, JavaDoc)	
 	\item Gibt es Hilfestellung für Entwicklung? (Tutorial, Codebeispiele)
 \end{itemize}
 
-\textbf{Implementierung mit REST-Framework:}
+\textbf{Implementierung der REST-Frameworks:}
 \begin{itemize}
 	\item Wie lange wird benötigt um das Framework einzubinden?  (Zeitdauer)
 	\item Welche \acrfull{HTTP}-Verben werden unterstützt? (GET, POST, PUT, DELETE etc.)
@@ -65,12 +65,18 @@ Das Hauptaugenmerk der Evaluierung liegt auf der Clientseite, da die entwickelte
 	\item Wird das HATEOAS Konzept unterstützt?
 \end{itemize}
 
-\textbf{Erweiterte Technische Fähigkeiten}
+\textbf{Performance und benötige Speicherplatz der Frameworks:}
 \begin{itemize}
-	\item Definiert das Framework eine eigene IDL\footnote{Schnittstellenbeschreibungssprachen}?
+	\item Wie stark wird die CPU belastet?  
+	\item Wie schnell erfolgt die Abwicklung einzelner Requests (GET, POST)?
+	\item Wie viel interner Speicher wird benötigt?
+\end{itemize}
+
+\textbf{Erweiterte Technische Fähigkeiten der Frameworks:}
+\begin{itemize}
 	\item Wie wird der Bereich Sicherheit gehandhabt?  (Authentifizierung, Verschlüsselung)
 	\item Werden andere Protokolle außer HTTP noch unterstützt?
 	\item Gibt es eine Möglichkeit für asynchronen Nachrichtenaustausch?
 	\item Wird transaktionales Verhalten vom Framework unterstützt? (ACID-Eigenschaften)
+	\item Bietet das Framework zusätzliche Dienst fernab der REST-Kommunikation an?
 \end{itemize}
-
