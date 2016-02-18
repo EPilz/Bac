@@ -58,43 +58,62 @@ In der Abbildung \ref{cpuAuslastung} wird die CPU Auslastung der einzelnen Frame
 
 \textbf{Speicherplatz}\\
 
-\begin{landscape}
 
-\begin{table}[h]
-    \caption{Gegenüberstellung der Frameworks} 
-	\begin{tabular}{m{3.2cm}|m{4.8cm}|m{4.8cm}|m{4.8cm}|m{4.8cm}}
-	  \centering
+\begin{landscape}
+% m{3.5cm}|m{4.5cm}|m{4.5cm}|m{4.5cm}|m{4.5cm}
+\renewcommand{\arraystretch}{1.3}
+\begin{longtable}{ m{3.5cm}|m{4.5cm}|m{4.5cm}|m{4.5cm}|m{4.5cm}}
+	%	>{\centering \arraybackslash}m{3.5cm}|
+	%	>{\centering \arraybackslash}m{4.5cm}|
+	%	>{\centering \arraybackslash}m{4.5cm}|
+	%	>{\centering \arraybackslash}m{4.5cm}|
+	%	>{\centering \arraybackslash}m{4.5cm}}
+
+      \caption{Gegenüberstellung der Frameworks} \\
 	  \label{tableVergleich}	 
-	   & \textbf{Retrofit} & \textbf{Jersey} & \textbf{Spring for Android}  & \textbf{AndroidAnnotations}  \\  \hline \hline
-	   \multicolumn{5}{c}{\textbf{Allgemein}} \\ \hline \hline
+	  
+	    & \textbf{Retrofit} & \textbf{Jersey} & \textbf{Spring for Android}  & \textbf{AndroidAnnotations}  \\  \hhline{=====}
+	   \multicolumn{5}{c}{\textbf{Entwicklungskultur}} \\ \hhline{=====}
 	  \textbf{Lizenz} &
 	  Apache License Version 2.0 & CDDL Version 1.1 \newline GPL Version 2 & 
 	  Apache License Version 2.0 & 
 	  Apache License 2.0 \newline CDDL \\ \hline
 	  \textbf{aktive Community} & Ja & Ja & Ja & Ja\\ \hline
-	  \textbf{Dokumentation} & Grundlegen Verwendungsweise auf der Homepage erklärt & aktuelle und umfangreiche Dokumentation vorhanden & aktuelle und umfangreiche Dokumentation vorhanden  & aktuelle und umfangreiche Dokumentation vorhanden\\ \hline 
-	  \textbf{Codebeispiele vorhanden} &  Ja  & Ja, aber nur für die clientseite Implementierung - nicht spezielle für die Androidentwicklung & Ja & Ja\\ \hline \hline
-	  \multicolumn{5}{c}{\textbf{Performance}} \\ \hline \hline
+	  \textbf{Dokumentation} & grundlegend & gut & gut  & gut \\ \hline 
+		  \textbf{Codebeispiele} &  Ja  & nicht speziell für Android & Ja & Ja\\ \hhline{=====}
 	  
-	  \textbf{Zeit GET Request} & \textasciitilde3s & \textasciitilde12s  & \textasciitilde5s & \textasciitilde3.5s\\ \hline
+	  \multicolumn{5}{c}{\textbf{Implementierung}} \\ \hhline{=====}
+	  \textbf{Einbindung} & leicht & problematisch & leicht & leicht \\ \hline
+	  \textbf{HTTP-Verben} & GET, POST, PUT, DELETE, HEAD & GET, POST, PUT, DELETE, HEAD, OPTIONS  & GET, POST, PUT, DELETE, HEAD, OPTIONS & GET, POST, PUT, DELETE, HEAD, OPTIONS \\ \hline
+	  \textbf{HTTP-Header} & erweiterbar & erweiterbar & erweiterbar & erweiterbar \\ \hline
+	  \textbf{unterstützte\newline Medientypen} & alle möglichen, wenn Konverter für Typ vorhanden ist & alle möglichen, wenn Konverter für Typ vorhanden ist & alle möglichen, wenn Konverter für Typ vorhanden ist & alle möglichen, wenn Konverter für Typ vorhanden ist \\ \hline
+	  \textbf{URL veränderbar} & Ja & Ja & Ja & Ja  \\ \hline
+	  \textbf{HATEOAS Konzept} & Nein & Ja & mithilfe von Spring HATEOAS & ohne Annotations und mithilfe von Spring HATEOAS \\ \hline 
+	  \textbf{Error-Handling} \\ \hhline{=====}
+	  \multicolumn{5}{c}{\textbf{Performance und Speicherplatz}} \\ \hhline{=====}
 	  
-	  \textbf{Zeit POST Request} & \textasciitilde1s &  \textasciitilde1s & \textasciitilde1.5s & \textasciitilde1s \\ \hline
+	  \textbf{GET Request} & \textasciitilde3s & \textasciitilde12s  & \textasciitilde5s & \textasciitilde3.5s\\ \hline
+	  
+	  \textbf{POST Request} & \textasciitilde1s &  \textasciitilde1s & \textasciitilde1.5s & \textasciitilde1s \\ \hline
 	  
 	  \textbf{CPU Auslastung} & max. \textasciitilde55\%  & max. \textasciitilde87\% & max. \textasciitilde52\% & max. \textasciitilde40\%\\ \hline
-	\end{tabular} 
-\end{table}
+	  \textbf{belegter RAM} & max. 9.11 MB & max. 11.83 MB & max. 8.93 MB & max 7.02 MB \\ \hline
+	  \textbf{.apk-Größe} & 1.70 MB & 2.58 MB & 1.69 MB & 1.44 MB \\ \hhline{=====}
 
-
-Heap Size:
-AA: 6,469 MB	
-Jersey: 10.913 MB
-Spring: 8,546 MB
-Retrofit: 6,727 MB
-
+	   \multicolumn{5}{c}{\textbf{Erweiterte Technische Fähigkeiten}} \\ \hhline{=====}
+	   \textbf{Sicherheit} & \\ \hline
+	   \textbf{andere Protokolle außer HTTP} & \\ \hline
+	   \textbf{asynchroner Nachrichtenaustausch} & Ja & Ja & Ja & Ja \\ \hline
+	   \textbf{ACID-Eigenschaften} & Ja & Ja & Ja & Ja \\ \hline
+	   \textbf{Server Implementierung} & Nein & Ja &  Spring Framework & Nein (eventuell Spring Framework) \\ \hline
+	   \textbf{zusätzliche Dienste} & Nein & Nein & Nein & Ja \\ \hline
+ 
+\end{longtable}
 \end{landscape}
 
 \section{Persönliches Fazit zu den Frameworks}
-
+Es folgt nun ein kurzer Persönlicher Eindruck zu den Frameworks, wo traten Probleme während der Implementierung auf oder welche Aspekte positiv aufgefallen sind.
+\\\\
 \textbf{Jersey}
 \\\\
 \textbf{Retrofit}
