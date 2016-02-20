@@ -17,7 +17,7 @@ Retrofit ist ein typsicherer HTTP Client für Android und Java, welcher von Squa
 
 Mithilfe von Annotation bei den Interface Methoden wird angegeben wie Request zu verarbeiten sind. Daher muss jede Interface-Methode eine HTTP Annotation besitzen, die angibt welche Request Methode zu verwenden ist \cite{retrofit}. Es stehen dabei fünf built-in HTTP Methoden zur Auswahl \texttt{GET}, \texttt{POST}, \texttt{PUT}, \texttt{DELETE} und \texttt{HEAD}.
 \\\\
-Standardmäßig kann Retrofit nur \texttt{ResponseBody} und \texttt{RequestBody} von OkHttp serialisieren und deserialisieren. Durch das hinzufügen von Konvertern ist es jedoch möglich, weitere Formate wie JSON oder XML zum Übertragen von Daten zu verwenden. Seit der Veröffentlichung von Retrofit in der Version 2, werden auch noch zusätzliche Parser zur Serialisierung und Deserialisierung von JSON-Daten unterstützt. In der Vergangenheit wurde nur die GSON Bibliothek unterstützt, welche daher die häufig verwendetste Bibliothek zum Parsen von JSON-Daten darstellt \cite{consumingRetrofit}. Dadurch wurde die GSON Biliothek auch im Rahmen der Bachelorarbeit zum Übertragen von Daten verwendet.
+Standardmäßig kann Retrofit nur \texttt{ResponseBody} und \texttt{RequestBody} von OkHttp serialisieren und deserialisieren. Durch das hinzufügen von Konvertern ist es jedoch möglich, weitere Formate wie JSON oder XML zum Übertragen von Daten zu verwenden. Seit der Veröffentlichung von Retrofit in der Version 2, werden auch noch zusätzliche Parser zur Serialisierung und Deserialisierung von JSON-Daten unterstützt. In der Vergangenheit wurde nur die GSON Bibliothek unterstützt, welche daher die häufig verwendetste Bibliothek zum Parsen von JSON-Daten darstellt \cite{consumingRetrofit}. Im Rahmen der Bachelorarbeit wird aber die Jackson Bibliothek zum Übertragen von Daten verwendet, da diese am schnellsten Daten serialisiert und deserialisiert  \cite{json:evaluation}.
 \\\\
 Die Serverschnittstellen werden durch spezielle Annotationen bei den Interface Methoden spezifiziert, die Details über Parameter und die verwendete Request Methode beinhalten. Es stehen unter anderem folgende Annotationen zur Verfügung:
 
@@ -36,9 +36,10 @@ Um Retrofit verwenden zu können, müssen folgende Abhängigkeiten zum Projekt h
 \begin{lstlisting}[language=java, label=dependenciesRetrofit, numbers=none, frame=single]
 dependencies {
 	compile 'com.squareup.retrofit:retrofit:2.0.0-beta2'
-	compile 'com.squareup.retrofit:converter-gson:2.0.0-beta2'
-	compile 'com.google.code.gson:gson:2.4'
+	compile 'com.squareup.retrofit:converter-jackson:2.0.0-beta2'
 	compile 'com.squareup.okhttp:okhttp:2.4.0'
+	compile 'com.fasterxml.jackson.core:jackson-core:2.6.0'
+	compile 'com.fasterxml.jackson.core:jackson-annotations:2.6.0'
 }
 \end{lstlisting}
 
@@ -78,7 +79,7 @@ public interface PowerPlantService {
 \end{lstlisting}
 
 \newpage
-Sollen bei einem Request noch zusätzlich Daten in den Header eingefügt oder dieser manipuliert werden, ist dies durch das Interface \texttt{Interceptor} möglich. Dadurch kann zum Beispiel vor jeder Anfrage an den Server, ein Token hinzugefügt werden, welches angibt ob ein User eingeloggt ist.
+Sollen bei einem Request noch zusätzlich Daten in den Header eingefügt oder dieser manipuliert werden, ist dies durch das Interface \texttt{Interceptor} möglich. Dadurch kann zum Beispiel vor jeder Anfrage an den Server, ein Token hinzugefügt werden, welches vom Server zur Authentifizierung verwendet wird.
 
 \begin{lstlisting}[language=java, caption={Hinzufügen des Tokens, für gültigen Login},label={lst:addToken}, escapechar=|, frame=single]
 public static <S> S createServiceWithAuthToken(Class<S> serviceClass, final AuthToken token) {
@@ -122,7 +123,7 @@ Spring gliedert sich in zahlreiche Projekte, mit dem Ziel Java Entwicklung zu ve
 
 Spring for Android unterstützt dabei keine Dependency Injection, eine der Kernfunktionen des Core Spring Frameworks. Es ist daher nicht möglich eine lose Koppelung zwischen einzelnen Modulen zu haben \cite{springForAndroid:dahanne}.
 \\\\
-Grundbaustein des Frameworks ist die Klasse \texttt{RestTemplate}, welche Teil des im Jahr 2009 erschienen Framework \textquotedblleft Spring for MVC\textquotedblright ist. Diese Klasse ermöglicht Java-Entwicklern eine High-Level-Abstraktion von untergeordneten Java-APIs, wie des HTTP Clients. \texttt{RestTemplate} for Android unterstützt dabei auch die gzip Komprimierung und die Übertragung von \acrfull{JSON} und \acrfull{XML} Daten, indem \acrfull{POJO} Objekte automatisiert konvertiert werden \cite{springForAndroid:dahanne}.
+Grundbaustein des Frameworks ist die Klasse \texttt{RestTemplate}, welche Teil des im Jahr 2009 erschienen Framework \textquotedblleft Spring for MVC\textquotedblright ist. Diese Klasse ermöglicht Java-Entwicklern eine High-Level-Abstraktion von untergeordneten Java-APIs, wie des HTTP Clients. \texttt{RestTemplate} for Android unterstützt dabei auch die gzip Komprimierung und die Übertragung von \acrfull{JSON} und \acrfull{XML} Daten, indem \acrfull{POJO} Objekte  – also einfache Java-Objekte – automatisiert konvertiert werden \cite{springForAndroid:dahanne}.
 \\\\
 Die Klasse \texttt{RestTemplate} ist für den clientseitigen Zugriff auf einen RESTful Service zuständig. Das Verhalten kann durch Callback Methoden und durch konfigurieren des \texttt{HttpMessage- Converter} angepasst werden. Der \texttt{HttpMessageConverter} wird dabei verwendet um einen HTTP Request Body zu erstellen oder den Response in Java Objekte zu konvertieren. Die Klasse \texttt{MappingJackson2HttpMessageConverter} ist dabei ein Message Converter mit dem JSON Daten verarbeitet werden können.
 
@@ -134,9 +135,11 @@ Um Spring for Android verwenden zu können, muss folgende Abhängigkeit in die \
 \begin{lstlisting}[language=java, numbers=none, frame=single, stringstyle=\color{mymauve}\scriptsize]
 dependencies {
 	compile 'org.springframework.android:spring-android-rest-template:2.0.0.M1'
+	compile 'com.fasterxml.jackson.core:jackson-core:2.6.0'
+	compile 'com.fasterxml.jackson.core:jackson-annotations:2.6.0'
 }
 \end{lstlisting}
-
+\newpage
 Wie bereits oben beschrieben wird die Klasse \texttt{RestTemplate} dazu verwendet um HTTP Anfragen zusammenzubauen, um mit der Server REST-Schnittstelle kommunizieren zu können. Es folgt ein kurzes Beispiel eines GET Requests, um vom Server alle vorhanden Kraftwerke zu erhalten.
 
 \begin{lstlisting}[language=java, caption={GET Request um alle Kraftwerke zu erhalten},label=lst:getAllPowerPlants, frame=single, tabsize=3]
@@ -308,21 +311,8 @@ PowerPlant newPowerPlant = builder.
 \subsection{Allgemein}
 AndroidAnnotations ist ein Projekt das von Pierre-Yves Ricau gestartet wurde. Der Kern des Projektteams besteht aus aktiven und ehemaligen eBusinessInformation Mitarbeitern. Das Unternehmen unterstützt das Open Source Projekt durch seine Mitarbeiter, indem diesen Zeit und Ressourcen zur Verfügung gestellt werden, an AndroidAnnotations zu arbeiten \cite{annotation:sponsors}.
 \\\\
-Das Projekt AndroidAnnotations soll dabei helfen, Codefragemente die sich bei der Android-App Entwicklung wiederholen zu reduzieren. Dadurch verringert sich der zu schreibende und wartende Code, wodurch die Entwicklung beschleunigt und die Wartbarkeit verbessert werden kann. Einer der größten Vorteile des Projektes ist die Unterstützung von Dependency Injection. Durch die Verwendung dieses Entwurfsmusters wird die Kopplung zwischen einzelnen Modulen (Objekte, Klassen) reduziert. Dabei bekommen die Module ihre Abhängigkeiten von einer zentralen Komponente zugewiesen \cite{annotation:spring}.
-
-Die Haupteigenschaften des Projektes sind \cite{annotation:introduction}:
-
-\begin{itemize}
-	\item \textbf{Dependency Injection}\\
-	Injection von Views, System Services oder Ressourcen.
-	\item \textbf{einfaches Threading-Modell}\\
-	Annotation über Methoden, die angeben ob sie vom UI-Thread oder von einem Hintergrundthread ausgeführen werden sollen.
-	\item \textbf{Event Binding}\\
-	Annotation über Methoden um Events von Views zu behandeln, es werden keine anonymen Listener Klassen mehr benötigt.
-	\item \textbf{Rest Client}\\
-	Durch erstellen eines Client Interfaces, wird die zugrundeliegende Implementierung generiert.
-\end{itemize}
-
+Das Projekt AndroidAnnotations soll dabei helfen, Codefragemente die sich bei der Android-App Entwicklung wiederholen zu reduzieren, indem Annotationen verwendet werden. Dadurch verringert sich der zu schreibende und wartende Code, wodurch die Entwicklung beschleunigt und die Wartbarkeit verbessert werden kann \cite{annotation:introduction}. 
+\\\\
 Bei der Kompilierung des Codes werden die verwendeten Annotations aufgelöst, wodurch es zu keiner Laufzeitbeeinträchtigung durch die Verwendung von AndroidAnnotations kommt. Dies geschieht indem eine Unterklasse jeder einzelnen Aktivität erzeugt wird und die Annotations durch die zugrundeliegenden Codefragmente ersetzt werden. Wird beispielsweise eine \texttt{MyActivity} Klasse implementiert, erzeugt AndroidAnnotations die entsprechende \texttt{MyActivity\_} Unterklasse. Ein kleiner Nachteil dieses Ansatzes ist, dass ein Unterstrich hinter den Namen der einzelnen Aktivitäten in der Manifest-Datei anhängt werden muss. Des weiteren muss beim starten einer neuen Aktivität auch darauf geachtet werden, dass die entsprechend generierte Unterklasse verwendet wird \cite{annotation:spring}. 
 \\\\
 Die Rest API von AndroidAnnotations ist dabei ein Wrapper rund um das Spring for Android \texttt{RestTemplate} Modul. Die \texttt{@Rest}-Annotation über einem Interfaces ist dabei der Grundbaustein, welche die Schnittstelle genauer spezifizieren. Die Endpoint URL vom Server wird über den \texttt{rootUrl} Parameter bei der \texttt{@Rest}-Annotation angegeben. Des weiteren muss bei der \texttt{@Rest}-Annotation mindestens ein Message Konverter angegeben werden, welcher dem Spring \texttt{HttpMessageConverters} entspricht, da dieser dem RestTemplate Modul zur Verfügung gestellt wird. Dadurch werden automatisiert Java Objekte serialisiert und deserialisiert. Sind mehrere Konverter definiert, durchläuft Spring alle, bis der MIME-Typ des Requests oder Response verarbeitet werden kann. Es können auch Interceptoren hinzugefügt werden, welche beispielsweise jeden Request protokollieren oder benutzerdefinierte Authentifizierung handhaben \cite{annotation:rest}.
@@ -363,8 +353,7 @@ apt {
 \end{lstlisting}
 
 Das Android-apt Plugin hilft bei der Verarbeitung und richtigen Auflösung der Annotationen. Beispielsweise muss AndroidAnnotations wissen, wo die dazugehörige Manifest-Datei liegt. Dies wird durch die  \texttt{variant} angegeben. Durch die Angabe eines Indexes können auch unterschiedliche Manifest-Dateien für verschiedene Anwendungsfälle spezifiziert werden \cite{android:apt}.
-
-\newpage
+\\\\
 Die beispielhafte Implementierung eines AndroidAnnotation Rest Client kann man aus folgendem Listing \ref{lst:aaService} entnehmen. Durch Annotationen wird sowohl die Serverschnittstelle, also auch die zu verwendenden HTTP Methoden spezifiziert. Zur Konvertierung der übertragenen Daten im JSON Format wird die Klasse \texttt{MappingJackson2HttpMessageConverter} verwendet.
 
 \begin{lstlisting}[language=java, caption={Auszug aus dem PowerPlantService Interface},label={lst:aaService}, escapechar=|, frame=single]
@@ -405,3 +394,19 @@ public class HttpBasicAuthenticatorInterceptor
 	}
 }
 \end{lstlisting}
+
+\subsection{zusätzliche Dienste}
+Einer der größten Vorteile dieses Frameworks ist das zur Verfügung stellen weiterer Dienste. Ein solcher Dienst  ist die Dependency Injection. Durch die Verwendung dieses Entwurfsmusters wird die Kopplung zwischen einzelnen Modulen (Objekte, Klassen) reduziert. Dabei bekommen die Module ihre Abhängigkeiten von einer zentralen Komponente zugewiesen \cite{annotation:spring}.
+
+Die Haupteigenschaften des Projektes sind daher \cite{annotation:introduction}:
+
+\begin{itemize}
+	\item \textbf{Dependency Injection}\\
+	Injection von Views, System Services oder Ressourcen.
+	\item \textbf{einfaches Threading-Modell}\\
+	Annotation über Methoden, die angeben ob sie vom UI-Thread oder von einem Hintergrundthread ausgeführen werden sollen.
+	\item \textbf{Event Binding}\\
+	Annotation über Methoden um Events von Views zu behandeln, es werden keine anonymen Listener Klassen mehr benötigt.
+	\item \textbf{Rest Client}\\
+	Durch erstellen eines Client Interfaces, wird die zugrundeliegende Implementierung generiert.
+\end{itemize}
