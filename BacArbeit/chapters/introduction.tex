@@ -63,7 +63,7 @@ Das Hauptaugenmerk der Evaluierung liegt auf der Clientseite, da die entwickelte
 	\item Welche Medientypen werden unterstützt? (JSON, HTML, XML etc.)
 	\item Kann die URL zum Abfragen von Resourcen dynamisch verändert werden? (z.B. über Parameter steuern)
 	\item Gibt es eine Möglichkeit für asynchronen Nachrichtenaustausch?
-	\item Wird das HATEOAS Konzept unterstützt?
+	\item Wird das \acrfull{HATEOAS}* Konzept unterstützt?
 	\item Wird ein Error-Handling unterstützt?	
 \end{itemize}
 
@@ -77,9 +77,13 @@ Das Hauptaugenmerk der Evaluierung liegt auf der Clientseite, da die entwickelte
 \newpage
 \textbf{Erweiterte Technische Fähigkeiten der Frameworks:}
 \begin{itemize}
-	\item Wie wird der Bereich Sicherheit gehandhabt?  (Authentifizierung)
-	\item Werden andere Protokolle außer HTTP noch unterstützt?	
-	\item Wird transaktionales Verhalten vom Framework unterstützt? (ACID-Eigenschaften)
+	\item Wie wird Sicherheit gehandhabt?  (Authentifizierung)
+	\item Werden andere Protokolle fernab von HTTP unterstützt?	
 	\item Unterstützt das Framework die Entwicklung von Server Applikationen?
 	\item Bietet das Framework zusätzliche Dienst fernab der REST-Kommunikation an?
+	\item Wird transaktionales Verhalten vom Framework unterstützt? (ACID**-Eigenschaften)\\
 \end{itemize}
+
+* Das \textbf{HATEOAS}-Konzept wird in Kapitel \ref{sec:rest} genauer beschrieben.
+\\\\
+** \textbf{ACID} seht für Atomicity, Consistency, Isolation und Durability. Dieses Konzept beschreibt, dass alle Daten die während einer Transaktion verwendet werden, gesperrt sind und sich nicht ändern dürfen, so lange bis die Transaktion Commited wird oder ein Rollback durchgeführt wird. Das Einhalten dieser Eigenschaften ist wichtig, da die Kommunikation zu Servern über zustandslose REST-Schnittstellen abgewickelt wird. Durch die Zustandslosigkeit der Anfragen kann es bei Fehlern schnell zu einer Dateninkonsistenz auf dem Server kommen \cite{braun:Transaktionen}.

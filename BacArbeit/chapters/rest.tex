@@ -10,7 +10,7 @@ Es werden dabei folgende 5 Kernprinzipien unterschieden \cite{restHttp:book}:
 	Durch einen global definierten Namensraum wird sichergestellt, dass Ressourcen weltweit eindeutig identifiziert werden. Im Web heißt dieses Konzept für die Vergabe von IDs, \textit{Uniform Resource Identifier} oder kurz URI. 
 	
 	\item \textbf{Hypermedia}\\
-	Mithilfe dieses Konzeptes ist es mögliche andere Ressourcen zu referenzieren, um beispielsweise an zusätzliche Informationen zu gelangen. Ein weiterer wichtiger Aspekt ist die Möglichkeit die Applikation durch Links zu steuern. Ein Server kann dem Client über Hypermedia-Elemente mitteilen, welche Aktion er als Nächstes auszuführen hat - indem der Client einen Link \textit{folgt}.
+	Mithilfe dieses Konzeptes ist es mögliche andere Ressourcen zu referenzieren, um beispielsweise an zusätzliche Informationen zu gelangen. Ein weiterer wichtiger Aspekt ist die Möglichkeit die Applikation durch Links zu steuern. Ein Server kann dem Client über Hypermedia-Elemente mitteilen, welche Aktion er als Nächstes auszuführen hat - indem der Client einen Link \textit{folgt}. Dies wird auch oft als das HATEOAS-Konzept bezeichnet. 
 	
 	\item \textbf{Standardmethoden}\\
 	Jede Ressource unterstützt den gleichen Satz an Methoden, mit dem diese verarbeitet werden können. Bei HTTP zählen dazu folgende:
@@ -20,8 +20,8 @@ Es werden dabei folgende 5 Kernprinzipien unterschieden \cite{restHttp:book}:
 		\item PUT, für das Aktualisieren einer Ressource
 		\item DELETE, für das Löschen einer Ressource
 		\item HEAD, um Methadaten einer Ressource Abzurufen
+		\item OPTION, um die unterstützten Methoden einer Ressource zu erhalten
 	\end{itemize}
-
 	
 	\item \textbf{Unterschiedliche Repräsentationen}\\
 	HTTP verfolgte einen Ansatz zur Trennung der Verantwortlichkeiten, für Daten und Operationen. Ein Client der ein bestimmtes Dateiformat verarbeiten kann, ist in der Lage jede Ressource mit diesem Format zu verarbeiten, da die Operationen dafür dieselben sind. 
