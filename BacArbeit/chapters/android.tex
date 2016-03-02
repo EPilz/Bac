@@ -41,7 +41,7 @@ Beschreibung der Software Komponenten der Android Architektur \cite{overviewAndr
 	\item \textbf{Native Bibliotheken}\\
 	Die Nativen Bibliotheken stellen zahlreiche Funktionen für die Application-Framework-Schicht zur Verfügung, wie Grafik-Rendering oder Web-Browsing. Alle diese Bibliotheken sind in C oder C++ geschrieben und werden durch Java Interfaces aufgerufen, bei der Entwicklung von Applikationen.
 	\item \textbf{Runtime}\\
-	Die Laufzeitumgebung besteht aus der Dalvik \acrfull{VM} und den Java Kernbibliotheken. Die Dalvik VM ist eine Java Virtual Machine, welche speziell für Android entwickelt und optimiert wurde.  Durch die  Dalvik VM kann jede Applikation in einem eigenen Prozess ausgeführt werden, mit einer eigenen Instanz der Dalvik VM. \\
+	Die Laufzeitumgebung besteht aus der Dalvik \acrfull{VM} und den Java Kernbibliotheken. Die Dalvik VM ist eine Java Virtual Machine, welche speziell für Android entwickelt und optimiert wurde.  Durch die  Dalvik VM kann jede Applikation in einem eigenen Prozess ausgeführt werden, in einer eigenen Instanz der Dalvik VM. \\
 	Durch die Java Kernbibliotheken in der Laufzeitumgebung können Software Entwickler Android Applikationen mithilfe der Programmiersprache Java entwickeln.   
 	\item \textbf{Linux Kernel}\\
 	Der Linux Kernel stellt die unterste Schicht der Android Architektur dar, welcher leicht von Google abgeändert wurde. Der Kernel ist dabei die Schnittstelle zur Geräte Hardware (Kamera, Display etc.) und ist gleichzeitig für die Speicher- und Prozessverwaltung verantwortlich.
@@ -55,7 +55,7 @@ Um eine Applikation auf Android ausführen zu können, muss eine .apk-Datei erst
 %=======================================================================
 \section{Android und Java}
 %=======================================================================	
-Die meisten Android Applikationen werden in Java geschrieben und haben als Grundlage die Java 6 \acrfull{SE}. Einige Java 7 Funktionalitäten werden ab der Android Versionen 4.4 (KitKat) unterstützt, davor muss darauf geachtet werden, dass keine spezifischen Funktionen von Java 7 verwendet werden \cite{android:burnette}. Dabei unterstützt die Android Java \acrfull{API} einen Großteil der packages welche in der Java SE Bibliothek vorhanden sind. Einige packages wurden aber weggelassen, da sie auf einer mobilen Plattform keinen Sinn machen \cite{implemenationSDK}, wie etwa das Drucken (javax.print). Jedoch wurden zusätzlich einige Drittanbieter Bibliotheken hinzugefügt, um Entwicklern die Arbeit zu erleichtern, beispielsweise die Apache HttpComponents Bibliothek (org.apache.commons.httpclient) \cite{android:libs}. 
+Die meisten Android Applikationen werden in Java geschrieben und haben als Grundlage die Java 6 \acrfull{SE}. Einige Java 7 Funktionalitäten werden ab der Android Versionen 4.4 (KitKat) unterstützt, davor muss darauf geachtet werden, dass keine spezifischen Funktionen von Java 7 verwendet werden \cite{android:burnette}. Dabei unterstützt die Android Java \acrfull{API} einen Großteil der packages welche in der Java SE Bibliothek vorhanden sind. Einige packages wurden aber weggelassen, da sie auf einer mobilen Plattform keinen Sinn machen \cite{implemenationSDK}, wie etwa das Drucken (javax.print). Jedoch wurde um den Entwicklern die Arbeit zu erleichtern, zusätzlich einige Drittanbieter Bibliotheken hinzugefügt, beispielsweise die Apache HttpComponents Bibliothek (org.apache.commons.httpclient) \cite{android:libs}. 
 \\\\	
 Dadurch das Android nicht alle Java SE Funktionen der neuesten Version unterstützt, musste bei der Auswahl der Frameworks darauf geachtet werden, dass diese Java 6 kompatibel sind und keine ausgeklammerten packages verwenden.	
 
@@ -64,7 +64,7 @@ Dadurch das Android nicht alle Java SE Funktionen der neuesten Version unterstü
 %=======================================================================
 Android veröffentlicht in regelmäßigen Abständen neue Versionen, wie man an den zahlreichen Versionsnummern erkennen kann. Es sind vor allem jene Android-Versionsnummer wichtig, bei denen sich das API-Level ändert. Denn das API-Level bestimmt, welches Geräte eine App ausführen kann und welches nicht. Normalerweise soll eine App von möglichst vielen Geräten ausgeführt werden können. Deswegen sollte ein API-Level anvisieren werden, das so klein wie möglich ist \cite{gargenta:einfuhrung}.
 \\\\
-Wie aus der Abbildung \ref{figure:androidVersionen} zu entnehmen ist, nützen nicht mehr viele Besitzer eines Android-Gerätes die älteren Versionen 2.2 bis 4.0.3. Es nützen aber auch nicht viele Smartphone-Besitzer die neueste und beste Android Version. Die meisten verwenden eine Version zwischen 4.1 und 5.1. Wie aus der Abbildung zu erkennen ist, muss bei der Android-Entwicklung 
+Wie aus der Abbildung \ref{figure:androidVersionen} zu entnehmen ist, nützen nicht mehr viele Besitzer eines Android-Gerätes die älteren Versionen 2.2 bis 4.0.3. Es nützen aber auch nicht viele Smartphone-Besitzer die aktuellste Android Version 6.0. Die meisten verwenden eine Version zwischen 4.1 und 5.1. Wie aus der Abbildung zu erkennen ist, muss bei der Android-Entwicklung 
 immer einen Kompromiss eingegangen werden. Sollen neuere Funktionen der jüngeren Plattform-Versionen eingesetzt werden, muss in Kauf genommen werden, dass die App mit älteren Geräten nicht kompatibel ist. Soll die App auf so vielen Geräten wie möglich laufen, muss auf die Funktionen der jüngeren Plattform-Versionen verzichten werden. Da die Plattform kontinuierlich weiterentwickelt wird und die Geräte Systemupdates erhalten, sollte die Entscheidung bezüglich der Versionsnummer in regelmäßig Abständen überprüft werden \cite{gargenta:einfuhrung}.
 
 \begin{minipage}{\textwidth} 
@@ -75,7 +75,7 @@ immer einen Kompromiss eingegangen werden. Sollen neuere Funktionen der jüngere
 	\vspace{2ex}
 \end{minipage}
  
-Die Beispielimplementierung ist ab einer Version größer 5.0 kompatibel. Denn für das Anzeigen der Daten wird eine Funktionalität benötigt, die erst in der API Version 21 enthalten ist. Die App kann dadurch auf mehr als einem Drittel der vertriebenen Geräte ausgeführt werden. Wenn Geräte Systemupdates erhalten, bald auf mehr.
+Die Beispielimplementierung ist kompatibel mit der Android Version 5.0 und höher, da für das Anzeigen der Daten eine Funktionalität benötigt wird, die erst in der API Version 21 enthalten ist. Die App kann dadurch auf mehr als einem Drittel der vertriebenen Geräte ausgeführt werden. Wenn ältere Geräte Systemupdates erhalten, erhöht sich diese Anzahl entsprechend. 
 
 	
 	
