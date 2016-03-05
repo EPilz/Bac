@@ -21,7 +21,7 @@ Retrofit ist ein typsicherer HTTP Client für Android und Java, welcher von Squa
 
 Mithilfe von Annotation bei den Interface Methoden wird angegeben wie Request zu verarbeiten sind. Daher muss jede Interface-Methode eine HTTP Annotation besitzen, die angibt welche Request Methode zu verwenden ist \cite{retrofit}. Es stehen dabei fünf built-in HTTP Methoden zur Auswahl GET, POST, PUT, DELETE und HEAD.
 \\\\
-Standardmäßig kann Retrofit nur \texttt{ResponseBody} und \texttt{RequestBody} von OkHttp serialisieren und deserialisieren. Durch das hinzufügen von Konvertern ist es jedoch möglich, weitere Formate wie \acrfull{JSON}oder \acrfull{XML} zum Übertragen von Daten zu verwenden. Seit der Veröffentlichung von Retrofit in der Version 2, werden auch noch zusätzliche Parser zur Serialisierung und Deserialisierung von JSON-Daten unterstützt. In der Vergangenheit wurde nur die GSON Bibliothek unterstützt, welche daher die häufig verwendetste Bibliothek zum Parsen von JSON-Daten darstellt \cite{consumingRetrofit}. Im Rahmen der Bachelorarbeit wird aber die Jackson Bibliothek zum Übertragen von Daten verwendet, da diese am schnellsten Daten serialisiert und deserialisiert  \cite{json:evaluation}.
+Standardmäßig kann Retrofit nur \texttt{ResponseBody} und \texttt{RequestBody} von OkHttp serialisieren und deserialisieren. Durch das hinzufügen von Konvertern ist es jedoch möglich, weitere Formate wie \acrfull{JSON} oder \acrfull{XML} zum Übertragen von Daten zu verwenden. Seit der Veröffentlichung von Retrofit in der Version 2, werden auch noch zusätzliche Parser zur Serialisierung und Deserialisierung von JSON-Daten unterstützt. In der Vergangenheit wurde nur die GSON Bibliothek unterstützt, welche daher die am häufigsten verwendete Bibliothek zum Parsen von JSON-Daten darstellt \cite{consumingRetrofit}. Im Rahmen der Bachelorarbeit wird aber die Jackson Bibliothek zum Übertragen von Daten verwendet, da diese am schnellsten Daten serialisiert und deserialisiert  \cite{json:evaluation}.
 
 Die Serverschnittstellen werden durch spezielle Annotationen bei den Interface Methoden spezifiziert, die Details über Parameter und die verwendete Request Methode beinhalten. Es stehen unter anderem folgende Annotationen zur Verfügung:
 \newpage
@@ -29,13 +29,13 @@ Die Serverschnittstellen werden durch spezielle Annotationen bei den Interface M
 	\item \texttt{@GET}, \texttt{@POST}, \texttt{@PUT}, \texttt{@DELETE}\\
 	Diese Annotationen geben an, welche Request Methode zu verwenden ist.
 	\item \texttt{@Path} \\
-	Durch diese Annotation ist es möglich, die URL des Endpoints dynamisch zu konfigurieren. Dabei wird ein bestimmter Teil in der URL der durch Klammern gekennzeichnet wurde, durch den dazugehörenden Parameter ersetzt (siehe Listing \ref{lst:retrofitPowerPlantService}, Zeile \ref{line:path}).
+	Durch diese Annotation ist es möglich, die URL des Endpoints dynamisch zu konfigurieren. Dabei wird ein bestimmter Teil in der URL, der durch Klammern gekennzeichnet wurde, durch den dazugehörenden Parameter ersetzt (siehe Listing \ref{retrofitPowerPlantService}, Zeile \ref{line:path}).
 	\item \texttt{@Body} \\
-	Jeder Parameter der über diese Annotation verfügt, wird in den Body der Request Anfrage eingefügt - nachdem das dazugehörende Java Objekt serialisiert wurde (Listing \ref{lst:retrofitPowerPlantService}, Zeile \ref{line:body}).
+	Jeder Parameter der über diese Annotation verfügt, wird in den Body der Request Anfrage eingefügt - nachdem das dazugehörende Java Objekt serialisiert wurde (Listing \ref{retrofitPowerPlantService}, Zeile \ref{line:body}).
 \end{list}
 
 \subsection{Funktionsweise}
-Um Retrofit verwenden zu können, müssen die Abhängigkeiten aus dem Listing \ref{dependenciesRetrofit} in die \texttt{build.gradle} Datei des Projektes eingefügt werden.
+Um Retrofit verwenden zu können, müssen die Abhängigkeiten aus dem Listing \ref{dependenciesRetrofit} in die \texttt{build. gradle} Datei des Projektes eingefügt werden.
 
 \begin{lstlisting}[language=java, label=dependenciesRetrofit, caption={Retrofit build.gradle}, frame=single]
 dependencies {
@@ -117,7 +117,7 @@ public static <S> S createServiceWithAuthToken(Class<S> serviceClass, final Auth
 %=======================================================================
 
 \subsection{Allgemein}
-Spring gliedert sich in zahlreiche Projekte, mit dem Ziel Java Entwicklung zu vereinfachen. Die Idee zum Spring Framework hatte Rod Johnson im Jahr 2003. An den zahlreichen Open Source Projekten von Spring  beteiligen sich weltweit eine große Anzahl von Entwicklern \cite{springITWissen}. Spring for Android ist ein Projekt von Spring, dass die Entwicklung von Andorid-Apps vereinfachen soll. Aktuell wird das Projekt in der Version 2.0 ausgeliefert. Es stellt dabei ausgewählte Komponenten von Spring, gebündelt für Android zur Verfügung \cite{springForAndroid:website}. Dies sind im speziellen 
+Spring gliedert sich in zahlreiche Projekte, mit dem Ziel die Java Entwicklung zu vereinfachen. Die Idee zum Spring Framework hatte Rod Johnson im Jahr 2003. An den zahlreichen Open Source Projekten von Spring  beteiligen sich weltweit eine große Anzahl von Entwicklern \cite{springITWissen}. Spring for Android ist ein Projekt von Spring, dass die Entwicklung von Andorid-Apps vereinfachen soll. Aktuell wird das Projekt in der Version 2.0 ausgeliefert. Es stellt dabei ausgewählte Komponenten von Spring, gebündelt für Android, zur Verfügung \cite{springForAndroid:website}. Dies sind im speziellen 
 
 \begin{itemize}
 	\item ein Rest Client (RestTemplate) und
@@ -126,11 +126,11 @@ Spring gliedert sich in zahlreiche Projekte, mit dem Ziel Java Entwicklung zu ve
 
 Spring for Android unterstützt dabei keine Dependency Injection, eine der Kernfunktionen des Core Spring Frameworks. Die Bibliothek unterstützt den Entwickler daher nicht, bei der Umsetzung einer möglichst losen Kopplung in seiner Applikation \cite{springForAndroid:dahanne}.
 \\\\
-Grundbaustein des Frameworks ist die Klasse \texttt{RestTemplate}, welche Teil des im Jahr 2009 erschienen Framework \textquotedblleft Spring for MVC\textquotedblright\, ist. Diese Klasse ermöglicht Java-Entwicklern eine High-Level-Abstraktion von untergeordneten Java-APIs, wie des HTTP Clients. \texttt{RestTemplate} for Android unterstützt dabei auch die gzip Komprimierung und die Übertragung von JSON und XML Daten, indem \acrfull{POJO} Objekte  – einfache Java-Objekte, die keine Business Logik enthalten \cite{fowler:POJO} – automatisiert konvertiert werden \cite{springForAndroid:dahanne}.
+Grundbaustein des Frameworks ist die Klasse \texttt{RestTemplate}, welche Teil des im Jahr 2009 erschienen Framework \textquotedblleft Spring for MVC\textquotedblright\, ist. Diese Klasse ermöglicht Java-Entwicklern eine High-Level-Abstraktion von untergeordneten Java-APIs, wie des HTTP Clients. Die Klasse \texttt{Rest- Template} unterstützt dabei auch die gzip Komprimierung und die Übertragung von JSON und XML Daten, indem \acrfull{POJO} Objekte  – einfache Java-Objekte, die keine Business Logik enthalten \cite{fowler:POJO} – automatisiert konvertiert werden \cite{springForAndroid:dahanne}.
 \\\\
 Die Klasse \texttt{RestTemplate} ist für den clientseitigen Zugriff auf einen RESTful Service zuständig. Das Verhalten kann durch Callback Methoden und durch konfigurieren des \texttt{HttpMessage- Converter} angepasst werden. Der \texttt{HttpMessageConverter} wird dabei verwendet um einen HTTP Request Body zu erstellen oder den Response in Java Objekte zu konvertieren. Die Klasse \texttt{MappingJackson2HttpMessageConverter} ist dabei ein Message Converter mit dem JSON Daten verarbeitet werden können.
 
-\texttt{RestTemplate} stellt verschiedene Methoden zur Verfügung, um alle gängigen HTTP Methoden verwenden zu können, wie GET, POST, PUT, DELETE, HEAD und OPTION \cite{springDokuRestTemplate}.
+Die Klasse \texttt{RestTemplate} stellt verschiedene Methoden zur Verfügung, um alle gängigen HTTP Methoden verwenden zu können, wie GET, POST, PUT, DELETE, HEAD und OPTION \cite{springDokuRestTemplate}.
 
 \subsection{Funktionsweise}
 Um Spring for Android verwenden zu können, muss die Abhängigkeiten aus dem Listing \ref{dependenciesSpring} in die \texttt{build.gradle} Datei des Projektes eingefügt werden.
@@ -143,7 +143,7 @@ dependencies {
 }
 \end{lstlisting}
 \newpage
-Wie bereits oben beschrieben wird die Klasse \texttt{RestTemplate} dazu verwendet um HTTP Anfragen zusammenzubauen, um mit der Server REST-Schnittstelle kommunizieren zu können. Im Listing \ref{lst:getAllPowerPlants} folgt ein kurzes Beispiel eines GET Requests, um vom Server alle vorhanden Kraftwerke zu erhalten.
+Wie bereits beschrieben, wird die Klasse \texttt{RestTemplate} dazu verwendet um HTTP Anfragen zusammenzubauen, um mit der Server REST-Schnittstelle kommunizieren zu können. Im Listing \ref{lst:getAllPowerPlants} folgt ein kurzes Beispiel eines GET Requests, um vom Server alle vorhanden Kraftwerke zu erhalten.
 
 \begin{lstlisting}[language=java, caption={GET Request um alle Kraftwerke zu erhalten},label=lst:getAllPowerPlants, frame=single, tabsize=3]
 public static List<PowerPlant> getPowerPlants() {

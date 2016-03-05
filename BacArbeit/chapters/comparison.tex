@@ -4,6 +4,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Es folgt nun eine Gegenüberstellung der einzelnen Frameworks, anhand der in Kapitel \ref{sec:methodik} definierten Kriterien. Als erster wird ein genereller Überblick über die einzelnen Fakten zu den Frameworks gegeben und deren Unterschiede beschrieben. Danach wird genauer auf relevanten Kriterien für das Revex Projekt eingegangen und ein persönliches Fazit zu den Frameworks gezogen.
 
+\section{Testumgebung}
+Um die Implementierung der Apps testen zu können, wurde eine virtuelle Testumgebung aufgesetzt. Der Emulator simulierte ein Nexus 5 Endgerät mit der Android Version 5.0. Um eine neutrale Bewertung zu ermöglichen, wurde der Emulator für jede entwickelte App und jedes Testszenario neu gestartet. Es wurden dabei auch die gleichen Daten verwendet. Beispielsweise beinhaltet ein Szenario das Abrufen aller Details zu einem bestimmten Kraftwerk, ein anderes hingegen das Anlegen eines neuen Kraftwerkes. Des Weiteren wurde zur Serialisierung und Deserialisierung der Daten die Jackson Bibliothek genutzt, damit für alle Frameworks die gleiche Ausgangslage vorliegt. 
+
 \section{Gegenüberstellung der Frameworks}
 
 {\large \textbf{Entwicklungskultur rund um die Frameworks}}\\\\
@@ -21,7 +24,7 @@ Es werden von allen Frameworks die gängigsten HTTP-Methoden unterstützt. Retro
 Wenn zeitraubende Aktionen ausgeführt werden sollen, wie z.B. das Herunterladen einer großen Datei aus dem Internet, langweilen sich User oft. Denn diese müssen dann warten bis der Request vollständig abgearbeitet wurde und können währenddessen nicht weiterarbeiten. Dies kann aber verhindert werden, indem zeitraubende Aktion im Hintergrund ausgeführt werden - in Form von asynchronen Requests \cite{louis:android}. Mithilfe aller Frameworks können asynchrone Requests modelliert werden. 
 \\\\
 Das HATEOAS Konzept wird von Jersey und Spring for Android unterstützt. Jedoch muss bei Spring for Android eine eigene Bibliothek \textquotedblleft Spring HATEOAS\textquotedblright\, eingebunden werden, damit eine Linkverfolgung möglich ist. Wenn das HATEOAS Konzept mit AndroidAnnotations verwendet werden soll, muss ebenfalls \textquotedblleft Spring HATEOAS\textquotedblright\, eingebunden werden und die Verwendung ist nur ohne Annotations möglich. Man greift dabei auf die Basis REST Implementierung zurück, welche Spring for Android ist. Retrofit unterstützt das HATEOAS Konzept nicht.
-\\\\
+\newpage
 Das registrieren von Error Handlern ist bei allen Frameworks möglich, dadurch können aussagekräftige Fehlermeldungen für den User erzeugt werden. Designrichtlinien für mögliche Geräte geben an, dass es sinnvoll ist, Rückmeldungen für Aktionen des Systems zu geben, wie beispielsweise eine Fehlermeldung, wenn der Server nicht erreichbar ist. Eine solche Rückmeldung sollte für den Benutzer verständlich sein. Zum Beispiel sind die Fehlermeldungen \textquotedblleft HTTP404 ERROR\textquotedblright\, und \textquotedblleft Diese Seite konnte nicht gefunden werden\textquotedblright\, äquivalent, die zweite Fehlermeldung ist aber für einen Großteil der User verständlicher \cite{gong2004guidelines}.
 \\\\
 {\large \textbf{Performance}}\\\\
@@ -42,7 +45,6 @@ Die Zeitdauer der GET-Requests bei der Abbildung \ref{getRequests} setzt sich au
 	\caption{Zeitmessung der GET Requests} 
 	\label{getRequests}
 \end{figure} 
-
 \newpage
 Die Messung der Zeitdauer für einen POST Request ist aus der Abbildung \ref{postRequests} zu entnehmen. Dabei wurde die Zeit gemessen bis neu eingegeben Daten, um ein Kraftwerk anzulegen erfolgreich zum Server übermittelt wurden. Es konnte dabei festgestellt werden, dass alle Frameworks circa gleich lange benötigen, um die Daten zu übertragen. Spring for Android ist dabei minimal langsamer als die anderen, dies ist aber zu vernachlässigen, da diese Verzögerung keine Auswirkung auf die Usability für einen User hat \cite{meyer:performance}.
 
@@ -80,7 +82,7 @@ Eine der größten Herausforderungen beim Implementieren von Apps ist der Hardwa
 	\caption{benötigter RAM} 
 	\label{ramB}
 \end{figure} 
-
+\newpage
 {\large \textbf{Erweiterte Technische Fähigkeiten der Frameworks}}\\\\
 Sicherheit ist ein wesentliches Thema in der Informatik und auch für mobile Geräte. Denn die Apps sind nicht nur auf Informationen des Smartphones beschränkt, sondern haben auch Zugriff auf das Internet. OAuth ist ein Webstandard für den beschränkten Zugriff von Benutzer-Ressourcen auf Servern \cite{shehab:secure}. Dieser Standard wir von allen Frameworks unterstützt und ermöglicht einen sicheren und beschränkten Zugriff auf Ressourcen. 
 \\\\
@@ -164,7 +166,7 @@ Es folgt nun ein kurzer persönlicher Eindruck zu den Frameworks. Wo sind Proble
 Retrofit ist ein Annotations basiertes Framework, wodurch der Code leicht verständlich und kurz zu schreiben ist. Das Einbinden in ein Projekt gestaltet sich als sehr einfach, es müssen nur die nötigen Abhängigkeiten in die gradle-Datei des Projektes eingefügt werden. Problematisch bei der Implementierung war die teilweise veraltete Dokumentation. Es konnte anfangs nicht festgestellt werden, auf welche Version des Frameworks die gefundene Beschreibung Bezug nahm. Bei mehrmaligem Zugriff auf die offizielle Dokumentation konnte aber festgestellt werden, dass diese laufend erweitert und auf die neueste Version abgeändert wurde. Dies weißt auf eine aktive Community hin. Performance technisch konnten keinerlei Probleme festgestellt werden, das Framework arbeitet flüssig und es kam zu keinen Verzögerungen während der Nutzung der App.
 \newpage
 {\large \textbf{Jersey}}\\\\
-Jersey war am problematischsten zu implementieren, da es am längsten gedauert hat dieses Framework unter Android verwenden zu können. Es musste eine umfangreiche Recherche im Internet durchgeführt werden, bis die Probleme dieses Frameworks mit Android festgestellt werden konnten. Danach musste noch einige Zeit investiert werden, bis ein funktionierender Workaround für die Probleme gefunden werden konnte. Die clientseitige Dokumentation des Framework ist gut und liefert alle relevanten Informationen für den Implementierungsprozess. Während der Nutzung der App kam es immer wieder zu Verzögerungen, bis alle relevanten Daten geladen wurden. Dies hat wesentlich Auswirkungen auf die Usability, da eine längere Wartezeit nötig ist, bis dem User alle Daten angezeigt werden. Jersey schnitt im Performance- und Speichervergleich am schlechtesten ab. Es ist daher deutlich festzustellen, dass die clientseitige Implementierung von Jersey nicht für Android optimiert wurde.
+Jersey war am problematischsten zu implementieren, da es am längsten gedauert hat, dieses Framework unter Android verwenden zu können. Es musste eine umfangreiche Recherche im Internet durchgeführt werden, bis die Probleme dieses Frameworks mit Android festgestellt werden konnten. Danach musste noch einige Zeit investiert werden, bis ein funktionierender Workaround für die Probleme gefunden werden konnte. Die clientseitige Dokumentation des Framework ist gut und liefert alle relevanten Informationen für den Implementierungsprozess. Während der Nutzung der App kam es immer wieder zu Verzögerungen, bis alle relevanten Daten geladen wurden. Dies hat wesentlich Auswirkungen auf die Usability, da eine längere Wartezeit nötig ist, bis dem User alle Daten angezeigt werden. Jersey schnitt im Performance- und Speichervergleich am schlechtesten ab. Es ist daher deutlich festzustellen, dass die clientseitige Implementierung von Jersey nicht für Android optimiert wurde.
 \\\\
 {\large \textbf{Spring for Android}}\\\\
 Das Einbinden von Spring for Android in ein Projekt gestaltet sich als trivial, es müssen nur die nötigen Abhängigkeiten in die gradle-Datei des Projektes eingefügt werden. Es sind sowohl eine gute Dokumentation, als auch Beispielcodes auf der offiziellen Homepage verfügbar. Der Code ist gut strukturiert, aber nicht so leicht verständlich, wie bei Annotations basiertes REST Frameworks. Daher musste mehr Zeit in das Implementieren der REST Schnittstellen investiert werden, da auch mehr Code zu schreiben war.  Performancetechnisch lag dieses Framework im Mittelfeld, großteils arbeitet es sehr flüssig. Nur beim Abrufen großer Datenmengen kommt es zeitweise zu einer minimalen Verzögerung.
